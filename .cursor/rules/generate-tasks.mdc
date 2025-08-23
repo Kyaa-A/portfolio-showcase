@@ -3,35 +3,28 @@
 A breakdown of the project into actionable development tasks.
 
 ### Phase 1: Setup & Foundation
-- [ ] Initialize Next.js project with TypeScript and Tailwind CSS.
-- [ ] Install animation libraries (Framer Motion / GSAP).
-- [ ] Set up project structure as defined in `project-structure.mdc`.
-- [ ] Define color palette and typography in `tailwind.config.js`.
-- [ ] Implement the basic layout (`Header`, `Footer`) in `app/layout.tsx`.
+- [ ] **Task 1.1 (Initialize Project):** Initialize Next.js project with TypeScript and Tailwind CSS. *(Status: Complete)*
+- [ ] **Task 1.2 (Install Libraries):** Install the primary animation library. Run the command: `npm install framer-motion`.
+- [ ] **Task 1.3 (Create Project Structure):** Create the complete directory and file structure inside the `/src` directory as defined in `project-structure.mdc`. All `.tsx` files should be created with a basic placeholder component.
+- [ ] **Task 1.4 (Configure Tailwind):** Update the `tailwind.config.js` file. Extend the `theme` object to include:
+    *   A `fontFamily` key for `sans` using `'Montserrat'`.
+    *   A `colors` key with a basic dark palette:
+        *   `background`: `'#111111'`
+        *   `foreground`: `'#FFFFFF'`
+        *   `foreground-secondary`: `'#A1A1A1'`
+- [ ] **Task 1.5 (Implement Basic Layout):** Create functional placeholder components for `Header.tsx` and `Footer.tsx`. Import and render them in the root `app/layout.tsx` to establish the basic page structure.
 
 ### Phase 2: Global UI & Interactivity
-- [ ] Create the `CustomCursor` component.
-- [ ] Implement the default follow animation for the cursor.
-- [ ] Add logic for the "Standard Hover" state (solid white).
-- [ ] Implement the `NavButton` component with its morphing hover animation.
-- [ ] Create the full-screen `NavOverlay` component (static layout first).
-- [ ] Animate the opening/closing of the `NavOverlay`.
-- [ ] Implement the "Spotlight Hover" effect on the `NavOverlay` links.
-- [ ] Implement the rotating text effect for the "START A PROJECT" CTA.
+- [ ] **Task 2.1 (Create CustomCursor Component):** Create the `CustomCursor` component. Implement the default state (a hollow ring) and the smooth "follow mouse" animation using Framer Motion.
+- [ ] **Task 2.2 (Add Hover State to Cursor):** Add the "Standard Hover" logic to the `CustomCursor`. The ring should scale up and fill with solid white when hovering over interactive elements.
+- [ ] **Task 2.3 (Implement NavButton):** Build the `NavButton` component, including the hover animation where the hamburger icon morphs into a plus sign.
+- [ ] **Task 2.4 (Build NavOverlay Layout):** Create the static layout for the full-screen `NavOverlay` component with all its elements (links, CTA, avatar, etc.).
+- [ ] **Task 2.5 (Animate NavOverlay):** Implement the open/close animation for the `NavOverlay`.
+- [ ] **Task 2.6 (Implement Spotlight Effect):** Add the "Spotlight Hover" effect to the navigation links within the `NavOverlay`.
+- [ ] **Task 2.7 (Implement Rotating CTA):** Add the rotating text animation to the "START A PROJECT" CTA in the `NavOverlay`.
 
 ### Phase 3: Page Sections
-- [ ] Build the `HeroSection` component with the main headline.
-- [ ] Implement the interactive image-reveal hover effect on the hero headline.
-- [ ] Build the `ProjectsSection` component layout.
-- [ ] Implement the parallax scroll effect for the project images.
-- [ ] Implement the "Colored Hover" state for the "View Project" buttons.
-- [ ] Build the `ClosingSection` component ("AS WHO?").
-- [ ] Link the `ClosingSection` to the "About" page/view and add the spotlight hover effect.
+(Tasks will be detailed later)
 
 ### Phase 4: Finalization & Deployment
-- [ ] Implement the conditional "PORTFOLIO SECTION" text.
-- [ ] Implement the scroll progress indicator.
-- [ ] Thoroughly test for responsiveness across all major device sizes.
-- [ ] Perform accessibility checks (keyboard navigation, ARIA attributes).
-- [ ] Optimize all images and assets for performance.
-- [ ] Set up a new project on Vercel and deploy.
+(Tasks will be detailed later)
