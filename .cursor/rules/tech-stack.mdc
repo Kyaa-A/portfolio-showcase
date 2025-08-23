@@ -1,0 +1,18 @@
+# Project Technology Stack
+
+This document outlines the chosen technology stack for Asnari's portfolio website.
+
+*   **Framework: Next.js (with App Router)**
+    *   **Reason:** Provides a robust, production-ready React framework with excellent performance (SSR/SSG), image optimization, and a great developer experience.
+
+*   **Language: TypeScript**
+    *   **Reason:** Ensures type safety, which reduces bugs and improves code maintainability, especially as the project grows.
+
+*   **Styling: Tailwind CSS**
+    *   **Reason:** A utility-first CSS framework that allows for rapid UI development directly in the markup, ensuring consistency and maintainability.
+
+*   **Animation: Framer Motion**
+    *   **Reason:** A powerful and declarative animation library for React that simplifies complex animations, transitions, and gesture-based interactions like the ones required for this project. An alternative is **GSAP**, which is also excellent for complex timeline-based animations.
+
+*   **Deployment: Vercel**
+    *   **Reason:** The ideal platform for deploying Next.js applications, offering seamless integration, automatic CI/CD, and a global CDN for optimal performance.

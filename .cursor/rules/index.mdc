@@ -1,0 +1,12 @@
+# Project Hub: Asnari's Portfolio
+
+This directory contains the complete project plan for building Asnari's personal portfolio website. Use these documents as the single source of truth for features, design rules, and development tasks.
+
+### Rules Directory
+
+*   **[tech-stack.mdc](./tech-stack.mdc)**: Defines the technologies and libraries to be used.
+*   **[create-prd.mdc](./create-prd.mdc)**: The complete Product Requirements Document (PRD) detailing all features.
+*   **[cursor-rules.mdc](./cursor-rules.mdc)**: A specific deep-dive into the custom cursor's behavior and animations.
+*   **[project-structure.mdc](./project-structure.mdc)**: The recommended folder and component structure for the Next.js project.
+*   **[generate-tasks.mdc](./generate-tasks.mdc)**: A full breakdown of the development tasks needed to build the site.
+*   **[process-task-list.mdc](./process-task-list.mdc)**: A simple guide on how to approach the development workflow.

@@ -1,0 +1,31 @@
+# Product Requirements Document (PRD)
+
+**Version:** 1.0
+
+### 1. Introduction & Vision
+To build a cutting-edge, interactive personal portfolio for Asnari that showcases his skills and projects through a modern, dark-themed UI and rich micro-interactions.
+
+### 2. Functional Requirements
+
+#### 2.1. Global Elements
+*   **Custom Cursor:** A circular cursor with multiple interactive states (outline, solid, colored, spotlight).
+*   **Navigation Trigger:** A hamburger menu icon that morphs on hover and opens a full-screen overlay.
+*   **Scroll Progress Indicator:** A vertical line on the bottom-right that indicates scroll depth.
+*   **Conditional Section Title:** A "PORTFOLIO SECTION" text on the bottom-left, visible only during the main content scroll.
+
+#### 2.2. Main Page Sections
+*   **Hero Section:** Features a large headline with an interactive image-reveal effect on hover. The text behind the image will switch to an outline style.
+*   **Portfolio Section:** A vertical list of projects with large background images, parallax scroll effects, and unique hover states on "View Project" buttons.
+*   **Closing Section ("AS WHO?"):** A full-screen section with large, outlined text that acts as a link to the "About" page/view and features a "spotlight" hover effect.
+*   **Footer:** Minimalist design with copyright and social links (GitHub, LinkedIn).
+
+#### 2.3. Navigation Overlay
+*   A full-screen menu triggered by the navigation button.
+*   **Layout:** Includes an avatar, large outlined navigation links (`PROJECTS`, `SKILLS`, `ABOUT`), a rotating "START A PROJECT" CTA, contact info, and social icons.
+*   **Interaction:** Features the "spotlight" cursor effect on links and a rotating text effect on the CTA.
+
+### 3. Non-Functional Requirements
+*   **Performance:** Fluid 60fps animations and fast page loads.
+*   **Responsiveness:** Flawless display and functionality on desktop, tablet, and mobile.
+*   **Accessibility (a11y):** Keyboard navigable and screen-reader friendly.
+*   **Browser Compatibility:** Works on the latest versions of Chrome, Firefox, Safari, and Edge.

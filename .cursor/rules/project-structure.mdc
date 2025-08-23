@@ -1,0 +1,32 @@
+# Recommended Next.js Project Structure
+
+This structure organizes the project logically, separating concerns and making it easy to locate and manage files.
+
+/src
+├── app/ # Next.js App Router
+│ ├── layout.tsx # Root layout
+│ └── page.tsx # Main page component
+│
+├── components/ # Reusable components
+│ ├── ui/ # Small, generic UI elements
+│ │ ├── CustomCursor.tsx
+│ │ └── NavButton.tsx
+│ │
+│ ├── layout/ # Major layout components
+│ │ ├── Header.tsx
+│ │ ├── Footer.tsx
+│ │ └── NavOverlay.tsx
+│ │
+│ └── sections/ # Main page sections
+│ ├── HeroSection.tsx
+│ ├── ProjectsSection.tsx
+│ └── ClosingSection.tsx
+│
+├── hooks/ # Custom React Hooks
+│ └── useMousePosition.ts
+│
+├── lib/ # Library/helper functions
+│ └── utils.ts
+│
+└── styles/ # Global styles
+└── globals.css

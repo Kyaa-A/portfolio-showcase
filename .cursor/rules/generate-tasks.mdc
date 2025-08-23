@@ -1,0 +1,37 @@
+# Development Task List
+
+A breakdown of the project into actionable development tasks.
+
+### Phase 1: Setup & Foundation
+- [ ] Initialize Next.js project with TypeScript and Tailwind CSS.
+- [ ] Install animation libraries (Framer Motion / GSAP).
+- [ ] Set up project structure as defined in `project-structure.mdc`.
+- [ ] Define color palette and typography in `tailwind.config.js`.
+- [ ] Implement the basic layout (`Header`, `Footer`) in `app/layout.tsx`.
+
+### Phase 2: Global UI & Interactivity
+- [ ] Create the `CustomCursor` component.
+- [ ] Implement the default follow animation for the cursor.
+- [ ] Add logic for the "Standard Hover" state (solid white).
+- [ ] Implement the `NavButton` component with its morphing hover animation.
+- [ ] Create the full-screen `NavOverlay` component (static layout first).
+- [ ] Animate the opening/closing of the `NavOverlay`.
+- [ ] Implement the "Spotlight Hover" effect on the `NavOverlay` links.
+- [ ] Implement the rotating text effect for the "START A PROJECT" CTA.
+
+### Phase 3: Page Sections
+- [ ] Build the `HeroSection` component with the main headline.
+- [ ] Implement the interactive image-reveal hover effect on the hero headline.
+- [ ] Build the `ProjectsSection` component layout.
+- [ ] Implement the parallax scroll effect for the project images.
+- [ ] Implement the "Colored Hover" state for the "View Project" buttons.
+- [ ] Build the `ClosingSection` component ("AS WHO?").
+- [ ] Link the `ClosingSection` to the "About" page/view and add the spotlight hover effect.
+
+### Phase 4: Finalization & Deployment
+- [ ] Implement the conditional "PORTFOLIO SECTION" text.
+- [ ] Implement the scroll progress indicator.
+- [ ] Thoroughly test for responsiveness across all major device sizes.
+- [ ] Perform accessibility checks (keyboard navigation, ARIA attributes).
+- [ ] Optimize all images and assets for performance.
+- [ ] Set up a new project on Vercel and deploy.

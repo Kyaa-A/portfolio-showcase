@@ -1,0 +1,22 @@
+# Cursor Interaction Rules
+
+This document provides a specific breakdown of all behaviors for the custom cursor.
+
+### 1. Default State
+*   **Appearance:** A thin, white, hollow circle (a ring).
+*   **Behavior:** Smoothly follows the system mouse pointer with a slight delay (`lerp` or `spring` animation) to feel fluid. The system cursor is hidden.
+
+### 2. Standard Hover State
+*   **Trigger:** Hovering over standard interactive elements (buttons, simple links, icons).
+*   **Animation:** The cursor ring smoothly scales up slightly and fills with solid white.
+*   **Element Interaction:** The text or icon being hovered over inverts its color to black to maintain contrast.
+
+### 3. Spotlight Hover State
+*   **Trigger:** Hovering over large, outlined text (e.g., the links in the navigation overlay, the "AS WHO?" text).
+*   **Animation:** The cursor transforms into a larger, semi-transparent grey circle.
+*   **Element Interaction:** As the circle moves over the text, it "fills in" the outlines, making the portion of the text under the cursor appear solid white.
+
+### 4. Colored Hover State
+*   **Trigger:** Hovering over the "View Project" circular button in the portfolio section.
+*   **Animation:** The cursor ring fills with the unique accent color associated with that specific project.
+*   **Element Interaction:** The "View Project" text inverts to maintain readability against the new colored background.
