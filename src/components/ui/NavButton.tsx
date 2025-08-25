@@ -50,7 +50,7 @@ export function NavButton({ onClick, isOpen }: NavButtonProps) {
   return (
     <div
       ref={buttonRef}
-      className={`nav-button cursor-interactive z-60 ${isHovered ? 'hovered' : ''}`}
+      className={`w-12 h-12 rounded-full border border-gray-300 bg-white flex items-center justify-center cursor-interactive z-60 ${isHovered ? 'hovered' : ''}`}
       data-cursor-target="true"
       onClick={onClick}
       onMouseEnter={() => {

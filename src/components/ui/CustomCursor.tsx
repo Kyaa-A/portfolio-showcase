@@ -23,12 +23,12 @@ export function CustomCursor() {
   const cursorY = useTransform(mouseY, (value) => value - 32);
 
   useEffect(() => {
-    const handleMouseEnter = () => {
-      console.log('Cursor hover start');
+    const handleMouseEnter = (event: any) => {
+      console.log('Cursor hover start on:', event.target);
       setIsHovering(true);
     };
-    const handleMouseLeave = () => {
-      console.log('Cursor hover end');
+    const handleMouseLeave = (event: any) => {
+      console.log('Cursor hover end on:', event.target);
       setIsHovering(false);
     };
 
@@ -67,13 +67,14 @@ export function CustomCursor() {
   }, []);
 
   return (
-            <motion.div
-          className="fixed top-0 left-0 w-16 h-16 pointer-events-none z-40"
-      style={{
-        x: cursorX,
-        y: cursorY,
-        // mixBlendMode: 'difference', // Temporarily disabled to test NavButton
-      }}
+                    <motion.div
+          className="fixed top-0 left-0 w-16 h-16 pointer-events-none z-35"
+          style={{
+            x: cursorX,
+            y: cursorY,
+            pointerEvents: 'none',
+            zIndex: 35,
+          }}
       animate={{
         scale: isHovering ? 1.5 : 1,
         opacity: 1,
@@ -90,9 +91,9 @@ export function CustomCursor() {
       }}
     >
       <motion.div 
-        className="w-full h-full rounded-full border border-white"
+        className="w-full h-full rounded-full border-2 border-white bg-white/50"
         animate={{
-          backgroundColor: isHovering ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)',
+          backgroundColor: isHovering ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.5)',
         }}
         transition={{
           duration: 0.2,
