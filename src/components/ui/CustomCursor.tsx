@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 export function CustomCursor() {
   const { x, y } = useMousePosition();
   const [isHovering, setIsHovering] = useState(false);
+  const [isBlurHover, setIsBlurHover] = useState(false);
 
   // Create motion values for smooth spring following
   const mouseX = useMotionValue(x);
@@ -24,12 +25,14 @@ export function CustomCursor() {
 
   useEffect(() => {
     const handleMouseEnter = (event: any) => {
-      console.log('Cursor hover start on:', event.target);
+      const targetEl: Element | null = (event?.target as Element) || null;
+      const wantsBlur = !!targetEl?.closest('[data-cursor-blur="true"]');
       setIsHovering(true);
+      setIsBlurHover(wantsBlur);
     };
     const handleMouseLeave = (event: any) => {
-      console.log('Cursor hover end on:', event.target);
       setIsHovering(false);
+      setIsBlurHover(false);
     };
 
     const addEventListeners = () => {
@@ -74,11 +77,12 @@ export function CustomCursor() {
             y: cursorY,
             pointerEvents: 'none',
             zIndex: 35,
+            mixBlendMode: 'difference' as any,
           }}
-      animate={{
-        scale: isHovering ? 1.5 : 1,
-        opacity: 1,
-      }}
+              animate={{
+          scale: isBlurHover ? 1.4 : isHovering ? 1.4 : 1,
+          opacity: (typeof document !== 'undefined' && document.body.getAttribute('data-hide-cursor') === 'true') ? 0 : 1,
+        }}
       transition={{
         type: "spring",
         stiffness: 80,
@@ -91,9 +95,11 @@ export function CustomCursor() {
       }}
     >
       <motion.div 
-        className="w-full h-full rounded-full border-2 border-white bg-white/50"
+        className="w-full h-full rounded-full border-2"
         animate={{
-          backgroundColor: isHovering ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.5)',
+          backgroundColor: isHovering ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)',
+          borderColor: 'rgba(255,255,255,1)',
+          filter: isBlurHover ? 'blur(2px)' : 'none',
         }}
         transition={{
           duration: 0.2,

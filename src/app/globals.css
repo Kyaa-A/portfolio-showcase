@@ -177,4 +177,9 @@
     background-color: black !important;
     border: none !important;
   }
+
+  /* Hide native cursor when circle requests it */
+  body[data-hide-cursor='true'] {
+    cursor: none !important;
+  }
 }
