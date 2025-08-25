@@ -1,11 +1,27 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 export function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollTop / docHeight;
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section className="min-h-screen relative flex flex-col">
+    <section ref={containerRef} className="min-h-screen relative flex flex-col">
       {/* Header with Logo */}
       <header className="absolute top-16 left-0 z-10">
         <div className="bg-white flex flex-col p-3 items-center">
@@ -25,7 +41,7 @@ export function HeroSection() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center">
+      <div className="flex-1 flex items-start pl-10 pt-50">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,16 +57,24 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-0 right-8">
+      {/* Custom Scroll Indicator */}
+      <div className="fixed bottom-8 right-8 z-40">
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-2 border-white rounded-full mb-2"></div>
-          <div className="w-px h-16 bg-white"></div>
+          {/* Scroll Track */}
+          <div className="w-1 h-24 bg-gray-700 rounded-full relative overflow-hidden">
+            {/* Scroll Thumb */}
+            <motion.div
+              className="absolute w-3 h-8 bg-gray-400 rounded-full -left-1"
+              style={{ 
+                y: `${scrollProgress * (96 - 32)}px` // 96px track height - 32px thumb height
+              }}
+            ></motion.div>
+          </div>
         </div>
       </div>
 
       {/* Scroll Message */}
-      <div className="absolute bottom-8 left-32 max-w-md">
+      <div className="absolute bottom-8 left-32 max-w-md pl-10">
         <p className="text-sm text-white/60 leading-relaxed">
           This flashy headline? It&apos;s just for <span className="text-white font-medium">show</span>.<br />
           The proof of my work is waiting <span className="text-white font-medium">below</span>.<br />

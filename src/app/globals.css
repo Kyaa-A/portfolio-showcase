@@ -124,6 +124,27 @@
     @apply bg-background text-foreground;
   }
   
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  /* Hide scrollbar for all elements */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
   h1 {
     font-stretch: condensed;
     font-variation-settings: 'wght' 700, 'width' 75;
