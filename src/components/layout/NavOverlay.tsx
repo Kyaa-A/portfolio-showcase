@@ -26,16 +26,41 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
     >
       {/* Face avatar (top-left) */}
       <div className="absolute top-12 left-12 z-40">
-        <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden">
-          <Image
-            src="/assets/face.webp"
-            alt="Avatar"
-            width={96}
-            height={96}
-            className="w-full h-full object-contain"
-            priority
-          />
-        </div>
+        <motion.a
+          href="#hero"
+          className="block cursor-interactive"
+          data-cursor-target="true"
+          data-cursor-blur="true"
+          onClick={onClose}
+          onMouseEnter={() => {
+            document.body.setAttribute('data-hide-cursor', 'true');
+          }}
+          onMouseLeave={() => {
+            document.body.removeAttribute('data-hide-cursor');
+          }}
+          whileHover={{ 
+            scale: 1.1,
+            rotate: 5,
+            transition: { duration: 0.2, ease: "easeInOut" }
+          }}
+          whileTap={{ 
+            scale: 0.95,
+            transition: { duration: 0.1 }
+          }}
+        >
+          <motion.div 
+            className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden"
+          >
+            <Image
+              src="/assets/face.webp"
+              alt="Avatar"
+              width={96}
+              height={96}
+              className="w-full h-full object-contain"
+              priority
+            />
+          </motion.div>
+        </motion.a>
       </div>
 
       {/* Start a Project magnetic circle (center-left) */}
