@@ -177,7 +177,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
         <div className="space-y-16 w-full max-w-[900px] text-right pr-4 md:pr-12">
           <motion.a
             href="#work"
-            className="block cursor-interactive"
+            className="inline-block cursor-interactive ml-auto"
             data-cursor-target="true"
             data-cursor-blur="true"
             initial={{ opacity: 0, y: 20 }}
@@ -193,7 +193,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
               WORK
             </motion.h2>
             <motion.p
-              className="mt-3 text-white/70 text-base md:text-lg"
+              className="mt-3 text-white/70 text-base md:text-lg block"
               whileHover={{ color: '#ffffff', letterSpacing: '0.06em' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
@@ -203,7 +203,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
 
           <motion.a
             href="#about"
-            className="block cursor-interactive"
+            className="inline-block cursor-interactive ml-auto"
             data-cursor-target="true"
             data-cursor-blur="true"
             initial={{ opacity: 0, y: 20 }}
@@ -219,7 +219,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
               ABOUT
             </motion.h2>
             <motion.p
-              className="mt-3 text-white/70 text-base md:text-lg"
+              className="mt-3 text-white/70 text-base md:text-lg block"
               whileHover={{ color: '#ffffff', letterSpacing: '0.06em' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
@@ -234,7 +234,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           href="https://www.facebook.com/asnari.pacalna"
           target="_blank"
           rel="noreferrer"
-          className="w-10 h-10 rounded-full border border-white/40 text-white/80 hover:bg-white hover:text-black hover:border-transparent transition-colors flex items-center justify-center cursor-interactive"
+          className="w-10 h-10 rounded-full border border-white/40 text-white/80 hover:bg-black hover:text-white hover:border-transparent transition-colors flex items-center justify-center cursor-interactive"
           data-cursor-target="true"
           data-cursor-blur="true"
           aria-label="Facebook"
@@ -247,7 +247,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           href="https://www.instagram.com/asnarsss_/"
           target="_blank"
           rel="noreferrer"
-          className="w-10 h-10 rounded-full border border-white/40 text-white/80 hover:bg-white hover:text-black hover:border-transparent transition-colors flex items-center justify-center cursor-interactive"
+          className="w-10 h-10 rounded-full border border-white/40 text-white/80 hover:bg-black hover:text-white hover:border-transparent transition-colors flex items-center justify-center cursor-interactive"
           data-cursor-target="true"
           data-cursor-blur="true"
           aria-label="Instagram"
@@ -259,15 +259,50 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
       </div>
       {/* Email bottom-left */}
       <div className="absolute bottom-8 left-8 z-40">
-                 <motion.a
-           href="mailto:asnaripacalna@gmail.com"
-           className="text-white/20 underline decoration-white/90 underline-offset-4 transition-colors cursor-interactive"
-           data-cursor-target="true"
-           data-cursor-blur="true"
-           transition={{ duration: 0.25, ease: 'easeInOut' }}
-         >
-           asnaripacalna@gmail.com
-         </motion.a>
+        {(() => {
+          const EmailLink = () => {
+            const ref = useRef<HTMLAnchorElement>(null);
+            const { x: mouseX, y: mouseY } = useMousePosition();
+            const [isInside, setIsInside] = useState(false);
+
+            useEffect(() => {
+              const el = ref.current;
+              if (!el) return;
+              const rect = el.getBoundingClientRect();
+              
+              // Check if cursor is inside the email link area
+              const isCursorInside = mouseX >= rect.left && mouseX <= rect.right && 
+                                    mouseY >= rect.top && mouseY <= rect.bottom;
+              setIsInside(isCursorInside);
+            }, [mouseX, mouseY]);
+
+            // Toggle body attribute to hide the custom cursor while inside
+            useEffect(() => {
+              if (isInside) {
+                document.body.setAttribute('data-hide-cursor', 'true');
+              } else {
+                document.body.removeAttribute('data-hide-cursor');
+              }
+              return () => {
+                document.body.removeAttribute('data-hide-cursor');
+              };
+            }, [isInside]);
+
+            return (
+              <motion.a
+                ref={ref}
+                href="mailto:asnaripacalna@gmail.com"
+                className="text-white underline decoration-white/90 underline-offset-4 transition-colors cursor-interactive"
+                data-cursor-target="true"
+                data-cursor-blur="true"
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+              >
+                asnaripacalna@gmail.com
+              </motion.a>
+            );
+          };
+          return <EmailLink />;
+        })()}
       </div>
       {isOpen && <CustomCursor />}
     </motion.div>
