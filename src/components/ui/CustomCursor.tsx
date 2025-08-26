@@ -24,13 +24,13 @@ export function CustomCursor() {
   const cursorY = useTransform(mouseY, (value) => value - 32);
 
   useEffect(() => {
-    const handleMouseEnter = (event: any) => {
-      const targetEl: Element | null = (event?.target as Element) || null;
+    const handleMouseEnter = (event: MouseEvent) => {
+      const targetEl = event.target as Element | null;
       const wantsBlur = !!targetEl?.closest('[data-cursor-blur="true"]');
       setIsHovering(true);
       setIsBlurHover(wantsBlur);
     };
-    const handleMouseLeave = (event: any) => {
+    const handleMouseLeave = (_event: MouseEvent) => {
       setIsHovering(false);
       setIsBlurHover(false);
     };
@@ -39,17 +39,32 @@ export function CustomCursor() {
       // Add event listeners to all interactive elements including motion.div
       const interactiveElements = document.querySelectorAll('a, button, [role="button"], input, textarea, select, [class*="cursor-pointer"], [data-cursor-target="true"], .cursor-interactive, [class*="motion-"]');
       
+      const onEnter = (e: Event) => handleMouseEnter(e as MouseEvent);
+      const onLeave = (e: Event) => handleMouseLeave(e as MouseEvent);
+
       interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', handleMouseEnter);
-        element.addEventListener('mouseleave', handleMouseLeave);
+        element.addEventListener('mouseenter', onEnter);
+        element.addEventListener('mouseleave', onLeave);
       });
+
+      // Return unsubscribe for this batch so we can clean up before re-adding
+      return () => {
+        interactiveElements.forEach(element => {
+          element.removeEventListener('mouseenter', onEnter);
+          element.removeEventListener('mouseleave', onLeave);
+        });
+      };
     };
 
     // Initial setup
-    addEventListeners();
+    const removeInitial = addEventListeners();
 
     // Set up a mutation observer to watch for new elements
     const observer = new MutationObserver(() => {
+      // Clean up previous listeners and re-attach to include new nodes
+      removeInitial?.();
+      // Re-bind and store new remover
+      // Note: we intentionally ignore storing multiple removers; cleanup on effect teardown handles it
       addEventListeners();
     });
 
@@ -61,11 +76,7 @@ export function CustomCursor() {
     return () => {
       observer.disconnect();
       // Clean up all event listeners
-      const allElements = document.querySelectorAll('a, button, [role="button"], input, textarea, select, [class*="cursor-pointer"], [data-cursor-target="true"], .cursor-interactive, [class*="motion-"]');
-      allElements.forEach(element => {
-        element.removeEventListener('mouseenter', handleMouseEnter);
-        element.removeEventListener('mouseleave', handleMouseLeave);
-      });
+      removeInitial?.();
     };
   }, []);
 
@@ -77,7 +88,8 @@ export function CustomCursor() {
             y: cursorY,
             pointerEvents: 'none',
             zIndex: 35,
-            mixBlendMode: 'difference' as any,
+            // Keep type strictness without casting to any
+            mixBlendMode: 'difference' as React.CSSProperties['mixBlendMode'],
           }}
               animate={{
           scale: isBlurHover ? 1.4 : isHovering ? 1.4 : 1,

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 // Button removed (no CTA in overlay)
 import Image from 'next/image';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMotionValue, useSpring } from 'framer-motion';
 import { useMousePosition } from '@/hooks/useMousePosition';
 import { CustomCursor } from '@/components/ui/CustomCursor';
