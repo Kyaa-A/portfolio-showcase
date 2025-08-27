@@ -123,7 +123,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           return (
             <motion.div
               ref={ref}
-              className="absolute left-[28%] top-3/4 -translate-y-1/2 select-none"
+              className="absolute left-[28%] top-1/2 -translate-y-1/2 select-none"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
