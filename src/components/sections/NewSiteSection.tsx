@@ -11,7 +11,7 @@ export function NewSiteSection() {
     <section className="min-h-screen bg-background relative flex items-center overflow-hidden">
               {/* Video on the right side */}
                   <motion.div
-            className="absolute right-60 top-3/5 -translate-y-1/2 z-10 w-[36rem] h-[40rem]"
+            className="absolute left-[38%] top-[55%] -translate-y-1/2 z-10 w-[42rem] h-[46rem]"
             initial={{ opacity: 0, scale: 0.8, x: 50, rotate: -5 }}
             animate={{ 
               opacity: isVideoVisible ? 1 : 0,
@@ -66,9 +66,8 @@ export function NewSiteSection() {
                   transition: { duration: 0.2, ease: "easeOut" }
                 }}
               >
-                NEW SIT
+                NEW SITE
               </motion.span>
-              <span className="text-white">E</span>
             </span>
           </motion.h1>
 
