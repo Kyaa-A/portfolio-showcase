@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 // Button removed (no CTA in overlay)
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { useMotionValue, useSpring } from 'framer-motion';
 import { useMousePosition } from '@/hooks/useMousePosition';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 
@@ -16,16 +17,20 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.setAttribute('data-overlay-open', 'true');
     } else {
       document.body.style.overflow = '';
+      document.body.removeAttribute('data-overlay-open');
     }
     return () => {
       document.body.style.overflow = '';
+      document.body.removeAttribute('data-overlay-open');
     };
   }, [isOpen]);
   return (
     <motion.div
-      className="fixed inset-0 bg-background z-[100] overflow-visible"
+      id="nav-overlay"
+      className="fixed inset-0 bg-background z-[200] overflow-visible"
       initial={{ opacity: 0, visibility: 'hidden' }}
       animate={{
         opacity: isOpen ? 1 : 0,
@@ -72,7 +77,127 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
         </motion.a>
       </div>
 
+      {/* Start a Project magnetic circle (center-left) */}
+      {(() => {
+        const MagneticCircle = () => {
+          const ref = useRef<HTMLDivElement>(null);
+          const { x: mouseX, y: mouseY } = useMousePosition();
+          const mvX = useMotionValue(0);
+          const mvY = useMotionValue(0);
+          const x = useSpring(mvX, { stiffness: 260, damping: 18, mass: 0.5 });
+          const y = useSpring(mvY, { stiffness: 260, damping: 18, mass: 0.5 });
+          const [isInside, setIsInside] = useState(false);
 
+          useEffect(() => {
+            const el = ref.current;
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            // Magnetic (inverse) mapping: move opposite to cursor, more sensitive
+            const vw = window.innerWidth || 1;
+            const vh = window.innerHeight || 1;
+            const normX = (mouseX - cx) / vw; // -1..1 roughly across screen
+            const normY = (mouseY - cy) / vh;
+            const maxOffsetX = 140; // px, limit so it doesn't hit other content
+            const maxOffsetY = 60;  // smaller vertical drift
+            const targetX = Math.max(Math.min(-normX * maxOffsetX * 2, maxOffsetX), -maxOffsetX);
+            const targetY = Math.max(Math.min(-normY * maxOffsetY * 2, maxOffsetY), -maxOffsetY);
+            mvX.set(targetX);
+            mvY.set(targetY);
+
+            // inside detection (cursor overlapping circle)
+            const radius = rect.width / 2;
+            const distToCenter = Math.hypot(mouseX - cx, mouseY - cy);
+            setIsInside(distToCenter <= radius);
+          }, [mouseX, mouseY, mvX, mvY]);
+
+          // Toggle a body attribute to hide the custom cursor while inside
+          useEffect(() => {
+            if (isInside) {
+              document.body.setAttribute('data-hide-cursor', 'true');
+            } else {
+              document.body.removeAttribute('data-hide-cursor');
+            }
+            return () => {
+              document.body.removeAttribute('data-hide-cursor');
+            };
+          }, [isInside]);
+
+          return (
+            <motion.div
+              ref={ref}
+              className="absolute left-[28%] top-1/2 -translate-y-1/2 select-none hidden md:block"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              style={{ x, y }}
+            >
+              <div className="relative w-48 h-48 flex items-center justify-center">
+                {/* Ring border fades when inside */}
+                <motion.div
+                  className="absolute inset-0 rounded-full border"
+                  animate={{ opacity: isInside ? 0 : 1, borderColor: 'rgba(255,255,255,0.6)' }}
+                  transition={{ duration: 0.12 }}
+                />
+
+                {/* Radial fill from center (scale up) */}
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-white"
+                  initial={false}
+                  animate={{ scale: isInside ? 1 : 0 }}
+                  transition={{ type: 'spring', stiffness: 190, damping: 20 }}
+                  style={{ transformOrigin: 'center center' }}
+                />
+
+                {/* Rotating vertical text (outside state) */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
+                  transition={{ duration: 18, repeat: Infinity, ease: 'linear', opacity: { duration: 0.05 } }}
+                >
+                  <span className="writing-mode-vertical whitespace-nowrap tracking-[0.6em] text-white/90 text-[13px] translate-x-[4px]">
+                    START A PROJECT
+                  </span>
+                </motion.div>
+
+                {/* Inside text when overlapped (black on white) */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{
+                    rotate: 360,
+                    opacity: isInside ? 1 : 0,
+                    scale: isInside ? 1 : 0.84,
+                    y: isInside ? 0 : 14,
+                  }}
+                  transition={{
+                    duration: 18,
+                    repeat: Infinity,
+                    ease: 'linear',
+                    opacity: { duration: 0.06 },
+                    y: { type: 'spring', stiffness: 160, damping: 24 },
+                    scale: { type: 'spring', stiffness: 160, damping: 24 },
+                  }}
+                >
+                  <motion.span
+                    className="text-black writing-mode-vertical whitespace-nowrap"
+                    initial={false}
+                    animate={{
+                      letterSpacing: isInside ? '0.08em' : '0.36em',
+                      fontSize: isInside ? '12px' : '14px',
+                    }}
+                    transition={{ type: 'spring', stiffness: 170, damping: 24 }}
+                    style={{ fontWeight: 600 }}
+                  >
+                    START A PROJECT
+                  </motion.span>
+                </motion.div>
+              </div>
+            </motion.div>
+          );
+        };
+        return <MagneticCircle />;
+      })()}
 
       {/* Close button */}
       <button

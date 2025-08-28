@@ -50,6 +50,28 @@ export function ProjectsSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
+  useEffect(() => {
+    const checkOverlay = () => {
+      if (typeof window !== 'undefined') {
+        setIsOverlayOpen(document.body.getAttribute('data-overlay-open') === 'true');
+      }
+    };
+
+    // Check initially
+    checkOverlay();
+
+    // Create a MutationObserver to watch for changes to data-overlay-open
+    const observer = new MutationObserver(checkOverlay);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['data-overlay-open']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="projects" className="min-h-screen bg-background relative">
       {/* Skills Subsection */}
@@ -62,10 +84,10 @@ export function ProjectsSection() {
       <ContactSubsection />
 
       {/* Bottom-Left Text - Only visible when ProjectsSection is in view */}
-      {isSectionInView && (
-        <div className="fixed bottom-0 left-0 z-50">
+      {isSectionInView && !isOverlayOpen && (
+        <div className="fixed bottom-0 left-0 z-10">
           <motion.div
-            className="bg-white px-8 sm:px-12 md:px-16 py-6 sm:py-8 md:py-12"
+            className="bg-white px-6 sm:px-8 md:px-16 py-4 sm:py-6 md:py-12"
             key={currentSection}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

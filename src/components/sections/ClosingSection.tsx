@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export function ClosingSection() {
   return (
-    <section className="min-h-screen bg-background relative flex items-center justify-center">
+    <section id="about" className="min-h-screen bg-background relative flex items-center justify-center">
       {/* Main "AS WHO?" text */}
       <div className="text-center">
         <motion.div
