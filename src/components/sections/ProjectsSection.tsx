@@ -31,10 +31,7 @@ export function ProjectsSection() {
       // Calculate relative position within the ProjectsSection
       const relativeScroll = scrollPosition - sectionTop;
       
-      // Three subsections, each one screen height:
-      // First screen height (0 to windowHeight): TECHNICAL EXPERTISE
-      // Second screen height (windowHeight to 2*windowHeight): FEATURED PROJECTS
-      // Third screen height (2*windowHeight to 3*windowHeight): GET IN TOUCH
+      // Three subsections, each one screen height
       if (relativeScroll >= 0 && relativeScroll < windowHeight) {
         setCurrentSection('TECHNICAL EXPERTISE');
       } else if (relativeScroll >= windowHeight && relativeScroll < windowHeight * 2) {
@@ -68,13 +65,13 @@ export function ProjectsSection() {
       {isSectionInView && (
         <div className="fixed bottom-0 left-0 z-50">
           <motion.div
-            className="bg-white px-16 py-12"
+            className="bg-white px-8 sm:px-12 md:px-16 py-6 sm:py-8 md:py-12"
             key={currentSection}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-black text-base uppercase tracking-[0.2em] leading-tight">
+            <p className="text-black text-sm md:text-base uppercase tracking-[0.2em] leading-tight">
               {currentSection}
             </p>
           </motion.div>
