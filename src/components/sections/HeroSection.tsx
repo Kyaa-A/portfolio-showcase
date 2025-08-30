@@ -21,7 +21,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="min-h-screen relative flex flex-col">
+    <section id="hero" ref={containerRef} className="min-h-screen relative flex flex-col">
       {/* Header with Logo */}
       <header className="absolute top-8 md:top-16 left-0 z-10">
         <div className="bg-white flex flex-col p-2 md:p-3 items-center">
@@ -48,8 +48,8 @@ export function HeroSection() {
           className="md:pl-32 max-w-full md:max-w-[90%]"
         >
           <h1 className="text-4xl sm:text-5xl md:text-[130px] font-black mb-4 md:mb-6 text-white leading-[1.1] md:leading-[0.9] tracking-[-1px] md:tracking-[-3px]" style={{fontFamily: 'var(--font-inter)'}}>
-            I BUILD<br className="hidden md:block" /> DIGITAL<br />
-            EXPERI<span className="hidden md:inline">ENCES</span><span className="md:hidden">ENCE</span>
+            I BUILD DIGITAL<br />
+            EXPERIENCES
           </h1>
           <p className="text-base md:text-xl text-white max-w-2xl font-light tracking-wide">
             By crafting beautiful <span className="underline decoration-gray-400/40 underline-offset-4 md:underline-offset-8">web applications</span> from concept to deployment.

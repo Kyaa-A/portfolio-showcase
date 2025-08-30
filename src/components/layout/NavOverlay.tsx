@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMotionValue, useSpring } from 'framer-motion';
 import { useMousePosition } from '@/hooks/useMousePosition';
 import { CustomCursor } from '@/components/ui/CustomCursor';
+import { useRouter } from 'next/navigation';
 
 interface NavOverlayProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface NavOverlayProps {
 }
 
 export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
+  const router = useRouter();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -41,11 +43,15 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
       {/* Face avatar (top-left) */}
       <div className="absolute top-12 left-12 z-40">
         <motion.a
-          href="#hero"
+          href="/"
           className="block cursor-interactive"
           data-cursor-target="true"
           data-cursor-blur="true"
-          onClick={onClose}
+          onClick={(e) => {
+            e.preventDefault();
+            onClose();
+            router.push('/');
+          }}
           onMouseEnter={() => {
             document.body.setAttribute('data-hide-cursor', 'true');
           }}
@@ -241,7 +247,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           </motion.a>
 
           <motion.a
-            href="#about"
+            href="/about"
             className="inline-block cursor-interactive ml-auto"
             data-cursor-target="true"
             data-cursor-blur="true"
@@ -262,7 +268,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
               whileHover={{ color: '#ffffff', letterSpacing: '0.06em' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
-              The man behind the beard
+              The person behind the pixels
             </motion.p>
           </motion.a>
         </div>
@@ -270,29 +276,29 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
       {/* Social links bottom-right */}
       <div className="absolute bottom-8 right-8 flex items-center gap-4 z-40">
         <a
-          href="https://www.facebook.com/asnari.pacalna"
+          href="https://github.com/Kyaa-A"
           target="_blank"
           rel="noreferrer"
           className="w-10 h-10 rounded-full border border-white/40 text-white/80 hover:bg-black hover:text-white hover:border-transparent transition-colors flex items-center justify-center cursor-interactive"
           data-cursor-target="true"
           data-cursor-blur="true"
-          aria-label="Facebook"
+          aria-label="GitHub"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.261c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
           </svg>
         </a>
         <a
-          href="https://www.instagram.com/asnarsss_/"
+          href="https://www.linkedin.com/in/asnari-pacalna-848096255/"
           target="_blank"
           rel="noreferrer"
           className="w-10 h-10 rounded-full border border-white/40 text-white/80 hover:bg-black hover:text-white hover:border-transparent transition-colors flex items-center justify-center cursor-interactive"
           data-cursor-target="true"
           data-cursor-blur="true"
-          aria-label="Instagram"
+          aria-label="LinkedIn"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.25-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/>
+            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
           </svg>
         </a>
       </div>
