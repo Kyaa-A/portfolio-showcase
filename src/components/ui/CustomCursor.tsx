@@ -120,6 +120,7 @@ export function CustomCursor() {
     >
       <motion.div 
         className="w-full h-full rounded-full border-2"
+        initial={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
         animate={{
           backgroundColor: isHovering ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)',
           borderColor: 'rgba(255,255,255,1)',

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { useMotionValue, useSpring } from 'framer-motion';
 import { useMousePosition } from '@/hooks/useMousePosition';
+import Link from 'next/link';
 
 export function ProjectsSubsection() {
   const [isMobile, setIsMobile] = useState(false);
@@ -52,12 +53,21 @@ export function ProjectsSubsection() {
     }, [mouseX, mouseY, mvX, mvY, isMobile]);
 
     return (
-      <motion.div
-        ref={ref}
-        className="absolute right-[10%] md:right-[30%] top-[75%] md:top-2/3 select-none z-40"
-        style={isMobile ? {} : { x, y }}
-      >
-        <div className="relative w-32 md:w-48 h-32 md:h-48 flex items-center justify-center">
+      <Link href="/projects">
+        <motion.div
+          ref={ref}
+          className="absolute right-[10%] md:right-[30%] top-[75%] md:top-2/3 select-none z-40 cursor-pointer"
+          style={isMobile ? {} : { x, y }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          data-cursor-target="true"
+        >
+          <motion.div 
+            className="relative w-32 md:w-48 h-32 md:h-48 flex items-center justify-center"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
           {/* Circle background */}
           {isMobile ? (
             // Mobile: White background with continuous rotation
@@ -151,8 +161,9 @@ export function ProjectsSubsection() {
               </motion.div>
             </>
           )}
-        </div>
+        </motion.div>
       </motion.div>
+      </Link>
     );
   };
 

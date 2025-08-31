@@ -221,13 +221,18 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
       <div className="flex flex-col justify-center items-end h-full px-8 md:px-16">
         <div className="space-y-16 w-full max-w-[900px] text-right pr-4 md:pr-12">
           <motion.a
-            href="#work"
+            href="/work"
             className="inline-block cursor-interactive ml-auto"
             data-cursor-target="true"
             data-cursor-blur="true"
             initial={{ opacity: 0, y: 20 }}
             animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            onClick={(e) => {
+              e.preventDefault();
+              onClose();
+              router.push('/work');
+            }}
           >
             <motion.h2
               className="text-[12vw] md:text-[9vw] font-black leading-none inline-block bg-background relative z-30"
