@@ -56,7 +56,7 @@ export function ContactSubsection() {
       <Link href="/contact">
         <motion.div
           ref={ref}
-          className="absolute right-[10%] md:right-[30%] top-[75%] md:top-2/3 select-none z-40 cursor-pointer"
+          className="absolute right-[8%] sm:right-[10%] md:right-[30%] top-[70%] sm:top-[75%] md:top-2/3 select-none z-40 cursor-pointer"
           style={isMobile ? {} : { x, y }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -64,7 +64,7 @@ export function ContactSubsection() {
           data-cursor-target="true"
         >
           <motion.div 
-            className="relative w-32 md:w-48 h-32 md:h-48 flex items-center justify-center"
+            className="relative w-24 sm:w-32 md:w-48 h-24 sm:h-32 md:h-48 flex items-center justify-center"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
@@ -112,7 +112,7 @@ export function ContactSubsection() {
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
-              <span className="text-black text-[11px] font-bold tracking-[0.15em] whitespace-nowrap">
+              <span className="text-black text-[9px] sm:text-[11px] font-bold tracking-[0.15em] whitespace-nowrap">
                 CONTACT ME
               </span>
             </motion.div>
@@ -124,7 +124,7 @@ export function ContactSubsection() {
                 animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
                 transition={{ duration: 12, repeat: Infinity, ease: 'linear', opacity: { duration: 0.05 } }}
               >
-                <span className="writing-mode-vertical whitespace-nowrap tracking-[0.4em] text-white/90 text-[13px] translate-x-[2px] font-bold">
+                <span className="writing-mode-vertical whitespace-nowrap tracking-[0.4em] text-white/90 text-[11px] sm:text-[13px] translate-x-[2px] font-bold">
                   CONTACT ME
                 </span>
               </motion.div>
@@ -168,15 +168,15 @@ export function ContactSubsection() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden mt-20">
+    <div className="min-h-screen relative overflow-hidden mt-8 sm:mt-16 md:mt-20">
       {/* Main Content Area - 75% width */}
       <div className="w-full md:w-[75%] h-screen relative">
         {/* Content Container */}
         <div className="relative h-full">
           {/* Title Container */}
-          <div className="relative w-full px-6 md:px-0" style={{ height: '180px' }}>
+          <div className="relative w-full px-4 sm:px-6 md:px-0" style={{ height: isMobile ? '140px' : '180px' }}>
             {/* Animated Text */}
-            <div className="absolute inset-x-0 bottom-0 z-20" style={{ top: isMobile ? '237%' : '45%', paddingLeft: isMobile ? '0' : '15%' }}>
+            <div className="absolute inset-x-0 z-20 contact-title-position" style={{ paddingLeft: isMobile ? '0' : '15%' }}>
               <motion.div
                 className="relative"
                 initial="hidden"
@@ -186,7 +186,7 @@ export function ContactSubsection() {
               >
                 {/* Top half - solid white */}
                 <div 
-                  className="absolute text-[80px] md:text-[160px] font-black uppercase tracking-tight text-white flex"
+                  className="absolute text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-tight text-white flex"
                   style={{ 
                     clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)',
                     WebkitClipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)'
@@ -212,7 +212,7 @@ export function ContactSubsection() {
                 
                 {/* Bottom half - outlined */}
                 <div 
-                  className="text-[80px] md:text-[160px] font-black uppercase tracking-tight flex"
+                  className="text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-tight flex"
                   style={{ 
                     clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)',
                     WebkitClipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)',
@@ -242,7 +242,7 @@ export function ContactSubsection() {
           </div>
 
           {/* Background Image */}
-          <div className="absolute bottom-0 left-0 z-10 overflow-hidden w-full md:w-[1300px] h-[500px] md:h-[750px]" style={{ bottom: isMobile ? '-10%' : '0' }}>
+          <div className="absolute bottom-0 left-0 z-10 overflow-hidden w-full h-[65vh] sm:h-[70vh] max-h-[750px]" style={{ bottom: isMobile ? '-5%' : '0' }}>
             <motion.img
               src="/assets/Contact.webp"
               alt="Contact Background"

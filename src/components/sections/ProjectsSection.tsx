@@ -87,13 +87,13 @@ export function ProjectsSection() {
       {isSectionInView && !isOverlayOpen && (
         <div className="fixed bottom-0 left-0 z-10">
           <motion.div
-            className="bg-white px-6 sm:px-8 md:px-16 py-4 sm:py-6 md:py-12"
+            className="bg-white px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4 md:py-6 lg:py-8 xl:py-12"
             key={currentSection}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-black text-sm md:text-base uppercase tracking-[0.2em] leading-tight">
+            <p className="text-black text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase tracking-[0.15em] sm:tracking-[0.2em] leading-tight font-medium">
               {currentSection}
             </p>
           </motion.div>

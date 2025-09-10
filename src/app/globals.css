@@ -182,4 +182,82 @@
   body[data-hide-cursor='true'] {
     cursor: none !important;
   }
+
+  /* Title positioning based on zoom level */
+  .skills-title-position,
+  .projects-title-position,
+  .contact-title-position {
+    transform: translateY(17.3vh);
+  }
+
+  @media screen and (min-resolution: 125dpi) {
+    .skills-title-position,
+    .projects-title-position,
+    .contact-title-position {
+      transform: translateY(13.7vh);
+    }
+    
+    /* Adjust text size at 125% zoom to maintain visual consistency */
+    .skills-title-position .text-\[80px\],
+    .projects-title-position .text-\[80px\],
+    .contact-title-position .text-\[80px\] {
+      font-size: 100px !important;
+    }
+    
+    .skills-title-position .text-\[160px\],
+    .projects-title-position .text-\[160px\],
+    .contact-title-position .text-\[160px\] {
+      font-size: 200px !important;
+    }
+    
+    /* Keep section text at original size at 125% zoom */
+    .skills-title-position ~ * .text-sm,
+    .projects-title-position ~ * .text-sm,
+    .contact-title-position ~ * .text-sm,
+    .skills-title-position ~ * .text-xs,
+    .projects-title-position ~ * .text-xs,
+    .contact-title-position ~ * .text-xs,
+    .skills-title-position ~ * [class*="text-"],
+    .projects-title-position ~ * [class*="text-"],
+    .contact-title-position ~ * [class*="text-"] {
+      font-size: 0.875rem !important; /* 14px */
+    }
+    
+    /* Specifically target "TECHNICAL EXPERTISE" and similar bottom text */
+    .skills-title-position ~ * .text-black,
+    .projects-title-position ~ * .text-black,
+    .contact-title-position ~ * .text-black,
+    .skills-title-position ~ * .text-white,
+    .projects-title-position ~ * .text-white,
+    .contact-title-position ~ * .text-white {
+      font-size: 0.75rem !important; /* 12px - smaller to match 100% visual size */
+    }
+    
+    /* Keep rotating circles at original size at 125% zoom */
+    .skills-title-position ~ * .w-32,
+    .projects-title-position ~ * .w-32,
+    .contact-title-position ~ * .w-32,
+    .skills-title-position ~ * .w-48,
+    .projects-title-position ~ * .w-48,
+    .contact-title-position ~ * .w-48,
+    .skills-title-position ~ * .h-32,
+    .projects-title-position ~ * .h-32,
+    .contact-title-position ~ * .h-32,
+    .skills-title-position ~ * .h-48,
+    .projects-title-position ~ * .h-48,
+    .contact-title-position ~ * .h-48 {
+      width: 8rem !important; /* 128px */
+      height: 8rem !important; /* 128px */
+    }
+    
+    /* Keep circle text at original size */
+    .skills-title-position ~ * .text-\[11px\],
+    .projects-title-position ~ * .text-\[11px\],
+    .contact-title-position ~ * .text-\[11px\],
+    .skills-title-position ~ * .text-\[13px\],
+    .projects-title-position ~ * .text-\[13px\],
+    .contact-title-position ~ * .text-\[13px\] {
+      font-size: 11px !important;
+    }
+  }
 }
