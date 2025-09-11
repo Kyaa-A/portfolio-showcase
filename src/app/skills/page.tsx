@@ -51,6 +51,14 @@ const technicalSkills = {
   ],
 };
 
+const skillCategories = [
+  { id: 'programmingLanguages', name: 'Programming Languages', icon: '💻' },
+  { id: 'frontend', name: 'Frontend', icon: '🎨' },
+  { id: 'backend', name: 'Backend', icon: '⚙️' },
+  { id: 'databases', name: 'Databases', icon: '🗄️' },
+  { id: 'tools', name: 'Tools & Platforms', icon: '🛠️' },
+];
+
 // Certificates Data
 const certificates = [
   {
@@ -106,6 +114,7 @@ const softSkills = [
 export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState('technical');
   const [selectedCertificate, setSelectedCertificate] = useState<number | null>(null);
+  const [selectedSkillCategory, setSelectedSkillCategory] = useState<string | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,6 +150,22 @@ export default function SkillsPage() {
           viewport={{ once: true }}
         />
       </div>
+    </motion.div>
+  );
+
+  const SkillCard = ({ skill }: { skill: { name: string; level: number; color: string } }) => (
+    <motion.div
+      className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer group"
+      variants={itemVariants}
+      whileHover={{ scale: 1.05, y: -5 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="w-12 h-12 rounded-full mb-3 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+           style={{ backgroundColor: skill.color + '20' }}>
+        <div className="w-6 h-6 rounded-full" style={{ backgroundColor: skill.color }} />
+      </div>
+      <span className="text-white text-sm font-medium text-center mb-1">{skill.name}</span>
+      <span className="text-white/60 text-xs">{skill.level}%</span>
     </motion.div>
   );
 
@@ -278,8 +303,27 @@ export default function SkillsPage() {
                 whileHover={{ scale: 1.05 }}
                 data-cursor-target="true"
               >
-                <p className="text-3xl sm:text-4xl md:text-5xl text-white/90 leading-relaxed font-bold cursor-pointer">
-                  Peeking Behind the Code
+                <p className="text-3xl sm:text-4xl md:text-5xl text-white/90 leading-relaxed font-bold cursor-pointer flex items-center justify-center">
+                  <span>P</span>
+                  <img 
+                    src="/assets/eyes.png" 
+                    alt="e"
+                    className="inline-block w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
+                    style={{ 
+                      filter: 'brightness(0) invert(1)',
+                      backgroundColor: 'transparent'
+                    }}
+                  />
+                  <img 
+                    src="/assets/eyes.png" 
+                    alt="e"
+                    className="inline-block w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
+                    style={{ 
+                      filter: 'brightness(0) invert(1)',
+                      backgroundColor: 'transparent'
+                    }}
+                  />
+                  <span>king Behind the Code</span>
                 </p>
               </motion.div>
               
@@ -356,7 +400,7 @@ export default function SkillsPage() {
       </motion.div>
 
       {/* Navigation Tabs */}
-      <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-white/10">
+      <div className="sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8">
             {[
@@ -369,9 +413,10 @@ export default function SkillsPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
-                    ? 'border-blue-500 text-white'
-                    : 'border-transparent text-white/60 hover:text-white/80'
+                    ? 'border-blue-500 text-white bg-transparent'
+                    : 'border-transparent text-white/60 hover:text-black bg-transparent'
                 }`}
+                data-cursor-target="false"
               >
                 {tab.label}
               </button>
@@ -382,66 +427,81 @@ export default function SkillsPage() {
 
       {/* Content Sections */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Technical Skills */}
-        {activeTab === 'technical' && (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.h2
-              className="text-4xl font-bold text-white mb-12 text-center"
-              variants={itemVariants}
-            >
-              Technical Expertise
-            </motion.h2>
+         {/* Technical Skills */}
+         {activeTab === 'technical' && (
+           <motion.div
+             variants={containerVariants}
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true }}
+           >
+             <motion.h2
+               className="text-4xl font-bold text-white mb-12 text-center"
+               variants={itemVariants}
+             >
+               Technical Expertise
+             </motion.h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Programming Languages */}
-              <motion.div variants={itemVariants}>
-                <h3 className="text-2xl font-semibold text-white mb-6">Programming Languages</h3>
-                {technicalSkills.programmingLanguages.map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
-              </motion.div>
-
-              {/* Frontend */}
-              <motion.div variants={itemVariants}>
-                <h3 className="text-2xl font-semibold text-white mb-6">Frontend Technologies</h3>
-                {technicalSkills.frontend.map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
-              </motion.div>
-
-              {/* Backend */}
-              <motion.div variants={itemVariants}>
-                <h3 className="text-2xl font-semibold text-white mb-6">Backend Technologies</h3>
-                {technicalSkills.backend.map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
-              </motion.div>
-
-              {/* Databases */}
-              <motion.div variants={itemVariants}>
-                <h3 className="text-2xl font-semibold text-white mb-6">Databases</h3>
-                {technicalSkills.databases.map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
-              </motion.div>
-
-              {/* Tools */}
-              <motion.div variants={itemVariants} className="lg:col-span-2">
-                <h3 className="text-2xl font-semibold text-white mb-6">Tools & Platforms</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {technicalSkills.tools.map((skill, index) => (
-                    <SkillBar key={index} skill={skill} />
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
+             {/* Clean Skills Display */}
+             <div className="space-y-16">
+               {skillCategories.map((category, categoryIndex) => (
+                 <motion.div
+                   key={category.id}
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                   viewport={{ once: true }}
+                   className="border-b border-white/10 pb-16 last:border-b-0"
+                 >
+                   <div className="flex items-center gap-3 mb-8">
+                     <span className="text-2xl">{category.icon}</span>
+                     <h3 className="text-2xl font-bold text-white">{category.name}</h3>
+                   </div>
+                   
+                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                     {technicalSkills[category.id as keyof typeof technicalSkills]?.map((skill, index) => (
+                       <motion.div
+                         key={index}
+                         className="group relative"
+                         initial={{ opacity: 0, y: 20 }}
+                         whileInView={{ opacity: 1, y: 0 }}
+                         transition={{ duration: 0.5, delay: index * 0.05 }}
+                         viewport={{ once: true }}
+                       >
+                         <div className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300 group-hover:scale-105">
+                           <div className="flex items-center justify-between mb-4">
+                             <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
+                             <div 
+                               className="w-4 h-4 rounded-full"
+                               style={{ backgroundColor: skill.color }}
+                             />
+                           </div>
+                           
+                           <div className="space-y-2">
+                             <div className="flex justify-between text-sm">
+                               <span className="text-white/60">Proficiency</span>
+                               <span className="text-white/80">{skill.level}%</span>
+                             </div>
+                             <div className="w-full bg-white/10 rounded-full h-2">
+                               <motion.div
+                                 className="h-2 rounded-full"
+                                 style={{ backgroundColor: skill.color }}
+                                 initial={{ width: 0 }}
+                                 whileInView={{ width: `${skill.level}%` }}
+                                 transition={{ duration: 1, delay: 0.3 + index * 0.05 }}
+                                 viewport={{ once: true }}
+                               />
+                             </div>
+                           </div>
+                         </div>
+                       </motion.div>
+                     ))}
+                   </div>
+                 </motion.div>
+               ))}
+             </div>
+           </motion.div>
+         )}
 
         {/* Certificates */}
         {activeTab === 'certificates' && (
