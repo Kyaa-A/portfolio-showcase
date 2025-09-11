@@ -52,6 +52,7 @@ const technicalSkills = {
 };
 
 const skillCategories = [
+  { id: 'all', name: 'All', icon: '✨' },
   { id: 'programmingLanguages', name: 'Programming Languages', icon: '💻' },
   { id: 'frontend', name: 'Frontend', icon: '🎨' },
   { id: 'backend', name: 'Backend', icon: '⚙️' },
@@ -114,7 +115,7 @@ const softSkills = [
 export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState('technical');
   const [selectedCertificate, setSelectedCertificate] = useState<number | null>(null);
-  const [selectedSkillCategory, setSelectedSkillCategory] = useState<string | null>(null);
+  const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('all');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -442,63 +443,84 @@ export default function SkillsPage() {
                Technical Expertise
              </motion.h2>
 
-             {/* Clean Skills Display */}
-             <div className="space-y-16">
-               {skillCategories.map((category, categoryIndex) => (
-                 <motion.div
-                   key={category.id}
-                   initial={{ opacity: 0, y: 30 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                   viewport={{ once: true }}
-                   className="border-b border-white/10 pb-16 last:border-b-0"
-                 >
-                   <div className="flex items-center gap-3 mb-8">
-                     <span className="text-2xl">{category.icon}</span>
-                     <h3 className="text-2xl font-bold text-white">{category.name}</h3>
-                   </div>
-                   
-                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                     {technicalSkills[category.id as keyof typeof technicalSkills]?.map((skill, index) => (
-                       <motion.div
-                         key={index}
-                         className="group relative"
-                         initial={{ opacity: 0, y: 20 }}
-                         whileInView={{ opacity: 1, y: 0 }}
-                         transition={{ duration: 0.5, delay: index * 0.05 }}
-                         viewport={{ once: true }}
-                       >
-                         <div className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300 group-hover:scale-105">
-                           <div className="flex items-center justify-between mb-4">
-                             <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
-                             <div 
-                               className="w-4 h-4 rounded-full"
-                               style={{ backgroundColor: skill.color }}
-                             />
-                           </div>
-                           
-                           <div className="space-y-2">
-                             <div className="flex justify-between text-sm">
-                               <span className="text-white/60">Proficiency</span>
-                               <span className="text-white/80">{skill.level}%</span>
-                             </div>
-                             <div className="w-full bg-white/10 rounded-full h-2">
-                               <motion.div
-                                 className="h-2 rounded-full"
-                                 style={{ backgroundColor: skill.color }}
-                                 initial={{ width: 0 }}
-                                 whileInView={{ width: `${skill.level}%` }}
-                                 transition={{ duration: 1, delay: 0.3 + index * 0.05 }}
-                                 viewport={{ once: true }}
-                               />
-                             </div>
-                           </div>
+             {/* Category Navigation */}
+             <nav className="mb-12" role="navigation" aria-label="Skills categories">
+               <div className="flex flex-wrap justify-center gap-4">
+                 {skillCategories.map((category) => (
+                   <motion.button
+                     key={category.id}
+                     onClick={() => setSelectedSkillCategory(
+                       selectedSkillCategory === category.id ? 'all' : category.id
+                     )}
+                     className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                       selectedSkillCategory === category.id || (category.id === 'all' && !selectedSkillCategory)
+                         ? 'bg-white text-black'
+                         : 'bg-white/5 text-white/80 hover:bg-white/10'
+                     }`}
+                     whileHover={{ scale: 1.05 }}
+                     whileTap={{ scale: 0.95 }}
+                     data-cursor-target="false"
+                     aria-pressed={selectedSkillCategory === category.id || (category.id === 'all' && !selectedSkillCategory)}
+                   >
+                     <span className="text-lg" aria-hidden="true">{category.icon}</span>
+                     <span>{category.name}</span>
+                   </motion.button>
+                 ))}
+               </div>
+             </nav>
+
+             {/* Skills Content Area */}
+             <div 
+               className="relative min-h-[400px]"
+               role="region"
+               aria-live="polite"
+             >
+               <motion.div
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -20 }}
+                 transition={{ duration: 0.5 }}
+                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+               >
+                 {(selectedSkillCategory === 'all' 
+                   ? Object.values(technicalSkills).flat()
+                   : technicalSkills[selectedSkillCategory as keyof typeof technicalSkills]
+                 )?.map((skill, index) => (
+                   <motion.div
+                     key={skill.name}
+                     className="group relative"
+                     initial={{ opacity: 0, y: 20 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ duration: 0.5, delay: index * 0.05 }}
+                   >
+                     <div className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300 group-hover:scale-105">
+                       <div className="flex items-center justify-between mb-4">
+                         <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
+                         <div 
+                           className="w-4 h-4 rounded-full"
+                           style={{ backgroundColor: skill.color }}
+                         />
+                       </div>
+                       
+                       <div className="space-y-2">
+                         <div className="flex justify-between text-sm">
+                           <span className="text-white/60">Proficiency</span>
+                           <span className="text-white/80">{skill.level}%</span>
                          </div>
-                       </motion.div>
-                     ))}
-                   </div>
-                 </motion.div>
-               ))}
+                         <div className="w-full bg-white/10 rounded-full h-2">
+                           <motion.div
+                             className="h-2 rounded-full"
+                             style={{ backgroundColor: skill.color }}
+                             initial={{ width: 0 }}
+                             animate={{ width: `${skill.level}%` }}
+                             transition={{ duration: 1 }}
+                           />
+                         </div>
+                       </div>
+                     </div>
+                   </motion.div>
+                 ))}
+               </motion.div>
              </div>
            </motion.div>
          )}
