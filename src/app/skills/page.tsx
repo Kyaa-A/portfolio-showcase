@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -11,45 +11,106 @@ const technicalSkills = {
   programmingLanguages: [
     { name: 'JavaScript', level: 90, color: '#F7DF1E' },
     { name: 'TypeScript', level: 85, color: '#3178C6' },
-    { name: 'Python', level: 80, color: '#3776AB' },
     { name: 'Java', level: 75, color: '#ED8B00' },
-    { name: 'C++', level: 70, color: '#00599C' },
     { name: 'PHP', level: 65, color: '#777BB4' },
+    { name: 'Visual Basic', level: 60, color: '#5C2D91' },
   ],
   frontend: [
     { name: 'React', level: 95, color: '#61DAFB' },
     { name: 'Next.js', level: 90, color: '#000000' },
-    { name: 'Vue.js', level: 80, color: '#4FC08D' },
-    { name: 'Angular', level: 70, color: '#DD0031' },
-    { name: 'HTML5', level: 95, color: '#E34F26' },
-    { name: 'CSS3', level: 90, color: '#1572B6' },
+    { name: 'HTML', level: 95, color: '#E34F26' },
+    { name: 'CSS', level: 90, color: '#1572B6' },
     { name: 'Tailwind CSS', level: 85, color: '#06B6D4' },
-    { name: 'SASS/SCSS', level: 80, color: '#CC6699' },
+    { name: 'shadcn', level: 70, color: '#999999' },
+    { name: 'Electron', level: 70, color: '#47848F' },
   ],
   backend: [
     { name: 'Node.js', level: 85, color: '#339933' },
-    { name: 'Express.js', level: 80, color: '#000000' },
-    { name: 'Django', level: 75, color: '#092E20' },
-    { name: 'Flask', level: 70, color: '#000000' },
-    { name: 'Spring Boot', level: 65, color: '#6DB33F' },
-    { name: 'Laravel', level: 70, color: '#FF2D20' },
   ],
   databases: [
     { name: 'PostgreSQL', level: 80, color: '#336791' },
     { name: 'MySQL', level: 75, color: '#4479A1' },
-    { name: 'MongoDB', level: 70, color: '#47A248' },
-    { name: 'Redis', level: 65, color: '#DC382D' },
-    { name: 'SQLite', level: 70, color: '#003B57' },
   ],
   tools: [
-    { name: 'Git', level: 85, color: '#F05032' },
-    { name: 'Docker', level: 75, color: '#2496ED' },
     { name: 'AWS', level: 70, color: '#FF9900' },
-    { name: 'Vercel', level: 80, color: '#000000' },
+    { name: 'Bash', level: 70, color: '#4EAA25' },
+    { name: 'Digital Ocean', level: 70, color: '#0080FF' },
+    { name: 'Docker', level: 75, color: '#2496ED' },
     { name: 'Figma', level: 75, color: '#F24E1E' },
+    { name: 'Git', level: 85, color: '#F05032' },
+    { name: 'GitHub', level: 85, color: '#181717' },
+    { name: 'Google Cloud', level: 70, color: '#4285F4' },
+    { name: 'Ubuntu', level: 70, color: '#E95420' },
+    { name: 'Vercel', level: 80, color: '#000000' },
     { name: 'VS Code', level: 90, color: '#007ACC' },
   ],
 };
+
+// Map skill names to logo assets in public/skills_logo
+const skillLogoMap: Record<string, string> = {
+  javascript: '/skills_logo/javascript.png',
+  typescript: '/skills_logo/typescript.png',
+  java: '/skills_logo/java.png',
+  php: '/skills_logo/php.png',
+  'visual basic': '/skills_logo/visual-basic.png',
+  react: '/skills_logo/reactjs.png',
+  'nextjs': '/skills_logo/nextjs.png',
+  'next.js': '/skills_logo/nextjs.png',
+  html: '/skills_logo/html.png',
+  css: '/skills_logo/css.png',
+  'tailwindcss': '/skills_logo/tailwindcss.png',
+  shadcn: '/skills_logo/shadcn.png',
+  electron: '/skills_logo/electronjs.png',
+  'node.js': '/skills_logo/nodejs.png',
+  nodejs: '/skills_logo/nodejs.png',
+  postgresql: '/skills_logo/postgresql.png',
+  mysql: '/skills_logo/mysql.png',
+  aws: '/skills_logo/aws.png',
+  bash: '/skills_logo/bash.png',
+  'digital ocean': '/skills_logo/digital-ocean.png',
+  docker: '/skills_logo/docker.png',
+  figma: '/skills_logo/figma.png',
+  git: '/skills_logo/git.png',
+  github: '/skills_logo/github.png',
+  'google cloud': '/skills_logo/google-cloud.png',
+  ubuntu: '/skills_logo/ubuntu.png',
+  vercel: '/skills_logo/vercel.png',
+  'vs code': '/skills_logo/visual-studio-code.png',
+  vscode: '/skills_logo/visual-studio-code.png',
+  'visual studio code': '/skills_logo/visual-studio-code.png',
+};
+
+function getLogoPath(skillName: string): string | null {
+  const key = skillName
+    .toLowerCase()
+    .replace(/\+/g, '+')
+    .replace(/\./g, '.')
+    .trim();
+
+  // Try exact key
+  if (skillLogoMap[key]) return skillLogoMap[key];
+
+  // Try simplified key without spaces and punctuation
+  const simple = key.replace(/[^a-z0-9+]/g, '');
+  if (skillLogoMap[simple]) return skillLogoMap[simple];
+
+  // Known aliases
+  const aliases: Record<string, string> = {
+    'nextjs': 'next.js',
+    'nodejs': 'node.js',
+    'postgres': 'postgresql',
+    'js': 'javascript',
+    'ts': 'typescript',
+    'tailwind': 'tailwindcss',
+    'vue': 'vue.js',
+    'css': 'css3',
+    'html': 'html5',
+  };
+  if (aliases[key] && skillLogoMap[aliases[key]]) return skillLogoMap[aliases[key]];
+  if (aliases[simple] && skillLogoMap[aliases[simple]]) return skillLogoMap[aliases[simple]];
+
+  return null;
+}
 
 const skillCategories = [
   { id: 'all', name: 'All', icon: '✨' },
@@ -116,6 +177,17 @@ export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState('technical');
   const [selectedCertificate, setSelectedCertificate] = useState<number | null>(null);
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('all');
+  // Smooth scroll progress without triggering React re-renders
+  const { scrollYProgress } = useScroll();
+  const thumbY = useTransform(scrollYProgress, v => `${v * (96 - 32)}px`);
+
+  const visibleSkills = useMemo(() => {
+    const base = selectedSkillCategory === 'all'
+      ? (Object.values(technicalSkills).flat())
+      : (technicalSkills[selectedSkillCategory as keyof typeof technicalSkills] ?? []);
+    // Show only those with mapped logos
+    return base.filter((s) => Boolean(getLogoPath(s.name)));
+  }, [selectedSkillCategory]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -156,17 +228,37 @@ export default function SkillsPage() {
 
   const SkillCard = ({ skill }: { skill: { name: string; level: number; color: string } }) => (
     <motion.div
-      className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer group"
+      className="flex flex-col items-center p-4 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
       variants={itemVariants}
-      whileHover={{ scale: 1.05, y: -5 }}
-      transition={{ duration: 0.2 }}
+      whileHover={{ scale: 1.04, y: -2 }}
+      transition={{ duration: 0.15 }}
     >
-      <div className="w-12 h-12 rounded-full mb-3 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
-           style={{ backgroundColor: skill.color + '20' }}>
-        <div className="w-6 h-6 rounded-full" style={{ backgroundColor: skill.color }} />
+      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-3 flex items-center justify-center">
+        {getLogoPath(skill.name) ? (
+          (() => {
+            const logo = getLogoPath(skill.name) as string;
+            const lower = skill.name.toLowerCase();
+            const needsWhiteBg = lower === 'vercel' || lower === 'shadcn';
+            return (
+              <div className={needsWhiteBg ? 'w-full h-full flex items-center justify-center bg-white rounded-sm p-1' : 'w-full h-full flex items-center justify-center'}>
+                <img
+                  src={logo}
+                  alt={skill.name}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+            );
+          })()
+        ) : (
+          <div className="w-full h-full rounded-md flex items-center justify-center" style={{ backgroundColor: skill.color + '22' }}>
+            <span className="text-white/80 text-sm font-semibold">
+              {skill.name.slice(0, 2).toUpperCase()}
+            </span>
+          </div>
+        )}
       </div>
-      <span className="text-white text-sm font-medium text-center mb-1">{skill.name}</span>
-      <span className="text-white/60 text-xs">{skill.level}%</span>
+      <span className="text-white/90 text-sm md:text-base font-medium text-center">{skill.name}</span>
     </motion.div>
   );
 
@@ -433,8 +525,7 @@ export default function SkillsPage() {
            <motion.div
              variants={containerVariants}
              initial="hidden"
-             whileInView="visible"
-             viewport={{ once: true }}
+             animate="visible"
            >
              <motion.h2
                className="text-4xl font-bold text-white mb-12 text-center"
@@ -453,14 +544,14 @@ export default function SkillsPage() {
                        selectedSkillCategory === category.id ? 'all' : category.id
                      )}
                      className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                       selectedSkillCategory === category.id || (category.id === 'all' && !selectedSkillCategory)
+                       selectedSkillCategory === category.id
                          ? 'bg-white text-black'
                          : 'bg-white/5 text-white/80 hover:bg-white/10'
                      }`}
                      whileHover={{ scale: 1.05 }}
                      whileTap={{ scale: 0.95 }}
                      data-cursor-target="false"
-                     aria-pressed={selectedSkillCategory === category.id || (category.id === 'all' && !selectedSkillCategory)}
+                     aria-pressed={selectedSkillCategory === category.id}
                    >
                      <span className="text-lg" aria-hidden="true">{category.icon}</span>
                      <span>{category.name}</span>
@@ -478,48 +569,14 @@ export default function SkillsPage() {
                <motion.div
                  initial={{ opacity: 0, y: 20 }}
                  animate={{ opacity: 1, y: 0 }}
-                 exit={{ opacity: 0, y: -20 }}
                  transition={{ duration: 0.5 }}
-                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 md:gap-8"
                >
-                 {(selectedSkillCategory === 'all' 
-                   ? Object.values(technicalSkills).flat()
-                   : technicalSkills[selectedSkillCategory as keyof typeof technicalSkills]
-                 )?.map((skill, index) => (
-                   <motion.div
-                     key={skill.name}
-                     className="group relative"
-                     initial={{ opacity: 0, y: 20 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     transition={{ duration: 0.5, delay: index * 0.05 }}
-                   >
-                     <div className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300 group-hover:scale-105">
-                       <div className="flex items-center justify-between mb-4">
-                         <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
-                         <div 
-                           className="w-4 h-4 rounded-full"
-                           style={{ backgroundColor: skill.color }}
-                         />
-                       </div>
-                       
-                       <div className="space-y-2">
-                         <div className="flex justify-between text-sm">
-                           <span className="text-white/60">Proficiency</span>
-                           <span className="text-white/80">{skill.level}%</span>
-                         </div>
-                         <div className="w-full bg-white/10 rounded-full h-2">
-                           <motion.div
-                             className="h-2 rounded-full"
-                             style={{ backgroundColor: skill.color }}
-                             initial={{ width: 0 }}
-                             animate={{ width: `${skill.level}%` }}
-                             transition={{ duration: 1 }}
-                           />
-                         </div>
-                       </div>
-                     </div>
-                   </motion.div>
-                 ))}
+                {visibleSkills.map((skill) => (
+                  <div key={`skill-${skill.name}`} className="group relative">
+                    <SkillCard skill={skill as any} />
+                  </div>
+                ))}
                </motion.div>
              </div>
            </motion.div>
@@ -620,24 +677,16 @@ export default function SkillsPage() {
         )}
       </div>
 
-      {/* Back to Home */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <Link href="/">
-            <Button
-              className="bg-white text-black hover:bg-white/90 px-8 py-3 text-lg font-semibold"
-              data-cursor-target="true"
-            >
-              Back to Home
-            </Button>
-          </Link>
-        </motion.div>
+      {/* Custom Scroll Indicator - Hidden on Mobile */}
+      <div className="hidden md:block fixed bottom-8 right-8 z-40">
+        <div className="flex flex-col items-center">
+          <div className="w-1 h-24 bg-gray-700 rounded-full relative overflow-hidden">
+            <motion.div
+              className="absolute w-3 h-8 bg-gray-400 rounded-full -left-1"
+              style={{ y: thumbY }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
