@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 // Technical Skills Data
 const technicalSkills = {
-  programmingLanguages: [
+  languages: [
     { name: 'JavaScript', level: 90, color: '#F7DF1E' },
     { name: 'TypeScript', level: 85, color: '#3178C6' },
     { name: 'Java', level: 75, color: '#ED8B00' },
@@ -113,12 +113,12 @@ function getLogoPath(skillName: string): string | null {
 }
 
 const skillCategories = [
-  { id: 'all', name: 'All', icon: '✨' },
-  { id: 'programmingLanguages', name: 'Programming Languages', icon: '💻' },
-  { id: 'frontend', name: 'Frontend', icon: '🎨' },
-  { id: 'backend', name: 'Backend', icon: '⚙️' },
-  { id: 'databases', name: 'Databases', icon: '🗄️' },
-  { id: 'tools', name: 'Tools & Platforms', icon: '🛠️' },
+  { id: 'all', name: 'All', icon: 'grid' },
+  { id: 'languages', name: 'Languages', icon: 'code' },
+  { id: 'frontend', name: 'Frontend', icon: 'palette' },
+  { id: 'backend', name: 'Backend', icon: 'server' },
+  { id: 'databases', name: 'Databases', icon: 'database' },
+  { id: 'tools', name: 'Tools & Platforms', icon: 'wrench' },
 ];
 
 // Certificates Data
@@ -179,6 +179,9 @@ export default function SkillsPage() {
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('all');
   // Smooth scroll progress without triggering React re-renders
   const { scrollYProgress } = useScroll();
+  
+  // Transform scroll progress to control navigation text shadow for readability
+  const navTextShadow = useTransform(scrollYProgress, [0.05, 0.15], ['none', '0 0 30px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.6)']);
   const thumbY = useTransform(scrollYProgress, v => `${v * (96 - 32)}px`);
 
   const visibleSkills = useMemo(() => {
@@ -492,16 +495,16 @@ export default function SkillsPage() {
         </motion.div>
       </motion.div>
 
-      {/* Navigation Tabs */}
-      <div className="sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Navigation Tabs */}
+        <div className="relative z-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8">
             {[
               { id: 'technical', label: 'Technical Skills' },
               { id: 'certificates', label: 'Certificates' },
               { id: 'soft', label: 'Soft Skills' },
             ].map((tab) => (
-              <button
+              <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
@@ -509,17 +512,18 @@ export default function SkillsPage() {
                     ? 'border-blue-500 text-white bg-transparent'
                     : 'border-transparent text-white/60 hover:text-black bg-transparent'
                 }`}
+                style={{ textShadow: navTextShadow }}
                 data-cursor-target="false"
               >
                 {tab.label}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
       </div>
 
       {/* Content Sections */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
          {/* Technical Skills */}
          {activeTab === 'technical' && (
            <motion.div
@@ -528,35 +532,93 @@ export default function SkillsPage() {
              animate="visible"
            >
              <motion.h2
-               className="text-4xl font-bold text-white mb-12 text-center"
+               className="text-4xl font-bold text-white mb-12 text-center tracking-[0.2em] uppercase"
                variants={itemVariants}
              >
-               Technical Expertise
+               T E C H N I C A L &nbsp; E X P E R T I S E
              </motion.h2>
 
              {/* Category Navigation */}
              <nav className="mb-12" role="navigation" aria-label="Skills categories">
-               <div className="flex flex-wrap justify-center gap-4">
-                 {skillCategories.map((category) => (
-                   <motion.button
-                     key={category.id}
-                     onClick={() => setSelectedSkillCategory(
-                       selectedSkillCategory === category.id ? 'all' : category.id
-                     )}
-                     className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                       selectedSkillCategory === category.id
-                         ? 'bg-white text-black'
-                         : 'bg-white/5 text-white/80 hover:bg-white/10'
-                     }`}
-                     whileHover={{ scale: 1.05 }}
-                     whileTap={{ scale: 0.95 }}
-                     data-cursor-target="false"
-                     aria-pressed={selectedSkillCategory === category.id}
-                   >
-                     <span className="text-lg" aria-hidden="true">{category.icon}</span>
-                     <span>{category.name}</span>
-                   </motion.button>
-                 ))}
+               <div className="flex flex-wrap justify-center gap-3">
+                 {skillCategories.map((category) => {
+                   const getIcon = (iconName: string) => {
+                     const iconClass = "w-4 h-4";
+                     switch (iconName) {
+                       case 'grid':
+                         return (
+                           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                           </svg>
+                         );
+                       case 'code':
+                         return (
+                           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                           </svg>
+                         );
+                       case 'palette':
+                         return (
+                           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
+                           </svg>
+                         );
+                       case 'server':
+                         return (
+                           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                           </svg>
+                         );
+                       case 'database':
+                         return (
+                           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                           </svg>
+                         );
+                       case 'wrench':
+                         return (
+                           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                           </svg>
+                         );
+                       default:
+                         return null;
+                     }
+                   };
+
+  return (
+                     <motion.button
+                       key={category.id}
+                       onClick={() => setSelectedSkillCategory(
+                         selectedSkillCategory === category.id ? 'all' : category.id
+                       )}
+                       className={`group relative flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 border ${
+                         selectedSkillCategory === category.id
+                           ? 'bg-white text-black border-white shadow-lg shadow-white/25'
+                           : 'bg-white/5 text-white/80 hover:bg-white/10 border-white/10 hover:border-white/20'
+                       }`}
+                       whileHover={{ scale: 1.02, y: -1 }}
+                       whileTap={{ scale: 0.98 }}
+                       data-cursor-target="false"
+                       aria-pressed={selectedSkillCategory === category.id}
+                     >
+                       <div className={`transition-colors duration-300 ${
+                         selectedSkillCategory === category.id ? 'text-black' : 'text-white/60 group-hover:text-white/80'
+                       }`}>
+                         {getIcon(category.icon)}
+                       </div>
+                       <span className="text-sm font-semibold">{category.name}</span>
+                       {selectedSkillCategory === category.id && (
+                         <motion.div
+                           className="absolute inset-0 rounded-xl bg-white/10"
+                           layoutId="activeCategory"
+                           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                         />
+                       )}
+                     </motion.button>
+                   );
+                 })}
                </div>
              </nav>
 
@@ -591,10 +653,10 @@ export default function SkillsPage() {
             viewport={{ once: true }}
           >
             <motion.h2
-              className="text-4xl font-bold text-white mb-12 text-center"
+              className="text-4xl font-bold text-white mb-12 text-center tracking-[0.2em] uppercase"
               variants={itemVariants}
             >
-              Professional Certificates
+              P R O F E S S I O N A L &nbsp; C E R T I F I C A T E S
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -662,10 +724,10 @@ export default function SkillsPage() {
             viewport={{ once: true }}
           >
             <motion.h2
-              className="text-4xl font-bold text-white mb-12 text-center"
+              className="text-4xl font-bold text-white mb-12 text-center tracking-[0.2em] uppercase"
               variants={itemVariants}
             >
-              Soft Skills
+              S O F T &nbsp; S K I L L S
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
