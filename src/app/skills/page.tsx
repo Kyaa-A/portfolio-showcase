@@ -125,58 +125,57 @@ const skillCategories = [
 const certificates = [
   {
     id: 1,
-    title: 'AWS Certified Cloud Practitioner',
-    issuer: 'Amazon Web Services',
+    title: 'Google UX Design',
+    issuer: 'Google',
     date: '2024',
-    credentialId: 'AWS-CCP-2024-001',
-    description: 'Foundational understanding of AWS Cloud concepts, services, and terminology.',
-    skills: ['Cloud Computing', 'AWS Services', 'Cloud Architecture'],
+    credentialId: 'GOOGLE-UX-2024-001',
+    description: 'Design user-centered experiences through research, wireframing, prototyping, and testing.',
+    skills: ['UX Design', 'User Research', 'Wireframing', 'Prototyping', 'Figma'],
+    image: '/certificates/ux/UX.webp',
+    badge: '/certificates/badges/ux.webp',
   },
   {
     id: 2,
-    title: 'Google Cloud Professional Developer',
-    issuer: 'Google Cloud',
+    title: 'Introduction to Cybersecurity',
+    issuer: 'Cisco Networking Academy',
     date: '2023',
-    credentialId: 'GCP-PD-2023-002',
-    description: 'Professional certification for developing and deploying applications on Google Cloud Platform.',
-    skills: ['Google Cloud', 'Application Development', 'Cloud Deployment'],
+    credentialId: 'CISCO-GCP-2023-002',
+    description: 'Certificate of Course Completion for Google Cloud Professional Developer through Cisco Networking Academy.',
+    skills: ['Cybersecurity Fundamentals', 'Threats & Vulnerabilities', 'Network Security'],
+    image: '/certificates/cyber/IntroductionToCybersecurity.webp',
+    badge: '/certificates/badges/introduction-to-cybersecurity.webp',
   },
   {
     id: 3,
-    title: 'Meta Front-End Developer Certificate',
-    issuer: 'Meta',
+    title: 'Cyber Threat Management',
+    issuer: 'Cisco Networking Academy',
     date: '2023',
-    credentialId: 'META-FE-2023-003',
-    description: 'Comprehensive front-end development skills including React, JavaScript, and responsive design.',
-    skills: ['React', 'JavaScript', 'Responsive Design', 'UI/UX'],
+    credentialId: 'CISCO-NET-2023-003',
+    description: 'This certificate is awarded to students who complete the Cisco Networking Academy program.',
+    skills: ['Threat Analysis', 'Incident Response', 'Security Monitoring', 'Risk Mitigation'],
+    image: '/certificates/cyber/CyberThreat.webp',
+    badge: '/certificates/badges/cyber-threat-management.webp',
   },
   {
     id: 4,
-    title: 'Microsoft Azure Fundamentals',
-    issuer: 'Microsoft',
+    title: 'Network Defense',
+    issuer: 'Cisco Networking Academy',
     date: '2023',
-    credentialId: 'AZ-900-2023-004',
-    description: 'Fundamental knowledge of cloud services and how those services are provided with Microsoft Azure.',
-    skills: ['Azure', 'Cloud Services', 'Microsoft Technologies'],
+    credentialId: 'CISCO-ND-2023-004',
+    description: 'Advanced network defense and security protocols certification through Cisco Networking Academy.',
+    skills: ['Firewall Configuration', 'IDS/IPS', 'Network Hardening', 'Access Control'],
+    image: '/certificates/cyber/NetworkDefense.webp',
+    badge: '/certificates/badges/network-defense.webp',
   },
+  
 ];
 
-// Soft Skills Data
-const softSkills = [
-  { name: 'Problem Solving', level: 95, description: 'Analytical thinking and creative solutions' },
-  { name: 'Communication', level: 90, description: 'Clear and effective verbal and written communication' },
-  { name: 'Team Collaboration', level: 88, description: 'Working effectively in diverse teams' },
-  { name: 'Leadership', level: 85, description: 'Leading projects and mentoring team members' },
-  { name: 'Time Management', level: 92, description: 'Efficient project planning and deadline management' },
-  { name: 'Adaptability', level: 90, description: 'Quickly adapting to new technologies and environments' },
-  { name: 'Critical Thinking', level: 88, description: 'Analyzing problems and making informed decisions' },
-  { name: 'Creativity', level: 85, description: 'Innovative approaches to design and development' },
-];
 
 export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState('technical');
   const [selectedCertificate, setSelectedCertificate] = useState<number | null>(null);
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('all');
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   // Smooth scroll progress without triggering React re-renders
   const { scrollYProgress } = useScroll();
   
@@ -191,6 +190,15 @@ export default function SkillsPage() {
     // Show only those with mapped logos
     return base.filter((s) => Boolean(getLogoPath(s.name)));
   }, [selectedSkillCategory]);
+
+  // Close preview on ESC
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPreviewImage(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -265,30 +273,6 @@ export default function SkillsPage() {
     </motion.div>
   );
 
-  const SoftSkillCard = ({ skill }: { skill: { name: string; level: number; description: string } }) => (
-    <motion.div
-      variants={itemVariants}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Card className="bg-white/5 border-white/10 p-6 hover:bg-white/10 transition-colors">
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="text-white font-semibold text-lg">{skill.name}</h3>
-          <span className="text-white/70 text-sm">{skill.level}%</span>
-        </div>
-        <p className="text-white/70 text-sm mb-4">{skill.description}</p>
-        <div className="w-full bg-white/10 rounded-full h-2">
-          <motion.div
-            className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
-            initial={{ width: 0 }}
-            whileInView={{ width: `${skill.level}%` }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-          />
-        </div>
-      </Card>
-    </motion.div>
-  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -448,17 +432,6 @@ export default function SkillsPage() {
                 >
                   Certifications
                 </motion.button>
-                
-                <span className="text-white/40 hidden sm:block">•</span>
-                
-                <motion.button
-                  className="text-green-400 hover:text-green-300 font-medium cursor-pointer transition-colors duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  onClick={() => setActiveTab('soft')}
-                  data-cursor-target="true"
-                >
-                  Soft Skills
-                </motion.button>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -502,7 +475,6 @@ export default function SkillsPage() {
             {[
               { id: 'technical', label: 'Technical Skills' },
               { id: 'certificates', label: 'Certificates' },
-              { id: 'soft', label: 'Soft Skills' },
             ].map((tab) => (
               <motion.button
                 key={tab.id}
@@ -659,84 +631,63 @@ export default function SkillsPage() {
               P R O F E S S I O N A L &nbsp; C E R T I F I C A T E S
             </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {certificates.map((cert) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {certificates.map((cert, index) => (
                 <motion.div
                   key={cert.id}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
+                  className="w-full"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
                 >
-                  <Card className="bg-white/5 border-white/10 p-6 hover:bg-white/10 transition-colors cursor-pointer"
-                        onClick={() => setSelectedCertificate(selectedCertificate === cert.id ? null : cert.id)}>
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="text-white font-semibold text-xl mb-2">{cert.title}</h3>
-                        <p className="text-white/70 text-sm">{cert.issuer}</p>
+                  <Card
+                    className="w-full bg-white/5 border-white/10 p-5 md:p-6 hover:bg-white/10 transition-colors cursor-default"
+                   >
+                    {cert.image && (
+                      <div className="mb-1 -mt-2 -mx-2">
+                        <button
+                          type="button"
+                          onClick={() => setPreviewImage(cert.image!)}
+                          className="block w-full cursor-zoom-in group"
+                          aria-label={`View ${cert.title} image full size`}
+                        >
+                          <div className="relative w-full h-40 md:h-48 overflow-hidden rounded-md border border-white/10 group-hover:border-white/20 transition-colors">
+                            <img
+                              src={cert.image}
+                              alt={`${cert.title} cover`}
+                              className="absolute inset-0 w-full h-full object-cover object-left-top origin-top-left scale-125 md:scale-150"
+                            />
+                            {cert.badge && (
+                              <img
+                                src={cert.badge}
+                                alt={`${cert.title} badge`}
+                                className="absolute top-2 right-2 w-10 h-10 md:w-12 md:h-12 object-contain drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]"
+                              />
+                            )}
+                            <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent via-transparent to-black/30" />
+                          </div>
+                        </button>
                       </div>
-                      <span className="text-white/50 text-sm">{cert.date}</span>
-                    </div>
-                    
-                    <p className="text-white/70 text-sm mb-4">{cert.description}</p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {cert.skills.map((skill, index) => (
-                        <span
-                          key={index}
-                          className="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-
-                    {selectedCertificate === cert.id && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="border-t border-white/10 pt-4"
-                      >
-                        <p className="text-white/60 text-sm">
-                          <strong>Credential ID:</strong> {cert.credentialId}
-                        </p>
-                        <Button
-                          className="mt-3 bg-blue-600 hover:bg-blue-700 text-white"
-                          size="sm"
-                        >
-                          View Certificate
-                        </Button>
-                      </motion.div>
                     )}
-                  </Card>
+                    <div className="mt-0.5 mb-2">
+                      <h3 className="text-white/95 font-semibold text-lg md:text-xl leading-tight tracking-tight">{cert.title}</h3>
+                    </div>
+ 
+                    <div className="flex flex-wrap gap-2 mt-2">
+                       {cert.skills.map((skill, i) => (
+                        <span key={i} className="px-3 py-1 text-xs rounded-full bg-white/10 text-white/80 border border-white/15">
+                           {skill}
+                         </span>
+                       ))}
+                     </div>
+                   </Card>
                 </motion.div>
               ))}
             </div>
           </motion.div>
         )}
 
-        {/* Soft Skills */}
-        {activeTab === 'soft' && (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.h2
-              className="text-4xl font-bold text-white mb-12 text-center tracking-[0.2em] uppercase"
-              variants={itemVariants}
-            >
-              S O F T &nbsp; S K I L L S
-            </motion.h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {softSkills.map((skill, index) => (
-                <SoftSkillCard key={index} skill={skill} />
-              ))}
-            </div>
-          </motion.div>
-        )}
       </div>
 
       {/* Custom Scroll Indicator - Hidden on Mobile */}
@@ -750,6 +701,34 @@ export default function SkillsPage() {
           </div>
         </div>
       </div>
+
+      {/* Image Lightbox */}
+      {previewImage && (
+        <motion.div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setPreviewImage(null)}
+          aria-modal="true"
+          role="dialog"
+        >
+          <div className="relative max-w-6xl w-full max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="absolute -top-3 -right-3 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow cursor-pointer"
+              onClick={() => setPreviewImage(null)}
+              aria-label="Close preview"
+            >
+              ×
+            </button>
+            <img
+              src={previewImage}
+              alt="Certificate preview"
+              className="w-full h-full object-contain rounded-md"
+            />
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
