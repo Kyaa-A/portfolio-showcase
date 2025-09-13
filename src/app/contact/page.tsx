@@ -1,8 +1,74 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useMousePosition } from '@/hooks/useMousePosition';
+import { useState, useEffect, useRef } from 'react';
 
 export default function ContactPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  const { x: mouseX, y: mouseY } = useMousePosition();
+  const mvX = useMotionValue(0);
+  const mvY = useMotionValue(0);
+  const x = useSpring(mvX, { stiffness: 260, damping: 18, mass: 0.5 });
+  const y = useSpring(mvY, { stiffness: 260, damping: 18, mass: 0.5 });
+  const [isInside, setIsInside] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Scroll progress for custom scrollbar
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollTop / docHeight;
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Cursor attraction effect
+  useEffect(() => {
+    if (isMobile) return;
+
+    const el = buttonRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    
+    const vw = window.innerWidth || 1;
+    const vh = window.innerHeight || 1;
+    const normX = (mouseX - cx) / vw;
+    const normY = (mouseY - cy) / vh;
+    const maxOffsetX = 80;
+    const maxOffsetY = 40;
+    const targetX = Math.max(Math.min(-normX * maxOffsetX * 2, maxOffsetX), -maxOffsetX);
+    const targetY = Math.max(Math.min(-normY * maxOffsetY * 2, maxOffsetY), -maxOffsetY);
+    
+    
+    mvX.set(targetX);
+    mvY.set(targetY);
+
+    const radius = rect.width / 2;
+    const distToCenter = Math.hypot(mouseX - cx, mouseY - cy);
+    setIsInside(distToCenter <= radius);
+  }, [mouseX, mouseY, mvX, mvY, isMobile]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -12,22 +78,6 @@ export default function ContactPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          {/* Only top-left circle */}
-          <motion.div
-            className="absolute top-8 left-8 w-8 h-8 border border-white/20 rounded-full"
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </div>
 
         {/* Main Content */}
         <div className="absolute inset-0 flex items-center justify-start z-10 pl-8 sm:pl-12 md:pl-16 lg:pl-20">
@@ -94,19 +144,19 @@ export default function ContactPage() {
         </div>
       </motion.div>
 
-      {/* Contact Form Section */}
-      <motion.div
-        className="min-h-screen bg-background flex items-center justify-start pl-8 sm:pl-12 md:pl-16 lg:pl-20 xl:pl-24"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
+          {/* Contact Form Section */}
+          <motion.div
+            className="min-h-screen bg-background flex items-center justify-start pl-8 sm:pl-12 md:pl-16 lg:pl-20 xl:pl-24 pb-32"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
         <div className="w-full max-w-4xl">
-          <form className="space-y-8">
+          <form className="space-y-4">
             {/* Greeting */}
             <motion.h2
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-12"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-12"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -209,11 +259,10 @@ export default function ContactPage() {
             >
               <span className="text-white text-xl sm:text-2xl">We'll invest between</span>
               <select className="bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl focus:border-white focus:outline-none py-2">
-                <option value="₱250,000 - ₱500,000" className="bg-background">₱250,000 - ₱500,000</option>
-                <option value="₱500,000 - ₱750,000" className="bg-background">₱500,000 - ₱750,000</option>
-                <option value="₱750,000 - ₱1,250,000" className="bg-background" selected>₱750,000 - ₱1,250,000</option>
-                <option value="₱1,250,000 - ₱2,500,000" className="bg-background">₱1,250,000 - ₱2,500,000</option>
-                <option value="₱2,500,000+" className="bg-background">₱2,500,000+</option>
+                <option value="₱5,000 - ₱10,000" className="bg-background">₱5,000 - ₱10,000</option>
+                <option value="₱10,000 - ₱20,000" className="bg-background">₱10,000 - ₱20,000</option>
+                <option value="₱20,000 - ₱50,000" className="bg-background" selected>₱20,000 - ₱50,000</option>
+                <option value="₱50,000 - ₱100,000" className="bg-background">₱50,000 - ₱100,000</option>
               </select>
               <span className="text-white text-xl sm:text-2xl">in this project.</span>
             </motion.div>
@@ -262,32 +311,163 @@ export default function ContactPage() {
 
             {/* Closing */}
             <motion.div
-              className="flex items-center justify-between pt-8"
+              className="flex items-center justify-between pt-8 relative"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.1 }}
             >
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 Thanks
               </h2>
               
-              {/* Send Button */}
-              <motion.button
-                type="submit"
-                className="w-32 h-32 rounded-full border-2 border-orange-400 flex items-center justify-center text-white font-semibold text-sm hover:bg-orange-400/10 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="text-center">
-                  <div>SEND</div>
-                  <div>MESSAGE</div>
-                </div>
-              </motion.button>
+              {/* Send Button Container */}
+              <div className="relative w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40">
+                <motion.button
+                  ref={buttonRef}
+                  type="submit"
+                  className="absolute inset-0 w-full h-full rounded-full flex items-center justify-center select-none z-40 cursor-pointer"
+                  style={isMobile ? {} : { x, y }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  data-cursor-target="true"
+                >
+                  <motion.div 
+                    className="relative w-full h-full flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    {/* Circle background */}
+                    {isMobile ? (
+                      // Mobile: Orange background with continuous rotation
+                      <motion.div
+                        className="absolute inset-0 rounded-full bg-orange-400"
+                        animate={{ 
+                          rotate: 360
+                        }}
+                        transition={{ 
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                        style={{ transformOrigin: 'center center' }}
+                      />
+                    ) : (
+                      // Desktop: Orange color scheme with hover effect
+                      <>
+                        <motion.div
+                          className="absolute inset-0 rounded-full border-2"
+                          animate={{ 
+                            opacity: isInside ? 0 : 1,
+                            borderColor: 'rgba(251, 146, 60, 0.8)'
+                          }}
+                          transition={{ duration: 0.12 }}
+                        />
+                        <motion.div
+                          className="absolute inset-0 rounded-full bg-orange-400"
+                          initial={false}
+                          animate={{ scale: isInside ? 1 : 0 }}
+                          transition={{ type: 'spring', stiffness: 190, damping: 20 }}
+                          style={{ transformOrigin: 'center center' }}
+                        />
+                      </>
+                    )}
+
+                    {/* Text */}
+                    {isMobile ? (
+                      // Mobile: Simple centered rotating text
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                        style={{ transformOrigin: 'center center' }}
+                      >
+                        <span className="text-white text-[9px] sm:text-[11px] md:text-[13px] font-bold tracking-[0.15em] whitespace-nowrap">
+                          SEND MESSAGE
+                        </span>
+                      </motion.div>
+                    ) : (
+                      // Desktop: Complex text animation matching navigation
+                      <>
+                        {/* Rotating vertical text (outside state) */}
+                        <motion.div
+                          className="absolute inset-0 flex items-center justify-center"
+                          animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
+                          transition={{ 
+                            duration: 18, 
+                            repeat: Infinity, 
+                            ease: 'linear', 
+                            opacity: { duration: 0.05 } 
+                          }}
+                          style={{ transformOrigin: 'center center' }}
+                        >
+                          <span className="writing-mode-vertical whitespace-nowrap tracking-[0.6em] text-white/90 text-[11px] sm:text-[13px] md:text-[15px] translate-x-[4px]">
+                            SEND MESSAGE
+                          </span>
+                        </motion.div>
+
+                        {/* Inside text when overlapped */}
+                        <motion.div
+                          className="absolute inset-0 flex items-center justify-center"
+                          animate={{
+                            rotate: 360,
+                            opacity: isInside ? 1 : 0,
+                            scale: isInside ? 1 : 0.84,
+                            y: isInside ? 0 : 14,
+                          }}
+                          transition={{
+                            duration: 18,
+                            repeat: Infinity,
+                            ease: 'linear',
+                            opacity: { duration: 0.06 },
+                            y: { type: 'spring', stiffness: 160, damping: 24 },
+                            scale: { type: 'spring', stiffness: 160, damping: 24 },
+                          }}
+                          style={{ transformOrigin: 'center center' }}
+                        >
+                          <motion.span
+                            className="text-white writing-mode-vertical whitespace-nowrap"
+                            initial={false}
+                            animate={{
+                              letterSpacing: isInside ? '0.08em' : '0.36em',
+                              fontSize: isInside ? '10px' : '12px',
+                            }}
+                            transition={{ type: 'spring', stiffness: 170, damping: 24 }}
+                            style={{ fontWeight: 600 }}
+                          >
+                            SEND MESSAGE
+                          </motion.span>
+                        </motion.div>
+                      </>
+                    )}
+                  </motion.div>
+                </motion.button>
+              </div>
             </motion.div>
           </form>
-        </div>
+      </div>
       </motion.div>
+
+      {/* Custom Scroll Indicator - Hidden on Mobile */}
+      <div className="hidden md:block fixed bottom-8 right-8 z-40">
+        <div className="flex flex-col items-center">
+          {/* Scroll Track */}
+          <div className="w-1 h-24 bg-gray-700 rounded-full relative overflow-hidden">
+            {/* Scroll Thumb */}
+            <motion.div
+              className="absolute w-3 h-8 bg-gray-400 rounded-full -left-1"
+              style={{ 
+                y: `${scrollProgress * (96 - 32)}px` // 96px track height - 32px thumb height
+              }}
+            ></motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+
+
+
