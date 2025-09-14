@@ -699,7 +699,7 @@ export default function SkillsPage() {
               style={{ y: thumbY }}
             />
           </div>
-        </div>
+      </div>
       </div>
 
       {/* Image Lightbox */}

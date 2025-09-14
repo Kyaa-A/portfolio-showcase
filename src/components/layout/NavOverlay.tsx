@@ -133,11 +133,15 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           return (
             <motion.div
               ref={ref}
-              className="absolute left-[28%] top-1/2 -translate-y-1/2 select-none hidden md:block"
+              className="absolute left-[28%] top-1/2 -translate-y-1/2 select-none hidden md:block cursor-pointer"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               style={{ x, y }}
+              onClick={() => {
+                onClose();
+                router.push('/contact');
+              }}
             >
               <div className="relative w-48 h-48 flex items-center justify-center">
                 {/* Ring border fades when inside */}
@@ -239,9 +243,9 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
               style={{ color: 'transparent', WebkitTextStroke: '2px #ffffff' }}
               whileHover={{ color: '#ffffff' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              WORK
-            </motion.h2>
+              >
+                AWARDS
+              </motion.h2>
             <motion.p
               className="mt-3 text-white/70 text-base md:text-lg block"
               whileHover={{ color: '#ffffff', letterSpacing: '0.06em' }}
