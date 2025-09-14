@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMousePosition } from '@/hooks/useMousePosition';
 
 // Project data structure
 interface Project {
@@ -102,19 +101,8 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const { x: mouseX, y: mouseY } = useMousePosition();
+  const [isButtonPressed, setIsButtonPressed] = useState(false);
 
-  // Handle mobile detection
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Handle scroll progress for custom scrollbar
   useEffect(() => {
@@ -156,17 +144,45 @@ export default function ProjectsPage() {
     }
   };
 
-  const getStatusText = (status: Project['status']) => {
-    switch (status) {
-      case 'completed': return 'Completed';
-      case 'in-progress': return 'In Progress';
-      case 'coming-soon': return 'Coming Soon';
-      default: return 'Unknown';
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background text-white">
+      {/* Return Button */}
+      <motion.div
+        className="fixed top-8 left-8 z-[9999]"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.button
+          onClick={() => window.history.back()}
+            className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
+              isButtonPressed 
+                ? 'bg-black text-white scale-90' 
+                : 'bg-white text-black hover:bg-black hover:text-white'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            onMouseDown={() => setIsButtonPressed(true)}
+            onMouseUp={() => setIsButtonPressed(false)}
+            onMouseLeave={() => setIsButtonPressed(false)}
+            data-cursor-target="true"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </motion.button>
+      </motion.div>
+
        {/* Custom Scrollbar */}
        <div className="hidden md:block fixed bottom-8 right-8 z-40">
          <div className="flex flex-col items-center">
@@ -265,7 +281,7 @@ export default function ProjectsPage() {
             initial="hidden"
             animate="visible"
           >
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
                 className="group relative cursor-pointer"
@@ -421,7 +437,7 @@ export default function ProjectsPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Let's collaborate and bring your ideas to life with cutting-edge technology and creative solutions.
+            Let&apos;s collaborate and bring your ideas to life with cutting-edge technology and creative solutions.
           </motion.p>
           <motion.div
             initial={{ y: 30, opacity: 0 }}

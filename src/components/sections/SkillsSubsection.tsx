@@ -74,7 +74,7 @@ export function SkillsSubsection() {
             <motion.div
               className="absolute inset-0 rounded-full bg-white"
               animate={{ 
-                rotate: 360
+                rotate: 360 
               }}
               transition={{ 
                 duration: 8,

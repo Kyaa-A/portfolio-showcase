@@ -3,9 +3,11 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useMousePosition } from '@/hooks/useMousePosition';
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function ContactPage() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isButtonPressed, setIsButtonPressed] = useState(false);
   const { x: mouseX, y: mouseY } = useMousePosition();
   const mvX = useMotionValue(0);
   const mvY = useMotionValue(0);
@@ -71,6 +73,42 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Return Button */}
+      <motion.div
+        className="fixed top-8 left-8 z-[9999]"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.button
+          onClick={() => window.history.back()}
+            className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
+              isButtonPressed 
+                ? 'bg-black text-white scale-90' 
+                : 'bg-white text-black hover:bg-black hover:text-white'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            onMouseDown={() => setIsButtonPressed(true)}
+            onMouseUp={() => setIsButtonPressed(false)}
+            onMouseLeave={() => setIsButtonPressed(false)}
+            data-cursor-target="true"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </motion.button>
+      </motion.div>
+
       {/* Header */}
       <motion.div
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -241,7 +279,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <span className="text-white text-xl sm:text-2xl block">but I'd like to work with Asnari because</span>
+              <span className="text-white text-xl sm:text-2xl block">but I&apos;d like to work with Asnari because</span>
               <input
                 type="text"
                 placeholder="Reason"
@@ -257,7 +295,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              <span className="text-white text-xl sm:text-2xl">We'll invest between</span>
+              <span className="text-white text-xl sm:text-2xl">We&apos;ll invest between</span>
               <select className="bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl focus:border-white focus:outline-none py-2">
                 <option value="₱5,000 - ₱10,000" className="bg-background">₱5,000 - ₱10,000</option>
                 <option value="₱10,000 - ₱20,000" className="bg-background">₱10,000 - ₱20,000</option>

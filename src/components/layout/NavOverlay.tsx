@@ -225,7 +225,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
       <div className="flex flex-col justify-center items-end h-full px-8 md:px-16">
         <div className="space-y-16 w-full max-w-[900px] text-right pr-4 md:pr-12">
           <motion.a
-            href="/work"
+            href="/awards"
             className="inline-block cursor-interactive ml-auto"
             data-cursor-target="true"
             data-cursor-blur="true"
@@ -235,7 +235,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
             onClick={(e) => {
               e.preventDefault();
               onClose();
-              router.push('/work');
+              router.push('/awards');
             }}
           >
             <motion.h2

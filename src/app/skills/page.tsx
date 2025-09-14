@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 // Technical Skills Data
@@ -173,9 +172,9 @@ const certificates = [
 
 export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState('technical');
-  const [selectedCertificate, setSelectedCertificate] = useState<number | null>(null);
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('all');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isButtonPressed, setIsButtonPressed] = useState(false);
   // Smooth scroll progress without triggering React re-renders
   const { scrollYProgress } = useScroll();
   
@@ -215,27 +214,6 @@ export default function SkillsPage() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const SkillBar = ({ skill }: { skill: { name: string; level: number; color: string } }) => (
-    <motion.div
-      className="mb-6"
-      variants={itemVariants}
-    >
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-white font-medium">{skill.name}</span>
-        <span className="text-white/70 text-sm">{skill.level}%</span>
-      </div>
-      <div className="w-full bg-white/10 rounded-full h-2">
-        <motion.div
-          className="h-2 rounded-full"
-          style={{ backgroundColor: skill.color }}
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          transition={{ duration: 1, delay: 0.2 }}
-          viewport={{ once: true }}
-        />
-      </div>
-    </motion.div>
-  );
 
   const SkillCard = ({ skill }: { skill: { name: string; level: number; color: string } }) => (
     <motion.div
@@ -276,6 +254,42 @@ export default function SkillsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Return Button */}
+      <motion.div
+        className="fixed top-8 left-8 z-[9999]"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.button
+          onClick={() => window.history.back()}
+            className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
+              isButtonPressed 
+                ? 'bg-black text-white scale-90' 
+                : 'bg-white text-black hover:bg-black hover:text-white'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            onMouseDown={() => setIsButtonPressed(true)}
+            onMouseUp={() => setIsButtonPressed(false)}
+            onMouseLeave={() => setIsButtonPressed(false)}
+            data-cursor-target="true"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </motion.button>
+      </motion.div>
+
       {/* Header */}
       <motion.div
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -608,7 +622,7 @@ export default function SkillsPage() {
                >
                 {visibleSkills.map((skill) => (
                   <div key={`skill-${skill.name}`} className="group relative">
-                    <SkillCard skill={skill as any} />
+                    <SkillCard skill={skill} />
                   </div>
                 ))}
                </motion.div>
@@ -632,7 +646,7 @@ export default function SkillsPage() {
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {certificates.map((cert, index) => (
+              {certificates.map((cert) => (
                 <motion.div
                   key={cert.id}
                   className="w-full"
