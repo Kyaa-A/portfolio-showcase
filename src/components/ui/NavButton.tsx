@@ -12,8 +12,6 @@ export function NavButton({ onClick, isOpen }: NavButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
   
-  console.log('NavButton render - isHovered:', isHovered, 'background should be:', isHovered ? 'BLACK' : 'WHITE');
-  
   // Force style update via DOM manipulation
   useEffect(() => {
     if (buttonRef.current) {
@@ -23,26 +21,12 @@ export function NavButton({ onClick, isOpen }: NavButtonProps) {
         buttonRef.current.style.setProperty('mix-blend-mode', 'normal', 'important');
         buttonRef.current.style.setProperty('opacity', '1', 'important');
         buttonRef.current.style.setProperty('filter', 'none', 'important');
-        console.log('Applied BLACK background via DOM');
-        
-        // Debug: Log what the browser actually computed
-        const computedStyle = window.getComputedStyle(buttonRef.current);
-        console.log('Computed background-color:', computedStyle.backgroundColor);
-        console.log('Computed border:', computedStyle.border);
-        console.log('Element style:', buttonRef.current.style.cssText);
       } else {
         buttonRef.current.style.setProperty('background-color', '#ffffff', 'important');
         buttonRef.current.style.setProperty('border', '1px solid #d1d5db', 'important');
         buttonRef.current.style.setProperty('mix-blend-mode', 'normal', 'important');
         buttonRef.current.style.setProperty('opacity', '1', 'important');
         buttonRef.current.style.setProperty('filter', 'none', 'important');
-        console.log('Applied WHITE background via DOM');
-        
-        // Debug: Log what the browser actually computed
-        const computedStyle = window.getComputedStyle(buttonRef.current);
-        console.log('Computed background-color:', computedStyle.backgroundColor);
-        console.log('Computed border:', computedStyle.border);
-        console.log('Element style:', buttonRef.current.style.cssText);
       }
     }
   }, [isHovered]);
@@ -53,14 +37,8 @@ export function NavButton({ onClick, isOpen }: NavButtonProps) {
       className={`w-12 h-12 rounded-full border border-gray-300 bg-white flex items-center justify-center cursor-interactive z-60 ${isHovered ? 'hovered' : ''}`}
       data-cursor-target="true"
       onClick={onClick}
-      onMouseEnter={() => {
-        console.log('NavButton: Mouse enter - setting hover to true');
-        setIsHovered(true);
-      }}
-      onMouseLeave={() => {
-        console.log('NavButton: Mouse leave - setting hover to false');
-        setIsHovered(false);
-      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
         className="w-6 h-6 flex flex-col justify-center items-center relative"

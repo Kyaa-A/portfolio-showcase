@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 // Technical Skills Data
 const technicalSkills = {
