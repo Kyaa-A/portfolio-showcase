@@ -8,6 +8,7 @@ import { useMotionValue, useSpring } from 'framer-motion';
 import { useMousePosition } from '@/hooks/useMousePosition';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { useRouter } from 'next/navigation';
+import { useNavigation } from '@/contexts/NavigationContext';
 
 interface NavOverlayProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface NavOverlayProps {
 
 export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
   const router = useRouter();
+  const { setIsNavigating } = useNavigation();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -47,11 +49,15 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           className="block cursor-interactive"
           data-cursor-target="true"
           data-cursor-blur="true"
-          onClick={(e) => {
-            e.preventDefault();
-            onClose();
-            router.push('/');
-          }}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsNavigating(true);
+              // Small delay to ensure navigation state is set before closing overlay
+              setTimeout(() => {
+                onClose();
+                router.push('/');
+              }, 50);
+            }}
           onMouseEnter={() => {
             document.body.setAttribute('data-hide-cursor', 'true');
           }}
@@ -139,8 +145,11 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               style={{ x, y }}
               onClick={() => {
-                onClose();
-                router.push('/contact');
+                setIsNavigating(true);
+                setTimeout(() => {
+                  onClose();
+                  router.push('/contact');
+                }, 50);
               }}
             >
               <div className="relative w-48 h-48 flex items-center justify-center">
@@ -234,8 +243,11 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
             transition={{ duration: 0.5, delay: 0.1 }}
             onClick={(e) => {
               e.preventDefault();
-              onClose();
-              router.push('/awards');
+              setIsNavigating(true);
+              setTimeout(() => {
+                onClose();
+                router.push('/awards');
+              }, 50);
             }}
           >
             <motion.h2
@@ -263,6 +275,14 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsNavigating(true);
+              setTimeout(() => {
+                onClose();
+                router.push('/about');
+              }, 50);
+            }}
           >
             <motion.h2
               className="text-[12vw] md:text-[9vw] font-black leading-none inline-block bg-background relative z-30"

@@ -24,7 +24,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: '1',
-    title: 'Portfolio Showcase',
+    title: 'Asnari | Branding & Websites',
     description: 'Modern portfolio website with smooth animations and responsive design',
     longDescription: 'A comprehensive portfolio website built with Next.js and Framer Motion, featuring smooth animations, responsive design, and modern UI components. This project showcases advanced frontend development skills with a focus on user experience and performance optimization.',
     image: '/projects/portfolio.webp',
