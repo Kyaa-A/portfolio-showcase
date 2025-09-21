@@ -56,7 +56,7 @@ export function ContactSubsection() {
       <Link href="/contact">
         <motion.div
           ref={ref}
-          className="absolute right-[8%] sm:right-[10%] md:right-[30%] top-[70%] sm:top-[75%] md:top-2/3 select-none z-40 cursor-pointer"
+          className="absolute right-[3%] sm:right-[4%] md:right-[10%] top-[75%] sm:top-[80%] md:top-[70%] select-none z-40 cursor-pointer"
           style={isMobile ? {} : { x, y }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -70,9 +70,9 @@ export function ContactSubsection() {
           >
           {/* Circle background */}
           {isMobile ? (
-            // Mobile: White background with continuous rotation
+            // Mobile: Red background with continuous rotation
             <motion.div
-              className="absolute inset-0 rounded-full bg-white"
+              className="absolute inset-0 rounded-full bg-red-500"
               animate={{ 
                 rotate: 360
               }}
@@ -84,18 +84,18 @@ export function ContactSubsection() {
               style={{ transformOrigin: 'center center' }}
             />
           ) : (
-            // Desktop: Original purple color scheme with hover effect
+            // Desktop: Red color scheme with hover effect
             <>
               <motion.div
                 className="absolute inset-0 rounded-full border-2"
                 animate={{ 
                   opacity: isInside ? 0 : 1,
-                  borderColor: 'rgba(168, 85, 247, 0.8)'
+                  borderColor: 'rgba(239, 68, 68, 0.8)'
                 }}
                 transition={{ duration: 0.12 }}
               />
               <motion.div
-                className="absolute inset-0 rounded-full bg-purple-500"
+                className="absolute inset-0 rounded-full bg-red-500"
                 initial={false}
                 animate={{ scale: isInside ? 1 : 0 }}
                 transition={{ type: 'spring', stiffness: 190, damping: 20 }}
@@ -112,7 +112,7 @@ export function ContactSubsection() {
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
-              <span className="text-black text-[9px] sm:text-[11px] font-bold tracking-[0.15em] whitespace-nowrap">
+              <span className="text-white text-[9px] sm:text-[11px] font-bold tracking-[0.15em] whitespace-nowrap">
                 CONTACT ME
               </span>
             </motion.div>
@@ -244,7 +244,7 @@ export function ContactSubsection() {
           {/* Background Image */}
           <div className="absolute bottom-0 left-0 z-10 overflow-hidden w-full h-[65vh] sm:h-[70vh] max-h-[750px]" style={{ bottom: isMobile ? '-5%' : '0' }}>
             <motion.img
-              src="/assets/Contact.webp"
+              src="/assets/Contact.png"
               alt="Contact Background"
               className="object-cover w-full h-full origin-center"
               initial={{ scale: 1 }}

@@ -34,7 +34,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
   return (
     <motion.div
       id="nav-overlay"
-      className="fixed inset-0 bg-background z-[200] overflow-visible"
+      className="fixed inset-0 bg-background z-[10000] overflow-visible"
       initial={{ opacity: 0, visibility: 'hidden' }}
       animate={{
         opacity: isOpen ? 1 : 0,
@@ -43,7 +43,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       {/* Face avatar (top-left) */}
-      <div className="absolute top-12 left-12 z-40">
+      <div className="absolute top-12 left-12 z-[10001]">
         <motion.a
           href="/"
           className="block cursor-interactive"

@@ -8,7 +8,7 @@ export function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
+    <header className="fixed top-0 left-0 w-full z-[10000]">
       <div className="absolute top-16 right-8">
         <NavButton onClick={() => setIsNavOpen(!isNavOpen)} isOpen={isNavOpen} />
       </div>
