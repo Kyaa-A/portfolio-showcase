@@ -297,7 +297,7 @@ export default function ProjectsPage() {
                 ) : project.slug === 'color-extractor' ? (
                   <div className="relative h-64 bg-[#1a1b1f] overflow-hidden">
                     <Image
-                      src="/mockups/extractor.png"
+                      src="/mockups/extractor.webp"
                       alt={project.title}
                       fill
                       className="object-cover"
