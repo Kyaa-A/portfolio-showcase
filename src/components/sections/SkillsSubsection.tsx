@@ -8,6 +8,8 @@ import Link from 'next/link';
 
 export function SkillsSubsection() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isDpr125, setIsDpr125] = useState(false);
+  const [titleOffset, setTitleOffset] = useState(25);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -16,6 +18,31 @@ export function SkillsSubsection() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Detect 125% scaling and nudge titles upward to match 100% layout
+  useEffect(() => {
+    const update = () => {
+      const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+      setIsDpr125(dpr >= 1.24 && dpr < 1.35);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  // Responsive offset per screen size so it also looks right at different widths
+  useEffect(() => {
+    const compute = () => {
+      const width = typeof window !== 'undefined' ? window.innerWidth || 0 : 0;
+      if (width < 640) setTitleOffset(10); // mobile
+      else if (width < 1024) setTitleOffset(18); // tablet
+      else if (width < 1440) setTitleOffset(25); // laptop
+      else setTitleOffset(30); // large desktop
+    };
+    compute();
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
   }, []);
 
   const FloatingCircle = () => {
@@ -64,7 +91,7 @@ export function SkillsSubsection() {
           data-cursor-target="true"
         >
           <motion.div 
-            className="relative w-24 sm:w-32 md:w-48 h-24 sm:h-32 md:h-48 flex items-center justify-center overflow-hidden rounded-full"
+            className="relative w-[100px] sm:w-[130px] md:w-[160px] h-[100px] sm:h-[130px] md:h-[160px] flex items-center justify-center overflow-hidden rounded-full"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
@@ -120,7 +147,7 @@ export function SkillsSubsection() {
               isMobile 
                 ? "tracking-[0.15em] text-black" 
                 : "tracking-[0.4em] text-white/90"
-            } text-[9px] sm:text-[11px] md:text-[13px] translate-x-[2px] font-bold`}>
+            } text-[10px] sm:text-[11px] md:text-[12px] translate-x-[2px] font-bold`}>
               VIEW SKILLS
             </span>
           </motion.div>
@@ -142,7 +169,8 @@ export function SkillsSubsection() {
             <div
               className="absolute inset-x-0 z-20 skills-title-position"
               style={{
-                paddingLeft: isMobile ? '0' : '15%'
+                paddingLeft: isMobile ? '0' : '15%',
+                marginTop: isDpr125 ? `-${titleOffset}px` : '0'
               }}
             >
               <motion.div

@@ -8,6 +8,8 @@ import Link from 'next/link';
 
 export function ContactSubsection() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isDpr125, setIsDpr125] = useState(false);
+  const [titleOffset, setTitleOffset] = useState(25);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -16,6 +18,29 @@ export function ContactSubsection() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const update = () => {
+      const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+      setIsDpr125(dpr >= 1.24 && dpr < 1.35);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  useEffect(() => {
+    const compute = () => {
+      const width = typeof window !== 'undefined' ? window.innerWidth || 0 : 0;
+      if (width < 640) setTitleOffset(10);
+      else if (width < 1024) setTitleOffset(18);
+      else if (width < 1440) setTitleOffset(25);
+      else setTitleOffset(30);
+    };
+    compute();
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
   }, []);
 
   const FloatingCircle = () => {
@@ -64,7 +89,7 @@ export function ContactSubsection() {
           data-cursor-target="true"
         >
           <motion.div 
-            className="relative w-24 sm:w-32 md:w-48 h-24 sm:h-32 md:h-48 flex items-center justify-center"
+            className="relative w-[100px] sm:w-[130px] md:w-[160px] h-[100px] sm:h-[130px] md:h-[160px] flex items-center justify-center"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
@@ -124,7 +149,7 @@ export function ContactSubsection() {
                 animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
                 transition={{ duration: 12, repeat: Infinity, ease: 'linear', opacity: { duration: 0.05 } }}
               >
-                <span className="writing-mode-vertical whitespace-nowrap tracking-[0.4em] text-white/90 text-[11px] sm:text-[13px] translate-x-[2px] font-bold">
+              <span className="writing-mode-vertical whitespace-nowrap tracking-[0.4em] text-white/90 text-[10px] sm:text-[12px] translate-x-[2px] font-bold">
                   CONTACT ME
                 </span>
               </motion.div>
@@ -151,7 +176,7 @@ export function ContactSubsection() {
                   initial={false}
                   animate={{
                     letterSpacing: isInside ? '0.06em' : '0.28em',
-                    fontSize: isInside ? '12px' : '13px',
+                    fontSize: isInside ? '11px' : '12px',
                   }}
                   transition={{ type: 'spring', stiffness: 170, damping: 24 }}
                   style={{ fontWeight: 600 }}
@@ -176,7 +201,7 @@ export function ContactSubsection() {
           {/* Title Container */}
           <div className="relative w-full px-4 sm:px-6 md:px-0" style={{ height: isMobile ? '140px' : '180px' }}>
             {/* Animated Text */}
-            <div className="absolute inset-x-0 z-20 contact-title-position" style={{ paddingLeft: isMobile ? '0' : '15%' }}>
+            <div className="absolute inset-x-0 z-20 contact-title-position" style={{ paddingLeft: isMobile ? '0' : '15%', marginTop: isDpr125 ? `-${titleOffset}px` : '0' }}>
               <motion.div
                 className="relative"
                 initial="hidden"

@@ -2,16 +2,28 @@
 
 import { motion } from 'framer-motion';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function NewSiteSection() {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [isDpr125, setIsDpr125] = useState(false);
+
+  useEffect(() => {
+    const update = () => {
+      const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+      setIsDpr125(dpr >= 1.24 && dpr < 1.35);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   
   return (
     <section className="min-h-screen bg-background relative flex items-center overflow-hidden">
       {/* Video - Hidden on small screens */}
       <motion.div
-        className="absolute left-[38%] top-[55%] -translate-y-1/2 z-10 w-[42rem] h-[46rem] hidden md:block"
+        className="absolute top-[55%] -translate-y-1/2 z-10 w-[42rem] h-[46rem] hidden md:block"
+        style={{ left: isDpr125 ? '47%' : '38%' }}
         initial={{ opacity: 0, scale: 0.8, x: 50, rotate: -5 }}
         animate={{ 
           opacity: isVideoVisible ? 1 : 0,
