@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error }, { status: 500 });
     }
     return NextResponse.json({ ok: true, id: data?.id });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }

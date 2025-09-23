@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -18,89 +18,51 @@ interface Project {
   status: 'completed' | 'in-progress' | 'coming-soon';
   category: string;
   accentColor: string;
+  slug: string;
 }
 
 // Sample projects data - you can replace this with your actual projects
 const projects: Project[] = [
   {
     id: '1',
-    title: 'Asnari | Branding & Websites',
-    description: 'Modern portfolio website with smooth animations and responsive design',
-    longDescription: 'A comprehensive portfolio website built with Next.js and Framer Motion, featuring smooth animations, responsive design, and modern UI components. This project showcases advanced frontend development skills with a focus on user experience and performance optimization.',
-    image: '/projects/portfolio.webp',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    githubUrl: 'https://github.com/yourusername/portfolio',
-    liveUrl: 'https://yourportfolio.com',
+    title: 'Whispr',
+    description: '',
+    longDescription: '',
+    image: '',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     status: 'completed',
     category: 'Web Development',
-    accentColor: 'from-blue-500 to-purple-600'
+    accentColor: 'from-blue-500 to-purple-600',
+    slug: 'whispr'
   },
   {
     id: '2',
-    title: 'E-Commerce Platform',
-    description: 'Full-stack e-commerce solution with payment integration',
-    longDescription: 'A complete e-commerce platform with user authentication, product management, shopping cart, and secure payment processing. Built with modern technologies and best practices for scalability and security.',
-    image: '/projects/ecommerce.webp',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-    githubUrl: 'https://github.com/yourusername/ecommerce',
-    liveUrl: 'https://yourecommerce.com',
+    title: 'Color-Extractor',
+    description: '',
+    longDescription: '',
+    image: '',
+    technologies: ['React', 'Node.js'],
     status: 'completed',
     category: 'Full Stack',
-    accentColor: 'from-green-500 to-teal-600'
+    accentColor: 'from-green-500 to-teal-600',
+    slug: 'color-extractor'
   },
   {
     id: '3',
-    title: 'Task Management App',
-    description: 'Collaborative task management with real-time updates',
-    longDescription: 'A collaborative task management application with real-time synchronization, team collaboration features, and intuitive drag-and-drop interface. Designed for modern teams who need efficient project management tools.',
-    image: '/projects/taskmanager.webp',
-    technologies: ['Vue.js', 'Express.js', 'MongoDB', 'Socket.io'],
-    githubUrl: 'https://github.com/yourusername/taskmanager',
-    status: 'in-progress',
+    title: 'KusiNotes',
+    description: '',
+    longDescription: '',
+    image: '',
+    technologies: ['Next.js'],
+    status: 'completed',
     category: 'Web Development',
-    accentColor: 'from-orange-500 to-red-600'
-  },
-  {
-    id: '4',
-    title: 'Mobile Banking App',
-    description: 'Secure mobile banking application with biometric authentication',
-    longDescription: 'A secure mobile banking application featuring biometric authentication, transaction history, bill payments, and real-time notifications. Built with security as the top priority and user experience in mind.',
-    image: '/projects/banking.webp',
-    technologies: ['React Native', 'Node.js', 'MySQL', 'Firebase'],
-    githubUrl: 'https://github.com/yourusername/banking-app',
-    status: 'completed',
-    category: 'Mobile Development',
-    accentColor: 'from-indigo-500 to-blue-600'
-  },
-  {
-    id: '5',
-    title: 'AI Chat Assistant',
-    description: 'Intelligent chatbot with natural language processing',
-    longDescription: 'An AI-powered chat assistant with natural language processing capabilities, context awareness, and integration with multiple APIs. Designed to provide seamless customer support and engagement.',
-    image: '/projects/chatbot.webp',
-    technologies: ['Python', 'TensorFlow', 'Flask', 'OpenAI API'],
-    status: 'coming-soon',
-    category: 'AI/ML',
-    accentColor: 'from-purple-500 to-pink-600'
-  },
-  {
-    id: '6',
-    title: 'Data Visualization Dashboard',
-    description: 'Interactive dashboard for business analytics',
-    longDescription: 'A comprehensive data visualization dashboard with interactive charts, real-time data updates, and customizable reporting features. Built to help businesses make data-driven decisions.',
-    image: '/projects/dashboard.webp',
-    technologies: ['React', 'D3.js', 'Python', 'PostgreSQL'],
-    githubUrl: 'https://github.com/yourusername/dashboard',
-    liveUrl: 'https://yourdashboard.com',
-    status: 'completed',
-    category: 'Data Visualization',
-    accentColor: 'from-cyan-500 to-blue-600'
+    accentColor: 'from-orange-500 to-red-600',
+    slug: 'kusinotes'
   }
 ];
 
 export default function ProjectsPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
 
 
@@ -135,14 +97,6 @@ export default function ProjectsPage() {
     visible: { opacity: 1, y: 0 }
   };
 
-  const getStatusColor = (status: Project['status']) => {
-    switch (status) {
-      case 'completed': return 'text-green-400';
-      case 'in-progress': return 'text-yellow-400';
-      case 'coming-soon': return 'text-blue-400';
-      default: return 'text-gray-400';
-    }
-  };
 
 
   return (
@@ -201,32 +155,62 @@ export default function ProjectsPage() {
 
       {/* Header Section */}
       <motion.div
-        className="relative h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8"
+        className="relative h-screen flex items-center px-4 sm:px-6 md:px-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Side - Content */}
+            <motion.div
+              className="space-y-12"
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <motion.h1
+                className="text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] xl:text-[14rem] font-black text-white leading-[0.8]"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                portfolio.
+              </motion.h1>
+              
+              <motion.div
+                className="space-y-8"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <p className="text-2xl sm:text-3xl md:text-4xl text-gray-300 leading-relaxed">
+                  Check out some of my latest product<br />
+                  design case studies.
+                </p>
+              </motion.div>
+            </motion.div>
 
-        {/* Main heading with enhanced styling */}
-        <motion.div
-          className="text-center mb-16 relative z-10"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          
-          <motion.div
-            className="space-y-4"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-          >
-             <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white max-w-5xl mx-auto leading-tight uppercase">
-               Showcasing my journey through code
-             </p>
-          </motion.div>
-
-        </motion.div>
+            {/* Right Side - Image */}
+            <motion.div
+              className="relative"
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="relative w-full h-[1400px] lg:h-[1700px] xl:h-[2000px] 2xl:h-[2200px]">
+                <Image
+                  src="/assets/ProjectIntroductory.png"
+                  alt="Project Introduction"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
         {/* Enhanced scroll indicator */}
         <motion.div
@@ -274,143 +258,95 @@ export default function ProjectsPage() {
       >
         <div className="max-w-7xl mx-auto">
 
-          {/* Projects Grid - Folder/Tablet Layout */}
+          {/* Projects Grid - Modern Card Layout */}
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                className="group relative cursor-pointer"
-                variants={itemVariants}
-                whileHover={{ y: -10 }}
-                onClick={() => setSelectedProject(project)}
-                data-cursor-target="true"
-              >
-                {/* Folder Icon */}
-                <div className="relative mb-6">
-                  <div className="w-32 h-20 md:w-40 md:h-24 bg-gray-800/50 rounded-lg border border-gray-700/50 group-hover:border-gray-600/50 transition-all duration-300 relative overflow-hidden">
-                    {/* Folder dots */}
-                    <div className="absolute top-3 left-3 flex space-x-1.5">
-                      <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
-                      <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
-                      <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
-                    </div>
-                    
-                    {/* Tablet Icon */}
-                    <div className="absolute -bottom-3 -right-3 w-16 h-20 md:w-20 md:h-24 bg-gray-700/50 rounded-lg border border-gray-600/50 group-hover:border-gray-500/50 transition-all duration-300">
-                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
-                    </div>
+              <Link key={project.id} href={`/projects/${project.slug}`} className="block" data-cursor-target="true">
+                <motion.div
+                  key={project.id}
+                  className="group relative cursor-pointer bg-[#111214] rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
+                  variants={itemVariants}
+                  whileHover={{ y: -5 }}
+                >
+                {/* Project Image */}
+                {project.slug === 'whispr' ? (
+                  <div className="relative h-64 bg-[#1a1b1f] overflow-hidden">
+                    <Image
+                      src="/mockups/whispr.png"
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ) : project.slug === 'kusinotes' ? (
+                  <div className="relative h-64 bg-[#1a1b1f] overflow-hidden">
+                    <Image
+                      src="/mockups/kusinotes.png"
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ) : project.slug === 'color-extractor' ? (
+                  <div className="relative h-64 bg-[#1a1b1f] overflow-hidden">
+                    <Image
+                      src="/mockups/extractor.png"
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <div className="relative h-64 bg-[#1a1b1f] overflow-hidden flex items-center justify-center">
+                    <span className="text-white/50 text-lg tracking-widest uppercase">Temp</span>
+                  </div>
+                )}
 
-                    {/* Accent decoration */}
-                    <div className={`absolute top-0 right-0 w-10 h-10 bg-gradient-to-br ${project.accentColor} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
+                {/* Project Content */}
+                <div className="p-4">
+                  <div className="mb-3">
+                    <h3 className="text-xl font-semibold text-white mb-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-white/60 uppercase tracking-wide">
+                      {project.category}
+                    </p>
+                  </div>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-white/10 text-white/80 text-xs rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="px-2 py-1 bg-white/10 text-white/80 text-xs rounded">
+                        +1 more
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                {/* Project Title */}
-                <h3 className="text-sm md:text-base font-medium text-white text-center group-hover:text-gray-300 transition-colors duration-300">
-                  {project.title}
-                </h3>
-
-                {/* Status indicator */}
-                <div className="absolute top-0 right-0">
-                  <div className={`w-3 h-3 rounded-full ${getStatusColor(project.status)} opacity-60`}></div>
-                </div>
-              </motion.div>
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </div>
       </motion.section>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setSelectedProject(null)}
-        >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-          
-          {/* Modal Content */}
-          <motion.div
-            className="relative bg-gray-900 rounded-2xl w-[80vw] h-[70vh] overflow-hidden flex"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Left Section - Thumbnail (70%) */}
-            <div className="w-[70%] relative">
-              <Image
-                src="/project_thumbnails/Thumbnail.png"
-                alt={selectedProject.title}
-                fill
-                className="object-contain bg-gray-800"
-              />
-            </div>
-
-            {/* Right Section - Project Details (30%) */}
-            <div className="w-[30%] p-8 flex flex-col justify-between" style={{ backgroundColor: '#181818' }}>
-              {/* Project Title and Category */}
-              <div className="mb-8">
-                <h2 className="text-4xl font-bold text-white mb-2">
-                  {selectedProject.title}
-                </h2>
-                <p className="text-lg uppercase tracking-wide text-white/80 mb-6">
-                  {selectedProject.category}
-                </p>
-              </div>
-
-              {/* Project Description */}
-              <div className="flex-1">
-                <p className="text-white text-lg leading-relaxed mb-8">
-                  {selectedProject.longDescription}
-                </p>
-
-                {/* Action Button */}
-                <div className="mt-8 flex justify-start">
-                  {selectedProject.liveUrl && (
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-[50%] bg-white text-black py-4 px-6 text-center font-medium hover:bg-gray-200 transition-all duration-300"
-                      style={{
-                        borderRadius: '6px 0px 6px 0px',
-                        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderRadius = '0px 6px 0px 6px';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderRadius = '6px 0px 6px 0px';
-                      }}
-                    >
-                      VIEW WEBSITE
-                    </a>
-                  )}
-                </div>
-      </div>
-            </div>
-
-            {/* Close Button - Bottom Right */}
-            <button
-              onClick={() => setSelectedProject(null)}
-              className="absolute bottom-0 right-0 w-16 h-10 bg-red-500 text-white rounded-tl flex items-center justify-center hover:bg-red-600 transition-colors z-10 text-xl"
-            >
-              ×
-            </button>
-          </motion.div>
-        </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Contact CTA Section */}
       <motion.section

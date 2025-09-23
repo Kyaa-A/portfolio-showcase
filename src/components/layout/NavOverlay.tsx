@@ -121,8 +121,13 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
             // inside detection (cursor overlapping circle)
             const radius = rect.width / 2;
             const distToCenter = Math.hypot(mouseX - cx, mouseY - cy);
-            setIsInside(distToCenter <= radius);
-          }, [mouseX, mouseY, mvX, mvY]);
+            const newIsInside = distToCenter <= radius;
+            
+            // Only update state if the value actually changed
+            if (newIsInside !== isInside) {
+              setIsInside(newIsInside);
+            }
+          }, [mouseX, mouseY, mvX, mvY, isInside]);
 
           // Toggle a body attribute to hide the custom cursor while inside
           useEffect(() => {
