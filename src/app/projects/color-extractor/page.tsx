@@ -77,41 +77,7 @@ export default function ColorExtractorPage() {
 
         <div className="my-12 md:my-16 h-px bg-white/15" />
 
-        {/* 2) Creating the Identity */}
-        <section className="space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="relative aspect-[3.5/3] rounded-sm overflow-hidden ring-1 ring-white/10">
-              <Image
-                src="/assets/colorExtractor/logo.webp"
-                alt="Sketches placeholder"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative aspect-[3.5/3] rounded-sm overflow-hidden ring-1 ring-white/10">
-              <Image
-                src="/assets/colorExtractor/logo.webp"
-                alt="Final Color-Extractor Logo"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-          <div className="text-start max-w-4xl space-y-5">
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-              Creating the Identity
-            </h2>
-            <p className="text-lg md:text-xl text-white/85 leading-relaxed">
-              The goal for the brand was to feel precise, modern, and fast. The
-              final logo is a stylized eyedropper, symbolizing the core function
-              of the tool with clean, geometric lines. I chose a minimal
-              aesthetic to ensure the brand never distracts from the main
-              purpose: showcasing the user's extracted colors.
-            </p>
-          </div>
-        </section>
-
-        <div className="my-12 md:my-16 h-px bg-white/15" />
+        
 
         {/* 3) Designing the Application */}
         <section className="space-y-12">
@@ -178,11 +144,11 @@ export default function ColorExtractorPage() {
               className="object-contain bg-white"
             />
           </div>
-          <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-4xl">
-            A focused, single‑page tool that turns any image into an accurate 6‑color palette. Built with React,
-            Vite, Tailwind, and a Roboto Slab + Mulish type system. Multiple algorithms (Vibrant, K‑Means,
-            Median‑Cut, Octree, Weighted K‑Means) and LAB‑based filtering deliver perceptually accurate, distinct
-            colors with one upload.
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-6xl">
+            A focused, single‑page tool that turns any image into an accurate 6‑color palette. Built with React, Vite,
+            Tailwind, and a Roboto Slab + Mulish type system. Multiple algorithms (Vibrant, K‑Means, Median‑Cut,
+            Octree, Weighted K‑Means) and LAB‑based filtering deliver perceptually accurate, distinct colors with one
+            upload.
           </p>
         </section>
 
@@ -214,10 +180,9 @@ export default function ColorExtractorPage() {
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
             Ongoing Optimisation
           </h2>
-          <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-4xl">
-            The next logical steps for Color-Extractor are to develop a browser
-            extension for extracting colors from any webpage on the fly. I also
-            plan to add a feature allowing users to create accounts, save their
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-6xl">
+            The next logical steps for Color-Extractor are to develop a browser extension for extracting colors from
+            any webpage on the fly. I also plan to add a feature allowing users to create accounts, save their
             favorite palettes, and discover palettes created by other users.
           </p>
         </section>
