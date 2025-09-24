@@ -78,7 +78,7 @@ export default function ColorExtractorPage() {
         <div className="my-12 md:my-16 h-px bg-white/15" />
 
         {/* 2) Creating the Identity */}
-        <section className="space-y-10">
+        <section className="space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="relative aspect-[3.5/3] rounded-sm overflow-hidden ring-1 ring-white/10">
               <Image
@@ -97,11 +97,11 @@ export default function ColorExtractorPage() {
               />
             </div>
           </div>
-          <div className="text-start max-w-3xl mx-auto space-y-4">
+          <div className="text-start max-w-4xl space-y-5">
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
               Creating the Identity
             </h2>
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed text-justify">
+            <p className="text-lg md:text-xl text-white/85 leading-relaxed">
               The goal for the brand was to feel precise, modern, and fast. The
               final logo is a stylized eyedropper, symbolizing the core function
               of the tool with clean, geometric lines. I chose a minimal
@@ -114,11 +114,11 @@ export default function ColorExtractorPage() {
         <div className="my-12 md:my-16 h-px bg-white/15" />
 
         {/* 3) Designing the Application */}
-        <section className="space-y-8">
+        <section className="space-y-12">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
             Design System & UI Decisions
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Icons */}
             <div className="rounded-xl ring-1 ring-white/10 p-6 grid grid-cols-3 gap-4 bg-white/5">
               {["Upload Image", "Copy Color", "Generate Palette"].map((label) => (
@@ -149,7 +149,7 @@ export default function ColorExtractorPage() {
             </div>
           </div>
           {/* Palette */}
-          <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-6 gap-4">
             {[
               "#121212",
               "#1E1E1E",
@@ -178,7 +178,7 @@ export default function ColorExtractorPage() {
               className="object-contain bg-white"
             />
           </div>
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl text-center mx-auto text-justify">
+          <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-4xl">
             A focused, single‑page tool that turns any image into an accurate 6‑color palette. Built with React,
             Vite, Tailwind, and a Roboto Slab + Mulish type system. Multiple algorithms (Vibrant, K‑Means,
             Median‑Cut, Octree, Weighted K‑Means) and LAB‑based filtering deliver perceptually accurate, distinct
@@ -189,65 +189,32 @@ export default function ColorExtractorPage() {
         <div className="my-12 md:my-16 h-px bg-white/15" />
 
         {/* 4) The User Story */}
-        <section className="space-y-8">
+        <section className="space-y-6">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
             From Tedious to Instant
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
-            {/* Persona */}
-            <div className="rounded-xl ring-1 ring-white/10 p-5 bg-white/5">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-10 w-10 rounded-full bg-white/70" />
-                <div>
-                  <p className="text-sm md:text-base font-medium">Meet Leo</p>
-                  <p className="text-xs md:text-sm text-white/70">
-                    Freelance designer
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm md:text-base text-white/80">
-                He finds the perfect inspiration photo.
-              </p>
-            </div>
-            {/* Problem */}
-            <div className="rounded-xl ring-1 ring-white/10 p-5 bg-white/5">
-              <p className="text-sm md:text-base text-white/80">
-                Old workflow: spend 20 minutes manually using an eyedropper
-                tool, copying hex codes one by one.
-              </p>
-            </div>
-            {/* Solution */}
-            <div className="rounded-xl ring-1 ring-white/10 p-5 bg-white/5">
-              <p className="text-sm md:text-base text-white/80">
-                With Color-Extractor, he simply uploads the image.
-              </p>
-            </div>
-            {/* Result */}
-            <div className="rounded-xl ring-1 ring-white/10 p-5 bg-white/5">
-              <p className="text-sm md:text-base text-white/80">
-                Instantly generates a full color palette, ready to copy with a
-                single click. What took 20 minutes now takes 5 seconds.
-              </p>
-            </div>
+          <div className="relative mx-auto w-full max-w-6xl aspect-[3/3] rounded-sm overflow-hidden ring-1 ring-white/10">
+            <Image
+              src="/assets/colorExtractor/caseStudy.webp"
+              alt="Color-Extractor case study overview"
+              fill
+              priority
+              className="object-contain bg-white"
+            />
           </div>
-          <div className="text-center">
-            <a
-              href="/projects"
-              className="inline-flex items-center justify-center px-7 py-3 rounded-full bg-white text-black font-medium hover:opacity-90 shadow-sm"
-            >
-              Streamline your workflow like Leo today!
-            </a>
-          </div>
+          <p className="text-sm md:text-base text-white/60 text-center">
+            A quick story walkthrough showing how Color‑Extractor streamlines the process from image to palette.
+          </p>
         </section>
 
         <div className="my-12 md:my-16 h-px bg-white/15" />
 
         {/* 5) Ongoing Optimisation */}
-        <section className="space-y-6">
+        <section className="space-y-8">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
             Ongoing Optimisation
           </h2>
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl">
+          <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-4xl">
             The next logical steps for Color-Extractor are to develop a browser
             extension for extracting colors from any webpage on the fly. I also
             plan to add a feature allowing users to create accounts, save their
