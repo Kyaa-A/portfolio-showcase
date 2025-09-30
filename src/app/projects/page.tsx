@@ -19,6 +19,10 @@ interface Project {
   category: string;
   accentColor: string;
   slug: string;
+  collaboration?: {
+    name: string;
+    role?: string;
+  };
 }
 
 // Sample projects data - you can replace this with your actual projects
@@ -29,9 +33,9 @@ const projects: Project[] = [
     description: '',
     longDescription: '',
     image: '',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    technologies: ['Electron', 'React', 'Tailwind CSS'],
     status: 'completed',
-    category: 'Web Development',
+    category: 'Desktop Application',
     accentColor: 'from-blue-500 to-purple-600',
     slug: 'whispr'
   },
@@ -41,9 +45,9 @@ const projects: Project[] = [
     description: '',
     longDescription: '',
     image: '',
-    technologies: ['React', 'Node.js'],
+    technologies: ['React', 'Vite', 'Tailwind CSS'],
     status: 'completed',
-    category: 'Full Stack',
+    category: 'Web Application',
     accentColor: 'from-green-500 to-teal-600',
     slug: 'color-extractor'
   },
@@ -53,11 +57,27 @@ const projects: Project[] = [
     description: '',
     longDescription: '',
     image: '',
-    technologies: ['Next.js'],
+    technologies: ['Next.js', 'TypeScript', 'Prisma'],
     status: 'completed',
-    category: 'Web Development',
+    category: 'Full Stack',
     accentColor: 'from-orange-500 to-red-600',
     slug: 'kusinotes'
+  },
+  {
+    id: '4',
+    title: 'DTPgo',
+    description: '',
+    longDescription: '',
+    image: '',
+    technologies: ['Next.js', 'TypeScript', 'Supabase'],
+    status: 'completed',
+    category: 'Full Stack',
+    accentColor: 'from-purple-500 to-pink-600',
+    slug: 'dtpgo',
+    collaboration: {
+      name: 'Gene',
+      role: 'Development Team'
+    }
   }
 ];
 
@@ -304,6 +324,16 @@ export default function ProjectsPage() {
                       priority
                     />
                   </div>
+                ) : project.slug === 'dtpgo' ? (
+                  <div className="relative h-64 bg-[#1a1b1f] overflow-hidden">
+                    <Image
+                      src="/mockups/dtpgo.webp"
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 ) : (
                   <div className="relative h-64 bg-[#1a1b1f] overflow-hidden flex items-center justify-center">
                     <span className="text-white/50 text-lg tracking-widest uppercase">Temp</span>
@@ -313,9 +343,19 @@ export default function ProjectsPage() {
                 {/* Project Content */}
                 <div className="p-4">
                   <div className="mb-3">
-                    <h3 className="text-xl font-semibold text-white mb-1">
-                      {project.title}
-                    </h3>
+                    <div className="flex items-center justify-between mb-1">
+                      <h3 className="text-xl font-semibold text-white">
+                        {project.title}
+                      </h3>
+                      {project.collaboration && (
+                        <div className="flex items-center space-x-1">
+                          <span className="text-xs text-white/40">collab with</span>
+                          <span className="text-xs text-white/80 font-medium">
+                            {project.collaboration.name}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                     <p className="text-xs text-white/60 uppercase tracking-wide">
                       {project.category}
                     </p>

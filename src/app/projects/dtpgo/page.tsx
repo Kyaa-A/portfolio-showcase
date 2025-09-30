@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
-export default function KusiNotesPage() {
+export default function DTPgoPage() {
   const [isButtonPressed, setIsButtonPressed] = useState(false);
 
   return (
@@ -49,23 +50,38 @@ export default function KusiNotesPage() {
         <section className="min-h-screen flex items-center justify-center">
           <div className="max-w-4xl space-y-5">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black">
-              KUSINOTES
+              DTPgo
             </h1>
             <p className="text-sm md:text-base text-white/60">
-              AI-Powered Meal Planning Assistant · 2024
+              Hybrid Student Registration System · 2024
             </p>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed text-justify">
-              A modern web application that helps you create personalized meal plans using AI technology. Whether you're looking to maintain a healthy diet, manage specific dietary requirements, or explore new cuisines, KusiNotes generates customized meal plans tailored to your preferences and nutritional needs.
+              A comprehensive attendance tracking and student registration system built with Next.js 15, TypeScript, and Tailwind CSS. The system supports two distinct registration workflows: secure admin-managed registration via a protected dashboard, and rapid self-registration by students during live events.
             </p>
             <div className="pt-2">
               <motion.button
                 className="rounded-sm px-5 py-3 text-sm md:text-base font-medium bg-white text-black border border-gray-300 hover:bg-black hover:text-white transition-colors"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => window.open('https://kusinotes.vercel.app/', '_blank', 'noopener,noreferrer')}
+                onClick={() => window.open('https://dtpgo.vercel.app/', '_blank', 'noopener,noreferrer')}
               >
                 Visit live site
               </motion.button>
+            </div>
+          </div>
+        </section>
+
+        {/* Large Image Section */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto">
+            <div className="relative w-full h-[800px] lg:h-[1000px] xl:h-[1200px] rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5">
+               <Image
+                 src="/mockups/dtpgo.webp"
+                 alt="DTPgo - Hybrid Student Registration System"
+                 fill
+                 className="object-cover"
+                 priority
+               />
             </div>
           </div>
         </section>
@@ -73,5 +89,3 @@ export default function KusiNotesPage() {
     </div>
   );
 }
-
-
