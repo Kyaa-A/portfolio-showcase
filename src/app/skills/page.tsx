@@ -134,6 +134,16 @@ const certificates = [
     badge: '/certificates/badges/ux.webp',
   },
   {
+    id: 5,
+    title: 'n8n Workflow Automation',
+    issuer: 'n8n',
+    date: '2024',
+    credentialId: 'N8N-AUTOMATION-2024',
+    description: 'Practical automation with n8n: building workflows, APIs, webhooks, and integrations.',
+    skills: ['Automation', 'APIs', 'Webhooks', 'Integrations', 'n8n'],
+    image: '/certificates/automation/n8n.webp',
+  },
+  {
     id: 2,
     title: 'Introduction to Cybersecurity',
     issuer: 'Cisco Networking Academy',
@@ -727,7 +737,7 @@ export default function SkillsPage() {
           aria-modal="true"
           role="dialog"
         >
-          <div className="relative max-w-6xl w-full max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-6xl w-full max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
             <button
               className="absolute -top-3 -right-3 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow cursor-pointer"
               onClick={() => setPreviewImage(null)}
@@ -738,7 +748,7 @@ export default function SkillsPage() {
             <img
               src={previewImage}
               alt="Certificate preview"
-              className="w-full h-full object-contain rounded-md"
+              className="w-full h-auto object-contain rounded-md"
             />
           </div>
         </motion.div>
