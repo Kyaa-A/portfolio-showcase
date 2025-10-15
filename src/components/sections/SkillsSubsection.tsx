@@ -132,25 +132,62 @@ export function SkillsSubsection() {
           )}
 
           {/* Text */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            animate={{ 
-              rotate: 360
-            }}
-            transition={{ 
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
-            <span className={`writing-mode-vertical whitespace-nowrap ${
-              isMobile 
-                ? "tracking-[0.15em] text-black" 
-                : "tracking-[0.4em] text-white/90"
-            } text-[10px] sm:text-[11px] md:text-[12px] translate-x-[2px] font-bold`}>
-              VIEW SKILLS
-            </span>
-          </motion.div>
+           {isMobile ? (
+             // Mobile: Centered text
+             <motion.div
+               className="absolute inset-0 flex items-center justify-center"
+               animate={{ rotate: 360 }}
+               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+             >
+               <span className="text-black text-[9px] sm:text-[11px] font-bold tracking-[0.15em] whitespace-nowrap">
+                 VIEW SKILLS
+               </span>
+             </motion.div>
+           ) : (
+             // Desktop: Original vertical text with hover state
+             <>
+               <motion.div
+                 className="absolute inset-0 flex items-center justify-center"
+                 animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
+                 transition={{ duration: 12, repeat: Infinity, ease: 'linear', opacity: { duration: 0.05 } }}
+               >
+               <span className="writing-mode-vertical whitespace-nowrap tracking-[0.4em] text-white/90 text-[10px] sm:text-[12px] translate-x-[2px] font-bold">
+                   VIEW SKILLS
+                 </span>
+               </motion.div>
+
+               <motion.div
+                 className="absolute inset-0 flex items-center justify-center"
+                 animate={{
+                   rotate: 360,
+                   opacity: isInside ? 1 : 0,
+                   scale: isInside ? 1 : 0.84,
+                   y: isInside ? 0 : 10,
+                 }}
+                 transition={{
+                   duration: 12,
+                   repeat: Infinity,
+                   ease: 'linear',
+                   opacity: { duration: 0.06 },
+                   y: { type: 'spring', stiffness: 160, damping: 24 },
+                   scale: { type: 'spring', stiffness: 160, damping: 24 },
+                 }}
+               >
+                 <motion.span
+                   className="text-white writing-mode-vertical whitespace-nowrap"
+                   initial={false}
+                   animate={{
+                     letterSpacing: isInside ? '0.06em' : '0.28em',
+                     fontSize: isInside ? '11px' : '12px',
+                   }}
+                   transition={{ type: 'spring', stiffness: 170, damping: 24 }}
+                   style={{ fontWeight: 600 }}
+                 >
+                   VIEW SKILLS
+                 </motion.span>
+               </motion.div>
+             </>
+           )}
         </motion.div>
       </motion.div>
       </Link>
@@ -182,10 +219,18 @@ export function SkillsSubsection() {
               >
                 {/* Top half - solid white */}
                 <div
-                  className="absolute text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-tight text-white flex"
+                  className="absolute text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-normal text-white flex"
                   style={{
                     clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)',
-                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)'
+                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)',
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.02em',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility',
+                    fontFeatureSettings: '"liga" 1, "kern" 1',
+                    textShadow: 'none'
                   }}
                 >
                   {'SKILLS'.split('').map((letter, index) => (
@@ -208,12 +253,20 @@ export function SkillsSubsection() {
 
                 {/* Bottom half - outlined */}
                 <div
-                  className="text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-tight flex"
+                  className="text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-normal flex"
                   style={{
                     clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)',
                     WebkitClipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)',
-                    WebkitTextStroke: '1px white',
-                    color: 'transparent'
+                    WebkitTextStroke: '2px white',
+                    color: 'transparent',
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.02em',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility',
+                    fontFeatureSettings: '"liga" 1, "kern" 1',
+                    textShadow: 'none'
                   }}
                 >
                   {'SKILLS'.split('').map((letter, index) => (
@@ -255,7 +308,20 @@ export function SkillsSubsection() {
       {/* Right Sidebar Panel */}
       <div className="absolute right-0 top-0 w-[25%] h-screen hidden md:block">
         {/* Background number */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 text-transparent text-[300px] font-bold select-none rotate-90" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}>
+        <div 
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-transparent text-[300px] font-bold select-none rotate-90" 
+          style={{ 
+            WebkitTextStroke: '1px rgba(255,255,255,0.1)',
+            fontFamily: 'Arial, Helvetica, sans-serif',
+            fontWeight: 900,
+            letterSpacing: '0.02em',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+            textRendering: 'optimizeLegibility',
+            fontFeatureSettings: '"liga" 1, "kern" 1',
+            textShadow: 'none'
+          }}
+        >
           01
         </div>
       </div>

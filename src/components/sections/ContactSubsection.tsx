@@ -211,10 +211,18 @@ export function ContactSubsection() {
               >
                 {/* Top half - solid white */}
                 <div 
-                  className="absolute text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-tight text-white flex"
+                  className="absolute text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-normal text-white flex"
                   style={{ 
                     clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)',
-                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)'
+                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)',
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.02em',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility',
+                    fontFeatureSettings: '"liga" 1, "kern" 1',
+                    textShadow: 'none'
                   }}
                 >
                   {'CONTACT'.split('').map((letter, index) => (
@@ -237,12 +245,20 @@ export function ContactSubsection() {
                 
                 {/* Bottom half - outlined */}
                 <div 
-                  className="text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-tight flex"
+                  className="text-[60px] sm:text-[80px] md:text-[160px] font-black uppercase tracking-normal flex"
                   style={{ 
                     clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)',
                     WebkitClipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)',
-                    WebkitTextStroke: '1px white',
-                    color: 'transparent'
+                    WebkitTextStroke: '2px white',
+                    color: 'transparent',
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.02em',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility',
+                    fontFeatureSettings: '"liga" 1, "kern" 1',
+                    textShadow: 'none'
                   }}
                 >
                   {'CONTACT'.split('').map((letter, index) => (
@@ -284,7 +300,20 @@ export function ContactSubsection() {
       {/* Right Sidebar Panel - Hidden on mobile */}
       <div className="absolute right-0 top-0 w-[25%] h-screen hidden md:block">
         {/* Background number */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 text-transparent text-[300px] font-bold select-none rotate-90" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}>
+        <div 
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-transparent text-[300px] font-bold select-none rotate-90" 
+          style={{ 
+            WebkitTextStroke: '1px rgba(255,255,255,0.1)',
+            fontFamily: 'Arial, Helvetica, sans-serif',
+            fontWeight: 900,
+            letterSpacing: '0.02em',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+            textRendering: 'optimizeLegibility',
+            fontFeatureSettings: '"liga" 1, "kern" 1',
+            textShadow: 'none'
+          }}
+        >
           03
         </div>
       </div>

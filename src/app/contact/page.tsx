@@ -188,7 +188,18 @@ export default function ContactPage() {
           >
             {/* Row 1 - solid white */}
             <motion.h1
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black text-white leading-[0.8] tracking-tight mb-12"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-white leading-[0.8] tracking-normal mb-8 sm:mb-10 md:mb-12"
+              style={{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '0.02em',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility',
+                fontFeatureSettings: '"liga" 1, "kern" 1',
+                textShadow: 'none',
+                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -197,16 +208,27 @@ export default function ContactPage() {
             </motion.h1>
             {/* Row 2 - mixed: solid and outline */}
             <motion.h1
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black leading-[0.8] tracking-tight mb-12"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.8] tracking-normal mb-8 sm:mb-10 md:mb-12"
+              style={{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '0.02em',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility',
+                fontFeatureSettings: '"liga" 1, "kern" 1',
+                textShadow: 'none',
+                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
               <span className="text-white">YOU WANT </span>
               <span 
+                className="text-outline-thick"
                 style={{
-                  WebkitTextStroke: '3px white',
-                  color: 'transparent'
+                  letterSpacing: '0.02em'
                 }}
               >
                 WHAT
@@ -215,10 +237,17 @@ export default function ContactPage() {
             
             {/* Row 3 - white outline */}
             <motion.h1
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black leading-[0.8] tracking-tight mb-12"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.8] tracking-normal mb-8 sm:mb-10 md:mb-12 text-outline-thick"
               style={{
-                WebkitTextStroke: '3px white',
-                color: 'transparent'
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '0.02em',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility',
+                fontFeatureSettings: '"liga" 1, "kern" 1',
+                textShadow: 'none',
+                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -228,10 +257,17 @@ export default function ContactPage() {
             </motion.h1>
             {/* Row 4 - white outline */}
             <motion.h1
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black leading-[0.8] tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.8] tracking-normal text-outline-thick"
               style={{
-                WebkitTextStroke: '3px white',
-                color: 'transparent'
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '0.02em',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility',
+                fontFeatureSettings: '"liga" 1, "kern" 1',
+                textShadow: 'none',
+                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

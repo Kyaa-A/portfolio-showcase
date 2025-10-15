@@ -257,7 +257,18 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           >
             <motion.h2
               className="text-[12vw] md:text-[9vw] font-black leading-none inline-block bg-background relative z-30"
-              style={{ color: 'transparent', WebkitTextStroke: '2px #ffffff' }}
+              style={{ 
+                color: 'transparent', 
+                WebkitTextStroke: '2px #ffffff',
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '0.02em',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility',
+                fontFeatureSettings: '"liga" 1, "kern" 1',
+                textShadow: 'none'
+              }}
               whileHover={{ color: '#ffffff' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
               >
@@ -291,7 +302,18 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
           >
             <motion.h2
               className="text-[12vw] md:text-[9vw] font-black leading-none inline-block bg-background relative z-30"
-              style={{ color: 'transparent', WebkitTextStroke: '2px #ffffff' }}
+              style={{ 
+                color: 'transparent', 
+                WebkitTextStroke: '2px #ffffff',
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '0.02em',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility',
+                fontFeatureSettings: '"liga" 1, "kern" 1',
+                textShadow: 'none'
+              }}
               whileHover={{ color: '#ffffff' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
