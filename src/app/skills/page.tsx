@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
+import Image from 'next/image';
 // import Link from 'next/link';
 
 // Technical Skills Data
@@ -240,11 +241,12 @@ export default function SkillsPage() {
             const needsWhiteBg = lower === 'vercel' || lower === 'shadcn';
             return (
               <div className={needsWhiteBg ? 'w-full h-full flex items-center justify-center bg-white rounded-sm p-1' : 'w-full h-full flex items-center justify-center'}>
-                <img
+                <Image
                   src={logo}
                   alt={skill.name}
+                  width={64}
+                  height={64}
                   className="w-full h-full object-contain"
-                  loading="lazy"
                 />
               </div>
             );
@@ -409,18 +411,22 @@ export default function SkillsPage() {
               >
                 <p className="text-3xl sm:text-4xl md:text-5xl text-white/90 leading-relaxed font-bold cursor-pointer flex items-center justify-center">
                   <span>P</span>
-                  <img 
+                  <Image 
                     src="/assets/eyes.png" 
                     alt="e"
+                    width={24}
+                    height={24}
                     className="inline-block w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
                     style={{ 
                       filter: 'brightness(0) invert(1)',
                       backgroundColor: 'transparent'
                     }}
                   />
-                  <img 
+                  <Image 
                     src="/assets/eyes.png" 
                     alt="e"
+                    width={24}
+                    height={24}
                     className="inline-block w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
                     style={{ 
                       filter: 'brightness(0) invert(1)',
@@ -677,15 +683,18 @@ export default function SkillsPage() {
                           aria-label={`View ${cert.title} image full size`}
                         >
                           <div className="relative w-full h-40 md:h-48 overflow-hidden rounded-md border border-white/10 group-hover:border-white/20 transition-colors">
-                            <img
+                            <Image
                               src={cert.image}
                               alt={`${cert.title} cover`}
+                              fill
                               className="absolute inset-0 w-full h-full object-cover object-left-top origin-top-left scale-125 md:scale-150"
                             />
                             {cert.badge && (
-                              <img
+                              <Image
                                 src={cert.badge}
                                 alt={`${cert.title} badge`}
+                                width={48}
+                                height={48}
                                 className="absolute top-2 right-2 w-10 h-10 md:w-12 md:h-12 object-contain drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]"
                               />
                             )}
@@ -745,9 +754,11 @@ export default function SkillsPage() {
             >
               ×
             </button>
-            <img
+            <Image
               src={previewImage}
               alt="Certificate preview"
+              width={1200}
+              height={800}
               className="w-full h-auto object-contain rounded-md"
             />
           </div>

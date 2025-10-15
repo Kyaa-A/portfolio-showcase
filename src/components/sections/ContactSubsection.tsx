@@ -75,7 +75,7 @@ export function ContactSubsection() {
       const radius = rect.width / 2;
       const distToCenter = Math.hypot(mouseX - cx, mouseY - cy);
       setIsInside(distToCenter <= radius);
-    }, [mouseX, mouseY, mvX, mvY, isMobile]);
+    }, [mouseX, mouseY, mvX, mvY]);
 
     return (
       <Link href="/contact">

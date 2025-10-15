@@ -55,7 +55,7 @@ export default function KusiNotesPage() {
               AI-Powered Meal Planning Assistant · 2024
             </p>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed text-justify">
-              A modern web application that helps you create personalized meal plans using AI technology. Whether you're looking to maintain a healthy diet, manage specific dietary requirements, or explore new cuisines, KusiNotes generates customized meal plans tailored to your preferences and nutritional needs.
+              A modern web application that helps you create personalized meal plans using AI technology. Whether you&apos;re looking to maintain a healthy diet, manage specific dietary requirements, or explore new cuisines, KusiNotes generates customized meal plans tailored to your preferences and nutritional needs.
             </p>
             <div className="pt-2">
               <motion.button
