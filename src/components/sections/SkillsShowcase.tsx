@@ -15,7 +15,7 @@ export function SkillsShowcase() {
           <div className="absolute top-0 left-0 right-0 h-1/3 bg-background"></div>
           <div className="absolute bottom-0 left-0 right-0 h-2/3 mb-8">
             <Image
-              src="/assets/Skills.webp"
+              src="/assets/Skills.png"
               alt="Skills Background"
               fill
               className="object-cover grayscale"
