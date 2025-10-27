@@ -290,7 +290,7 @@ export function SkillsSubsection() {
             </div>
           </div>
 
-          {/* Background Image */}
+          {/* Background Image - Updated to use .webp format */}
           <div className="absolute bottom-0 left-0 z-10 overflow-hidden w-full h-[65vh] sm:h-[70vh] max-h-[750px]" style={{ bottom: isMobile ? '-5%' : '0' }}>
             <motion.img
               src="/assets/Skills.webp"
