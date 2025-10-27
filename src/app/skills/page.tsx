@@ -745,13 +745,6 @@ export default function SkillsPage() {
           role="dialog"
         >
           <div className="relative max-w-6xl w-full max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="absolute -top-3 -right-3 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow cursor-pointer"
-              onClick={() => setPreviewImage(null)}
-              aria-label="Close preview"
-            >
-              ×
-            </button>
             <Image
               src={previewImage}
               alt="Certificate preview"
