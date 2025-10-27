@@ -27,7 +27,7 @@ const awards = [
     team: "UMDC-BSIT Team",
     description: "In one hack of an event as what they say, this is one way I have shown my potential in technical innovation and presentation skills. This regional competition brought together the brightest minds from across the region, and I had the privilege to be part of this remarkable experience. Through this journey, I learned that it's not just about having the technical knowledge, but about how you communicate your ideas and the value you bring to the table. Our team wowed the judges with our exceptional presentation skills, taking home the prestigious Best Pitch award. This experience taught me that success comes from taking challenges with innovation and determination.",
     members: "Asnari Pacalna, Vincent Ace Rivera, Sophia Pagal",
-    image: "/awards/ideas_plugin/img.webp",
+    image: "/awards/hack4gov/img.webp",
     layout: "left" // content on left, image on right
   },
   {

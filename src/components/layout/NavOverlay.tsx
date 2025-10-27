@@ -296,7 +296,7 @@ export function NavOverlay({ isOpen, onClose }: NavOverlayProps) {
               setIsNavigating(true);
               setTimeout(() => {
                 onClose();
-                router.push('/about');
+                router.push('/about'); 
               }, 50);
             }}
           >
