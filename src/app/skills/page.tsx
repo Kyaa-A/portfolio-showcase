@@ -32,7 +32,6 @@ const technicalSkills = {
     { name: 'MySQL', level: 75, color: '#4479A1' },
   ],
   tools: [
-    { name: 'AWS', level: 70, color: '#FF9900' },
     { name: 'Bash', level: 70, color: '#4EAA25' },
     { name: 'Digital Ocean', level: 70, color: '#0080FF' },
     { name: 'Docker', level: 75, color: '#2496ED' },
@@ -65,7 +64,6 @@ const skillLogoMap: Record<string, string> = {
   nodejs: '/skills_logo/nod.png',
   postgresql: '/skills_logo/postgresql.png',
   mysql: '/skills_logo/mysql.png',
-  aws: '/skills_logo/aws.png',
   bash: '/skills_logo/bash.png',
   'digital ocean': '/skills_logo/digital-ocean.png',
   docker: '/skills_logo/docker.png',
