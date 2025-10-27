@@ -206,8 +206,8 @@ export default function ProjectsPage() {
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <p className="text-2xl sm:text-3xl md:text-4xl text-gray-300 leading-relaxed">
-                  Check out some of my latest product<br />
-                  design case studies.
+                  Check out some of my latest<br />
+                  product design case studies.
                 </p>
               </motion.div>
             </motion.div>
