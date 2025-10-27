@@ -53,7 +53,7 @@ const skillLogoMap: Record<string, string> = {
   java: '/skills_logo/java.png',
   php: '/skills_logo/php.png',
   'visual basic': '/skills_logo/visual-basic.png',
-  react: '/skills_logo/reactJs.png',
+  react: '/skills_logo/react.png',
   'nextjs': '/skills_logo/nextjs.png',
   'next.js': '/skills_logo/nextjs.png',
   html: '/skills_logo/html.png',
