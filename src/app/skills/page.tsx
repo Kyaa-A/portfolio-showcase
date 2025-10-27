@@ -150,7 +150,7 @@ const certificates = [
     credentialId: 'CISCO-GCP-2023-002',
     description: 'Certificate of Course Completion for Google Cloud Professional Developer through Cisco Networking Academy.',
     skills: ['Cybersecurity Fundamentals', 'Threats & Vulnerabilities', 'Network Security'],
-    image: '/certificates/cyber/IntroductionToCybersecurity.webp',
+    image: '/certificates/cyber/introduction.webp',
     badge: '/certificates/badges/introduction-to-cybersecurity.webp',
   },
   {
