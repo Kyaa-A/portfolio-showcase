@@ -184,9 +184,10 @@ export default function SkillsPage() {
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('all');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
+
   // Smooth scroll progress without triggering React re-renders
   const { scrollYProgress } = useScroll();
-  
+
   // Transform scroll progress to control navigation text shadow for readability
   const navTextShadow = useTransform(scrollYProgress, [0.05, 0.15], ['none', '0 0 30px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.6)']);
   const thumbY = useTransform(scrollYProgress, v => `${v * (96 - 32)}px`);
@@ -363,47 +364,25 @@ export default function SkillsPage() {
 
 
 
-        {/* Main Title */}
-        <div className="text-center z-10 px-4">
-          <motion.h1
-            className="text-5xl sm:text-7xl md:text-9xl font-black text-white leading-none mb-6 md:mb-8"
-            style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <span className="relative">
-              <span
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(to bottom, white 50%, #0ea5e9 50%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
-                SKILLS
-              </span>
-            </span>
-          </motion.h1>
-          
+        {/* Main Content - Centered */}
+        <div className="text-center z-10 px-4 relative">
           <motion.div
             className="max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.div
               className="text-center space-y-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               <motion.div
                 className="inline-block px-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
                 whileHover={{ scale: 1.05 }}
                 data-cursor-target="true"
               >
@@ -434,12 +413,12 @@ export default function SkillsPage() {
                   <span>king Behind the Code</span>
                 </p>
               </motion.div>
-              
+
               <motion.div
                 className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-base sm:text-lg px-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
               >
                 <motion.button
                   className="text-blue-400 hover:text-blue-300 font-medium cursor-pointer transition-colors duration-300"
