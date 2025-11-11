@@ -73,8 +73,18 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Message - Hidden on Mobile */}
+      {/* Scroll Message - Desktop */}
       <div className="hidden md:block absolute bottom-8 left-32 max-w-md pl-10">
+        <p className="text-sm text-white/60 leading-relaxed">
+          This flashy headline? It&apos;s just for <span className="text-white font-medium">show</span>.<br />
+          The proof of my work is waiting <span className="text-white font-medium">below</span>.<br />
+          So if you&apos;re the type to just stop and <span className="text-white font-medium">stare</span>,<br />
+          You&apos;ll miss all the magic I&apos;ve built down <span className="text-white font-medium">there</span>.
+        </p>
+      </div>
+
+      {/* Scroll Message - Mobile */}
+      <div className="block md:hidden absolute bottom-8 left-6 right-6 max-w-md">
         <p className="text-sm text-white/60 leading-relaxed">
           This flashy headline? It&apos;s just for <span className="text-white font-medium">show</span>.<br />
           The proof of my work is waiting <span className="text-white font-medium">below</span>.<br />
