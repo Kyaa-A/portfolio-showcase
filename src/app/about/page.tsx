@@ -91,30 +91,59 @@ export default function AboutPage() {
                 }}
                 className="mb-48 md:mb-64"
               >
-                <motion.h2 
-                  className="text-[32px] sm:text-[40px] md:text-[90px] font-black leading-none tracking-tight mb-16 md:mb-32 pl-0"
+                {/* Mobile Layout */}
+                <motion.h2
+                  className="block md:hidden text-[32px] sm:text-[40px] font-black leading-tight tracking-normal mb-12"
+                  style={{
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.02em',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility',
+                    fontFeatureSettings: '"liga" 1, "kern" 1',
+                    textShadow: 'none'
+                  }}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false }}
-                  transition={{ 
+                  transition={{
                     duration: 1,
                     delay: 0.1,
                     ease: [0.33, 1, 0.68, 1]
                   }}
                 >
-                                     {/* Mobile Layout */}
-                   <div className="block md:hidden">
-                     <span className="text-white block">I KNOW WORDS</span>
-                     <span style={{ WebkitTextStroke: '2px white', color: 'transparent' }} className="block">I HAVE THE</span>
-                     <span style={{ WebkitTextStroke: '2px white', color: 'transparent' }} className="block">BEST WORDS</span>
-                   </div>
+                  <span className="text-white block">I KNOW WORDS</span>
+                  <span className="text-outline-thick block">I HAVE THE</span>
+                  <span className="text-outline-thick block">BEST WORDS</span>
+                </motion.h2>
 
-                   {/* Desktop Layout */}
-                   <div className="hidden md:block">
-                     <span className="text-white">I KNOW WORDS</span><span style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>&nbsp;I HAVE</span>
-                     <br />
-                     <span style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>THE&nbsp;BEST&nbsp;WORDS</span>
-                   </div>
+                {/* Desktop Layout */}
+                <motion.h2
+                  className="hidden md:block text-[90px] font-black leading-none tracking-normal mb-32"
+                  style={{
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.02em',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility',
+                    fontFeatureSettings: '"liga" 1, "kern" 1',
+                    textShadow: 'none'
+                  }}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.1,
+                    ease: [0.33, 1, 0.68, 1]
+                  }}
+                >
+                  <span className="text-white">I&nbsp;KNOW&nbsp;WORDS</span>
+                  <span className="text-outline-thick">&nbsp;I&nbsp;HAVE</span>
+                  <br />
+                  <span className="text-outline-thick">THE&nbsp;BEST&nbsp;WORDS</span>
                 </motion.h2>
 
                 <motion.div
