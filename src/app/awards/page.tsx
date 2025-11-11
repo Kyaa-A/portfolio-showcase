@@ -128,8 +128,8 @@ export default function AwardsPage() {
           transition={{ duration: 0.8, delay: 1.6 }}
         >
           <div className="flex flex-col items-center space-y-3">
-            <motion.span 
-              className="text-xs sm:text-sm text-gray-400 uppercase tracking-[0.2em] font-light"
+            <motion.span
+              className="text-xs sm:text-sm text-gray-400 uppercase tracking-[0.2em] font-light text-center"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >

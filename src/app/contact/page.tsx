@@ -179,16 +179,16 @@ export default function ContactPage() {
       >
 
         {/* Main Content */}
-        <div className="absolute inset-0 flex items-center justify-start z-10 pl-8 sm:pl-12 md:pl-16 lg:pl-20">
+        <div className="absolute inset-0 flex items-center justify-start z-10 px-6 sm:pl-12 md:pl-16 lg:pl-20">
           <motion.div
-            className="space-y-0"
+            className="space-y-2 md:space-y-0"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             {/* Row 1 - solid white */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-white leading-[0.8] tracking-normal mb-8 sm:mb-10 md:mb-12"
+              className="font-black text-white leading-tight md:leading-[0.8] tracking-normal mb-3 md:mb-8"
               style={{
                 fontFamily: 'Arial, Helvetica, sans-serif',
                 fontWeight: 900,
@@ -198,7 +198,7 @@ export default function ContactPage() {
                 textRendering: 'optimizeLegibility',
                 fontFeatureSettings: '"liga" 1, "kern" 1',
                 textShadow: 'none',
-                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
+                fontSize: 'clamp(2rem, 7vw, 8rem)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -208,7 +208,7 @@ export default function ContactPage() {
             </motion.h1>
             {/* Row 2 - mixed: solid and outline */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.8] tracking-normal mb-8 sm:mb-10 md:mb-12"
+              className="font-black leading-tight md:leading-[0.8] tracking-normal mb-3 md:mb-8"
               style={{
                 fontFamily: 'Arial, Helvetica, sans-serif',
                 fontWeight: 900,
@@ -218,26 +218,18 @@ export default function ContactPage() {
                 textRendering: 'optimizeLegibility',
                 fontFeatureSettings: '"liga" 1, "kern" 1',
                 textShadow: 'none',
-                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
+                fontSize: 'clamp(2rem, 7vw, 8rem)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
-              <span className="text-white">YOU WANT </span>
-              <span 
-                className="text-outline-thick"
-                style={{
-                  letterSpacing: '0.02em'
-                }}
-              >
-                WHAT
-              </span>
+              <span className="text-white">YOU WANT</span>
             </motion.h1>
-            
+
             {/* Row 3 - white outline */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.8] tracking-normal mb-8 sm:mb-10 md:mb-12 text-outline-thick"
+              className="font-black leading-tight md:leading-[0.8] tracking-normal mb-3 md:mb-8 text-outline-thick"
               style={{
                 fontFamily: 'Arial, Helvetica, sans-serif',
                 fontWeight: 900,
@@ -247,17 +239,17 @@ export default function ContactPage() {
                 textRendering: 'optimizeLegibility',
                 fontFeatureSettings: '"liga" 1, "kern" 1',
                 textShadow: 'none',
-                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
+                fontSize: 'clamp(2rem, 7vw, 8rem)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              YOU REALLY
+              WHAT YOU
             </motion.h1>
             {/* Row 4 - white outline */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.8] tracking-normal text-outline-thick"
+              className="font-black leading-tight md:leading-[0.8] tracking-normal text-outline-thick"
               style={{
                 fontFamily: 'Arial, Helvetica, sans-serif',
                 fontWeight: 900,
@@ -267,7 +259,7 @@ export default function ContactPage() {
                 textRendering: 'optimizeLegibility',
                 fontFeatureSettings: '"liga" 1, "kern" 1',
                 textShadow: 'none',
-                fontSize: 'clamp(2.5rem, 8vw, 8rem)'
+                fontSize: 'clamp(2rem, 7vw, 8rem)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -281,17 +273,17 @@ export default function ContactPage() {
 
           {/* Contact Form Section */}
           <motion.div
-            className="min-h-screen bg-background flex items-center justify-start pl-8 sm:pl-12 md:pl-16 lg:pl-20 xl:pl-24 pb-32"
+            className="min-h-screen bg-background flex items-center justify-start px-6 sm:px-8 md:pl-16 lg:pl-20 xl:pl-24 pb-32 pr-6 sm:pr-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
         <div className="w-full max-w-4xl">
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-6 md:space-y-4" onSubmit={handleSubmit}>
             {/* Greeting */}
             <motion.h2
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-12"
+              className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-8 md:mb-12"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -302,49 +294,49 @@ export default function ContactPage() {
 
             {/* Name Field */}
             <motion.div
-              className="flex items-center gap-4"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <span className="text-white text-xl sm:text-2xl">My name is</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl whitespace-nowrap">My name is</span>
               <input
                 type="text"
                 name="name"
                 placeholder="First & Last Name"
-                className="flex-1 bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
+                className="w-full sm:flex-1 bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
               />
             </motion.div>
 
             {/* Company Field */}
             <motion.div
-              className="flex items-center gap-4"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <span className="text-white text-xl sm:text-2xl">I work for</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl whitespace-nowrap">I work for</span>
               <input
                 type="text"
                 name="company"
                 placeholder="Company Name"
-                className="flex-1 bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
+                className="w-full sm:flex-1 bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
               />
-              <span className="text-white text-xl sm:text-2xl">and</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl hidden sm:inline">and</span>
             </motion.div>
 
             {/* Project Type */}
             <motion.div
-              className="flex items-center gap-4"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <span className="text-white text-xl sm:text-2xl">we could use your services for</span>
-              <select name="projectType" className="bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl focus:border-white focus:outline-none py-2">
+              <span className="text-white text-base sm:text-xl md:text-2xl">we could use your services for</span>
+              <select name="projectType" className="w-full sm:w-auto bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl focus:border-white focus:outline-none py-2">
                 <option value="" className="bg-background">Type of Project</option>
                 <option value="web-design" className="bg-background">Web Design</option>
                 <option value="development" className="bg-background">Development</option>
@@ -355,52 +347,52 @@ export default function ContactPage() {
 
             {/* Other Companies */}
             <motion.div
-              className="flex items-center gap-4"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <span className="text-white text-xl sm:text-2xl">We already contacted</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl">We already contacted</span>
               <input
                 type="number"
                 name="contactedCompanies"
                 defaultValue="0"
-                className="w-20 bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl text-center focus:border-white focus:outline-none py-2"
+                className="w-16 sm:w-20 bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl text-center focus:border-white focus:outline-none py-2"
               />
-              <span className="text-white text-xl sm:text-2xl">other companies,</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl">other companies,</span>
             </motion.div>
 
             {/* Reason */}
             <motion.div
-              className="space-y-4"
+              className="space-y-2 md:space-y-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <span className="text-white text-xl sm:text-2xl block">but I&apos;d like to work with Asnari because</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl block">but I&apos;d like to work with Asnari because</span>
               <input
                 type="text"
                 name="reason"
                 placeholder="Reason"
-                className="w-full bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
+                className="w-full bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
               />
             </motion.div>
 
             {/* Budget */}
             <motion.div
-              className="flex items-center gap-4"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              <span className="text-white text-xl sm:text-2xl">We&apos;ll invest between</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl">We&apos;ll invest between</span>
               <select
                 name="budget"
                 defaultValue="₱20,000 - ₱50,000"
-                className="bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl focus:border-white focus:outline-none py-2"
+                className="w-full sm:w-auto bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl focus:border-white focus:outline-none py-2"
               >
                 <option value="₱1,000 - ₱5,000" className="bg-background">₱1,000 - ₱5,000</option>
                 <option value="₱5,000 - ₱10,000" className="bg-background">₱5,000 - ₱10,000</option>
@@ -408,105 +400,102 @@ export default function ContactPage() {
                 <option value="₱20,000 - ₱50,000" className="bg-background">₱20,000 - ₱50,000</option>
                 <option value="₱50,000 - ₱100,000" className="bg-background">₱50,000 - ₱100,000</option>
               </select>
-              <span className="text-white text-xl sm:text-2xl">in this project.</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl hidden sm:inline">in this project.</span>
             </motion.div>
 
             {/* Contact Info */}
             <motion.div
-              className="space-y-6"
+              className="space-y-4 md:space-y-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.9 }}
             >
-              <div className="flex items-center gap-4">
-                <span className="text-white text-xl sm:text-2xl">You can reach me at</span>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                <span className="text-white text-base sm:text-xl md:text-2xl">You can reach me at</span>
                 <input
                   type="tel"
                   name="phone"
                   placeholder="Phone Number"
-                  className="flex-1 bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
+                  className="w-full sm:flex-1 bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
                 />
               </div>
-              <div className="flex items-center gap-4">
-                <span className="text-white text-xl sm:text-2xl">or get in touch by email at</span>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                <span className="text-white text-base sm:text-xl md:text-2xl">or get in touch by email at</span>
                 <input
                   type="email"
                   name="email"
                   placeholder="Email Address"
-                  className="flex-1 bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
+                  className="w-full sm:flex-1 bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2"
                 />
               </div>
             </motion.div>
 
             {/* Additional Details */}
             <motion.div
-              className="space-y-4"
+              className="space-y-2 md:space-y-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              <span className="text-white text-xl sm:text-2xl block">Details and/or clarifications</span>
+              <span className="text-white text-base sm:text-xl md:text-2xl block">Details and/or clarifications</span>
               <textarea
                 placeholder="Additional information..."
                 name="message"
                 rows={4}
-                className="w-full bg-transparent border-b-2 border-white/30 text-white text-xl sm:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2 resize-none"
+                className="w-full bg-transparent border-b-2 border-white/30 text-white text-base sm:text-xl md:text-2xl placeholder-white/50 focus:border-white focus:outline-none py-2 resize-none"
               />
             </motion.div>
 
             {/* Closing */}
             <motion.div
-              className="flex items-center justify-between pt-8 relative"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6 sm:gap-4 pt-8 relative"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.1 }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-white">
                 Thanks
               </h2>
-              
-              {/* Send Button Container */}
-              <div className="relative w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40">
+
+              {/* Send Button - Different styles for mobile/desktop */}
+              {isMobile ? (
+                // Mobile: Simple rectangular button
                 <motion.button
-                  ref={buttonRef}
                   type="submit"
-                  className="absolute inset-0 w-full h-full rounded-full flex items-center justify-center select-none z-40 cursor-pointer"
-                  style={isMobile ? {} : { x, y }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="w-full bg-orange-400 text-white font-bold py-4 px-8 rounded-lg disabled:opacity-50"
+                  whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  data-cursor-target="true"
                   disabled={isSubmitting}
                 >
-                  <motion.div 
-                    className="relative w-full h-full flex items-center justify-center"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
+                </motion.button>
+              ) : (
+                // Desktop: Animated circle button
+                <div className="relative w-32 md:w-40 h-32 md:h-40">
+                  <motion.button
+                    ref={buttonRef}
+                    type="submit"
+                    className="absolute inset-0 w-full h-full rounded-full flex items-center justify-center select-none z-40 cursor-pointer"
+                    style={{ x, y }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    data-cursor-target="true"
+                    disabled={isSubmitting}
                   >
-                    {/* Circle background */}
-                    {isMobile ? (
-                      // Mobile: Orange background with continuous rotation
-                      <motion.div
-                        className="absolute inset-0 rounded-full bg-orange-400"
-                        animate={{ 
-                          rotate: 360
-                        }}
-                        transition={{ 
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                        style={{ transformOrigin: 'center center' }}
-                      />
-                    ) : (
-                      // Desktop: Orange color scheme with hover effect
+                    <motion.div
+                      className="relative w-full h-full flex items-center justify-center"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    >
+                      {/* Circle background - Orange color scheme with hover effect */}
                       <>
                         <motion.div
                           className="absolute inset-0 rounded-full border-2"
-                          animate={{ 
+                          animate={{
                             opacity: isInside ? 0 : 1,
                             borderColor: 'rgba(251, 146, 60, 0.8)'
                           }}
@@ -520,78 +509,60 @@ export default function ContactPage() {
                           style={{ transformOrigin: 'center center' }}
                         />
                       </>
-                    )}
 
-                    {/* Text */}
-                    {isMobile ? (
-                      // Mobile: Simple centered rotating text
+                      {/* Text - Rotating vertical text (outside state) */}
                       <motion.div
                         className="absolute inset-0 flex items-center justify-center"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                        animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
+                        transition={{
+                          duration: 18,
+                          repeat: Infinity,
+                          ease: 'linear',
+                          opacity: { duration: 0.05 }
+                        }}
                         style={{ transformOrigin: 'center center' }}
                       >
-                        <span className="text-white text-[9px] sm:text-[11px] md:text-[13px] font-bold tracking-[0.15em] whitespace-nowrap">
-                          {isSubmitting ? 'SENDING…' : 'SEND MESSAGE'}
+                        <span className="writing-mode-vertical whitespace-nowrap tracking-[0.6em] text-white/90 text-[11px] sm:text-[13px] md:text-[15px] translate-x-[4px]">
+                          SEND MESSAGE
                         </span>
                       </motion.div>
-                    ) : (
-                      // Desktop: Complex text animation matching navigation
-                      <>
-                        {/* Rotating vertical text (outside state) */}
-                        <motion.div
-                          className="absolute inset-0 flex items-center justify-center"
-                          animate={{ rotate: 360, opacity: isInside ? 0 : 1 }}
-                          transition={{ 
-                            duration: 18, 
-                            repeat: Infinity, 
-                            ease: 'linear', 
-                            opacity: { duration: 0.05 } 
-                          }}
-                          style={{ transformOrigin: 'center center' }}
-                        >
-                          <span className="writing-mode-vertical whitespace-nowrap tracking-[0.6em] text-white/90 text-[11px] sm:text-[13px] md:text-[15px] translate-x-[4px]">
-                            SEND MESSAGE
-                          </span>
-                        </motion.div>
 
-                        {/* Inside text when overlapped */}
-                        <motion.div
-                          className="absolute inset-0 flex items-center justify-center"
+                      {/* Inside text when overlapped */}
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center"
+                        animate={{
+                          rotate: 360,
+                          opacity: isInside ? 1 : 0,
+                          scale: isInside ? 1 : 0.84,
+                          y: isInside ? 0 : 14,
+                        }}
+                        transition={{
+                          duration: 18,
+                          repeat: Infinity,
+                          ease: 'linear',
+                          opacity: { duration: 0.06 },
+                          y: { type: 'spring', stiffness: 160, damping: 24 },
+                          scale: { type: 'spring', stiffness: 160, damping: 24 },
+                        }}
+                        style={{ transformOrigin: 'center center' }}
+                      >
+                        <motion.span
+                          className="text-white writing-mode-vertical whitespace-nowrap"
+                          initial={false}
                           animate={{
-                            rotate: 360,
-                            opacity: isInside ? 1 : 0,
-                            scale: isInside ? 1 : 0.84,
-                            y: isInside ? 0 : 14,
+                            letterSpacing: isInside ? '0.08em' : '0.36em',
+                            fontSize: isInside ? '10px' : '12px',
                           }}
-                          transition={{
-                            duration: 18,
-                            repeat: Infinity,
-                            ease: 'linear',
-                            opacity: { duration: 0.06 },
-                            y: { type: 'spring', stiffness: 160, damping: 24 },
-                            scale: { type: 'spring', stiffness: 160, damping: 24 },
-                          }}
-                          style={{ transformOrigin: 'center center' }}
+                          transition={{ type: 'spring', stiffness: 170, damping: 24 }}
+                          style={{ fontWeight: 600 }}
                         >
-                          <motion.span
-                            className="text-white writing-mode-vertical whitespace-nowrap"
-                            initial={false}
-                            animate={{
-                              letterSpacing: isInside ? '0.08em' : '0.36em',
-                              fontSize: isInside ? '10px' : '12px',
-                            }}
-                            transition={{ type: 'spring', stiffness: 170, damping: 24 }}
-                            style={{ fontWeight: 600 }}
-                          >
-                            {isSubmitting ? 'SENDING…' : 'SEND MESSAGE'}
-                          </motion.span>
-                        </motion.div>
-                      </>
-                    )}
-                  </motion.div>
-                </motion.button>
-              </div>
+                          {isSubmitting ? 'SENDING…' : 'SEND MESSAGE'}
+                        </motion.span>
+                      </motion.div>
+                    </motion.div>
+                  </motion.button>
+                </div>
+              )}
             </motion.div>
             {submitStatus === 'success' && (
               <p className="mt-4 text-green-400">Thanks! Your message has been sent.</p>

@@ -226,12 +226,12 @@ export default function SkillsPage() {
 
   const SkillCard = ({ skill }: { skill: { name: string; level: number; color: string } }) => (
     <motion.div
-      className="flex flex-col items-center p-4 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+      className="flex flex-col items-center p-2 md:p-4 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
       variants={itemVariants}
       whileHover={{ scale: 1.04, y: -2 }}
       transition={{ duration: 0.15 }}
     >
-      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-3 flex items-center justify-center">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 md:mb-3 flex items-center justify-center">
         {getLogoPath(skill.name) ? (
           (() => {
             const logo = getLogoPath(skill.name) as string;
@@ -257,7 +257,7 @@ export default function SkillsPage() {
           </div>
         )}
       </div>
-      <span className="text-white/90 text-sm md:text-base font-medium text-center">{skill.name}</span>
+      <span className="text-white/90 text-xs md:text-sm font-medium text-center line-clamp-2">{skill.name}</span>
     </motion.div>
   );
 
@@ -266,7 +266,7 @@ export default function SkillsPage() {
     <div className="min-h-screen bg-background">
       {/* Return Button */}
       <motion.div
-        className="fixed top-8 left-8 z-[9999]"
+        className="fixed top-4 left-4 md:top-8 md:left-8 z-[9999]"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
@@ -274,8 +274,8 @@ export default function SkillsPage() {
         <motion.button
           onClick={() => window.history.back()}
             className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
-              isButtonPressed 
-                ? 'bg-black text-white scale-90' 
+              isButtonPressed
+                ? 'bg-black text-white scale-90'
                 : 'bg-white text-black hover:bg-black hover:text-white'
             }`}
             whileHover={{ scale: 1.05 }}
@@ -309,9 +309,9 @@ export default function SkillsPage() {
       >
         {/* Enhanced Background Pattern with Parallax */}
         <div className="absolute inset-0 opacity-5">
-          <motion.div 
-            className="absolute top-20 left-20 text-8xl text-white font-mono"
-            animate={{ 
+          <motion.div
+            className="absolute top-10 left-4 md:top-20 md:left-20 text-4xl md:text-8xl text-white font-mono"
+            animate={{
               rotate: [0, 5, -5, 0],
               scale: [1, 1.05, 1]
             }}
@@ -319,9 +319,9 @@ export default function SkillsPage() {
           >
             &lt;/&gt;
           </motion.div>
-          <motion.div 
-            className="absolute bottom-32 right-20 text-6xl text-white font-mono"
-            animate={{ 
+          <motion.div
+            className="absolute bottom-20 right-4 md:bottom-32 md:right-20 text-3xl md:text-6xl text-white font-mono"
+            animate={{
               rotate: [0, -3, 3, 0],
               scale: [1, 1.03, 1]
             }}
@@ -329,9 +329,9 @@ export default function SkillsPage() {
           >
             { }
           </motion.div>
-          <motion.div 
-            className="absolute top-1/2 right-8 text-4xl text-white font-mono"
-            animate={{ 
+          <motion.div
+            className="absolute top-1/2 right-4 md:right-8 text-2xl md:text-4xl text-white font-mono"
+            animate={{
               rotate: [0, 2, -2, 0],
               scale: [1, 1.02, 1]
             }}
@@ -339,9 +339,9 @@ export default function SkillsPage() {
           >
             &lt;div&gt;
           </motion.div>
-          <motion.div 
-            className="absolute top-1/3 left-1/4 text-3xl text-white font-mono"
-            animate={{ 
+          <motion.div
+            className="absolute top-1/3 left-1/4 text-xl md:text-3xl text-white font-mono"
+            animate={{
               opacity: [0.3, 0.7, 0.3],
               scale: [1, 1.1, 1]
             }}
@@ -349,9 +349,9 @@ export default function SkillsPage() {
           >
             &lt;span&gt;
           </motion.div>
-          <motion.div 
-            className="absolute bottom-1/4 left-1/3 text-2xl text-white font-mono"
-            animate={{ 
+          <motion.div
+            className="absolute bottom-1/4 left-1/3 text-lg md:text-2xl text-white font-mono"
+            animate={{
               opacity: [0.2, 0.6, 0.2],
               scale: [1, 1.08, 1]
             }}
@@ -364,16 +364,16 @@ export default function SkillsPage() {
 
 
         {/* Main Title */}
-        <div className="text-center z-10">
+        <div className="text-center z-10 px-4">
           <motion.h1
-            className="text-6xl sm:text-8xl md:text-9xl font-black text-white leading-none mb-8"
+            className="text-5xl sm:text-7xl md:text-9xl font-black text-white leading-none mb-6 md:mb-8"
             style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="relative">
-              <span 
+              <span
                 className="absolute inset-0"
                 style={{
                   background: 'linear-gradient(to bottom, white 50%, #0ea5e9 50%)',
@@ -400,33 +400,33 @@ export default function SkillsPage() {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <motion.div
-                className="inline-block"
+                className="inline-block px-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
                 whileHover={{ scale: 1.05 }}
                 data-cursor-target="true"
               >
-                <p className="text-3xl sm:text-4xl md:text-5xl text-white/90 leading-relaxed font-bold cursor-pointer flex items-center justify-center">
+                <p className="text-xl sm:text-3xl md:text-5xl text-white/90 leading-relaxed font-bold cursor-pointer flex items-center justify-center">
                   <span>P</span>
-                  <Image 
-                    src="/assets/eyes.png" 
+                  <Image
+                    src="/assets/eyes.png"
                     alt="e"
                     width={24}
                     height={24}
-                    className="inline-block w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
-                    style={{ 
+                    className="inline-block w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
+                    style={{
                       filter: 'brightness(0) invert(1)',
                       backgroundColor: 'transparent'
                     }}
                   />
-                  <Image 
-                    src="/assets/eyes.png" 
+                  <Image
+                    src="/assets/eyes.png"
                     alt="e"
                     width={24}
                     height={24}
-                    className="inline-block w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
-                    style={{ 
+                    className="inline-block w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 -mx-0.5"
+                    style={{
                       filter: 'brightness(0) invert(1)',
                       backgroundColor: 'transparent'
                     }}
@@ -436,7 +436,7 @@ export default function SkillsPage() {
               </motion.div>
               
               <motion.div
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-lg"
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-base sm:text-lg px-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
@@ -449,9 +449,9 @@ export default function SkillsPage() {
                 >
                   Technical Skills
                 </motion.button>
-                
+
                 <span className="text-white/40 hidden sm:block">•</span>
-                
+
                 <motion.button
                   className="text-purple-400 hover:text-purple-300 font-medium cursor-pointer transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
@@ -532,15 +532,16 @@ export default function SkillsPage() {
              animate="visible"
            >
              <motion.h2
-               className="text-4xl font-bold text-white mb-12 text-center tracking-[0.2em] uppercase"
+               className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 md:mb-12 text-center tracking-[0.1em] sm:tracking-[0.2em] uppercase px-4"
                variants={itemVariants}
              >
-               T E C H N I C A L &nbsp; E X P E R T I S E
+               T E C H N I C A L<br />
+               E X P E R T I S E
              </motion.h2>
 
              {/* Category Navigation */}
-             <nav className="mb-12" role="navigation" aria-label="Skills categories">
-               <div className="flex flex-wrap justify-center gap-3">
+             <nav className="mb-8 md:mb-12 px-4" role="navigation" aria-label="Skills categories">
+               <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                  {skillCategories.map((category) => {
                    const getIcon = (iconName: string) => {
                      const iconClass = "w-4 h-4";
@@ -593,7 +594,7 @@ export default function SkillsPage() {
                        onClick={() => setSelectedSkillCategory(
                          selectedSkillCategory === category.id ? 'all' : category.id
                        )}
-                       className={`group relative flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 border ${
+                       className={`group relative flex items-center gap-2 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-medium transition-all duration-300 border ${
                          selectedSkillCategory === category.id
                            ? 'bg-white text-black border-white shadow-lg shadow-white/25'
                            : 'bg-white/5 text-white/80 hover:bg-white/10 border-white/10 hover:border-white/20'
@@ -608,10 +609,10 @@ export default function SkillsPage() {
                        }`}>
                          {getIcon(category.icon)}
                        </div>
-                       <span className="text-sm font-semibold">{category.name}</span>
+                       <span className="text-xs md:text-sm font-semibold">{category.name}</span>
                        {selectedSkillCategory === category.id && (
                          <motion.div
-                           className="absolute inset-0 rounded-xl bg-white/10"
+                           className="absolute inset-0 rounded-lg md:rounded-xl bg-white/10"
                            layoutId="activeCategory"
                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                          />
@@ -632,7 +633,7 @@ export default function SkillsPage() {
                  initial={{ opacity: 0, y: 20 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ duration: 0.5 }}
-                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 md:gap-8"
+                 className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6"
                >
                 {visibleSkills.map((skill) => (
                   <div key={`skill-${skill.name}`} className="group relative">
@@ -653,13 +654,13 @@ export default function SkillsPage() {
             viewport={{ once: true }}
           >
             <motion.h2
-              className="text-4xl font-bold text-white mb-12 text-center tracking-[0.2em] uppercase"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 md:mb-12 text-center tracking-[0.1em] sm:tracking-[0.2em] uppercase px-4"
               variants={itemVariants}
             >
               P R O F E S S I O N A L &nbsp; C E R T I F I C A T E S
             </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 px-4">
               {certificates.map((cert) => (
                 <motion.div
                   key={cert.id}
