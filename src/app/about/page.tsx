@@ -20,7 +20,7 @@ export default function AboutPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   return (
-    <main className="min-h-screen bg-background text-white">
+    <main className="min-h-screen bg-background text-white overflow-x-hidden">
       {/* Navigation */}
       <nav className="fixed top-8 left-8 z-50 hidden">
         <Link href="/" className="text-white/60 hover:text-white transition-colors">
@@ -34,20 +34,20 @@ export default function AboutPage() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="max-w-6xl mx-auto">
           {/* Hero Section - Two Column Layout */}
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-12 mb-32">
+          <div className="flex flex-col md:flex-row items-center md:items-center justify-center gap-8 sm:gap-10 md:gap-6 lg:gap-8 mb-32">
             {/* Left Column - Text Content */}
-            <div className="flex-1 max-w-2xl md:self-center">
-              <motion.h1 
-                className="text-[40px] sm:text-[50px] md:text-[120px] font-black leading-none mb-6 md:mb-12"
+            <div className="w-full md:flex-none md:w-[48%] lg:w-[45%] md:self-center">
+              <motion.h1
+                className="text-[40px] sm:text-[50px] md:text-[56px] lg:text-[64px] xl:text-[72px] font-black leading-none mb-4 sm:mb-5 md:mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
                 NICE TO<br />MEET&nbsp;YOU
               </motion.h1>
-              
+
               <motion.p
-                className="text-base sm:text-lg md:text-2xl text-white/80 max-w-4xl leading-relaxed"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 leading-relaxed text-justify"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -61,8 +61,8 @@ export default function AboutPage() {
             </div>
 
             {/* Right Column - Profile Image */}
-            <motion.div 
-              className="w-80 h-80 md:w-[700px] md:h-[800px] flex-shrink-0 md:self-center"
+            <motion.div
+              className="w-64 h-64 sm:w-80 sm:h-80 md:flex-none md:w-[48%] lg:w-[45%] md:h-auto flex-shrink-0 md:self-center"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
